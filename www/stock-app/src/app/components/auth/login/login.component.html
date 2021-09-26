@@ -1,1 +1,37 @@
-<p>login works!</p>
+<div class="container">
+  <div class="title text-center mb-3">
+    <p class="h4">Log in</p>
+  </div>
+
+  <!-- Start Login Form -->
+  <div class="container row">
+    <div class="col col-lg-6 offset-lg-3">
+      <form class="p-4" method="POST">
+        <div class="email-container mb-3">
+          <label for="email">Email</label>
+          <input class="form-control" type="email" name="email">
+        </div>
+        <div class="password-container mb-5">
+          <label for="password">Password</label>
+          <input class="form-control" type="password" name="password">
+        </div>
+
+        <div class="forget text-end m-2">
+          <a href="#">Forgot password</a>
+        </div>
+        <button class="form-control" type="submit">Log in</button>
+        <div class="social-links text-center my-3">
+          <p class="h6 mb-3">or</p>
+          <button class="btn form-control mb-2"><i class="fa fa-facebook"></i>Signup With Google</button>
+          <button class="btn form-control mb-2"><i class="fa fa-facebook"></i>Signup With Facebook</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- New To Patreon -->
+    <div class="new-patreon text-center mt-2">
+      <p class="h6">New To Patreon? <a routerLink="/auth/register">Sign Up</a></p>
+    </div>
+  </div>
+
+</div>
