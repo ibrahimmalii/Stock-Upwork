@@ -9,8 +9,8 @@ export class ApiServicesService {
 
   constructor(private http: HttpClient) { }
 
-  get() {
-    return this.http.get('');
+  get(url : string) {
+    return this.http.get(url);
   };
 
   post(url: string, body: any) {
