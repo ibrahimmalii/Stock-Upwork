@@ -1,9 +1,5 @@
-.navbar-expand-lg .navbar-nav .nav-link {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    border-radius: 0;
-    float: right;
-}
-#navbar-nav .nav-item .nav-link{
-    float: right;
+
+.navbar-expand-lg{
+    background-color: var(--mc);
+    padding: 20px;
 }
