@@ -29,12 +29,18 @@ export class LoginComponent implements OnInit {
 
     if(this.form.valid){
       this.isLoginSuccess = true;
+      this.isLoginError = false
       console.log(this.form.value);
-    };
+    }else {
+      this.isLoginError = true;
+      this.isLoginSuccess = false;
+    }
 
-    this.isLoginError = true;
+  }
 
-    
+  hide(){
+    this.isLoginSuccess = false;
+    this.isLoginError = false;
   }
 
 }
