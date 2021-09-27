@@ -45,7 +45,7 @@
         <div class="forget text-end m-2">
           <a href="#">Forgot password</a>
         </div>
-        <input type="button" value="Log in" class="form-control" (click)="login()">
+        <input type="button" value="Log in" [ngClass]="{'bg-success text-light' : form.valid}" class="form-control" (click)="login()">
         <div class="social-links text-center my-3">
           <p class="h6 mb-3">or</p>
           <button class="btn form-control mb-2"><i class="fa fa-facebook"></i>Signup With Google</button>
