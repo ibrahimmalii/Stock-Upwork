@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private http: HttpClient, private formBuilder: FormBuilder) { }
+  constructor(private http: HttpClient, private formBuilder: FormBuilder, private router : Router) { }
 
   form: FormGroup = new FormGroup({});
   isLogged: Boolean = false;
@@ -21,7 +22,9 @@ export class RegisterComponent implements OnInit {
   personalData: any;
   name: any;
   email: any;
+  type: any;
   isPersonalDataLoaded: boolean = false;
+  regesterData : any;
 
   ngOnInit(): void {
 
@@ -37,15 +40,17 @@ export class RegisterComponent implements OnInit {
             this.personalData = res;
             this.name = this.personalData.data.attributes.full_name;
             this.email = this.personalData.data.attributes.email;
+            this.type = this.personalData.data.type;
             this.isPersonalDataLoaded = true;
 
 
             // Validate Login Form
             this.form = this.formBuilder.group({
-              full_name: [this.name, [Validators.minLength(4), Validators.maxLength(255), Validators.required]],
+              name: [this.name, [Validators.minLength(4), Validators.maxLength(255), Validators.required]],
               email: [this.email, [Validators.email, Validators.maxLength(255), Validators.required]],
               password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
               password_confirmation: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
+              type: [this.type, [Validators.required]],
             });
           })
         }
@@ -63,16 +68,27 @@ export class RegisterComponent implements OnInit {
 
     if (
       this.form.valid &&
-      this.form.controls.password.value == this.form.controls.password_confirmation.value&&
-      this.form.controls.full_name.value == this.name &&
+      this.form.controls.password.value == this.form.controls.password_confirmation.value &&
+      this.form.controls.name.value == this.name &&
       this.form.controls.email.value == this.email
-      ) {
-      this.isLoginSuccess = true;
-      this.isLoginError = false
-      console.log(this.form.value);
+    ) {
+
+      this.http.post('http://localhost:8000/api/register', this.form.value).subscribe(res=>{
+        this.regesterData = res;
+        if(this.regesterData.data != null){
+          localStorage.token = this.regesterData.data.access_token;
+          localStorage.user = JSON.stringify(this.regesterData.data.user);
+          this.router.navigateByUrl('/exchanges');
+          this.isLoginSuccess = true;
+          this.isLoginError = false;
+        }else{
+          this.isLoginError = true;
+          this.isLoginSuccess = false;
+        }
+
+      });
+
     } else {
-      console.log(this.email);
-      console.log(this.form.controls.email.value);
       this.isLoginError = true;
       this.isLoginSuccess = false;
     }
