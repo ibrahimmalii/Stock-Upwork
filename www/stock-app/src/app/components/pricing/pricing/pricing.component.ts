@@ -8,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class PricingComponent implements OnInit {
 
   constructor() { }
+  arrayOfInputs = [];
 
   ngOnInit(): void {
+    this.arrayOfInputs.length = 6;
   }
+
 
 }

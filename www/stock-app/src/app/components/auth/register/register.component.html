@@ -22,18 +22,26 @@
     <!-- Start Login Form -->
     <div class="container row">
       <div class="col col-lg-6 offset-lg-3">
-        <form class="p-4" action="#" [formGroup]="form">
+        <form class="p-4" action="#" [formGroup]="form" *ngIf="isPersonalDataLoaded">
+          <div class="fullName-container mb-3" >
+            <label class="fw-bold" for="full_name">Full Name</label>
+            <input class="form-control" [value]="name" type="text" name="name" formControlName="name" readonly>
+            <div *ngIf="form.controls.name.invalid && isLogged || (form.controls.name.dirty || form.controls.name.touched)">
+              <small class="text-danger fw-bold mb-3 " *ngIf="form.controls.name.hasError( 'required') ">Name is required</small>
+              <small class="text-danger fw-bold mb-3 " *ngIf="form.controls.name.hasError( 'maxlength') "> Maximum length is 30</small>
+            </div>
+          </div>
           <div class="email-container mb-3">
-            <label for="email">Email</label>
-            <input class="form-control" type="email" name="email" formControlName="email">
+            <label class="fw-bold" for="email">Email</label>
+            <input class="form-control" [value]="email" type="email" name="email" formControlName="email" readonly>
             <div *ngIf="form.controls.email.invalid && isLogged || (form.controls.email.dirty || form.controls.email.touched)">
               <small class="text-danger fw-bold mb-3 " *ngIf="form.controls.email.hasError( 'required') ">Email is required</small>
               <small class="text-danger fw-bold mb-3 " *ngIf="form.controls.email.hasError( 'email') ">Invalid Email </small>
               <small class="text-danger fw-bold mb-3 " *ngIf="form.controls.email.hasError( 'maxlength') "> this is big email</small>
             </div>
           </div>
-          <div class="password-container mb-3">
-            <label for="password">Password</label>
+          <div class="password-container mb-3" >
+            <label class="fw-bold" for="password">Password</label>
             <input class="form-control" #passwordValue type="password" name="password" formControlName="password">
             <div *ngIf="form.controls.password.invalid && isLogged || (form.controls.password.dirty || form.controls.password.touched)">
               <small class="text-danger fw-bold mb-3 " *ngIf="form.controls.password.hasError( 'required') ">Password is required</small>
@@ -42,7 +50,7 @@
             </div>
           </div>
           <div class="password-container mb-5">
-            <label for="password_confirmation">Password confirmation</label>
+            <label class="fw-bold" for="password_confirmation">Password confirmation</label>
             <input class="form-control" #passwordConfirmValue type="password" name="password_confirmation" formControlName="password_confirmation">
             <div *ngIf="form.controls.password_confirmation.invalid && isLogged || (form.controls.password_confirmation.dirty || form.controls.password_confirmation.touched)">
               <small class="text-danger fw-bold mb-3 " *ngIf="form.controls.password_confirmation.hasError( 'required') ">password confirmation is required</small>
