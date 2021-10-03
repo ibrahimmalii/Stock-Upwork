@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-key-statics',
@@ -9,7 +9,14 @@ export class KeyStaticsComponent implements OnInit {
 
   constructor() { }
 
+  @Input() data : any;
+
+  metaData : any;
   ngOnInit(): void {
+    // console.log(this.data);
+    this.metaData = this.data.metaData;
   }
+
+
 
 }
