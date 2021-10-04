@@ -24,65 +24,65 @@
         </tr>
         <tr>
           <td class="lt">P/E</td>
-          <td class="rt" id="ks-pe">{{PE.toFixed(2)}}</td>
+          <td class="rt" id="ks-pe">{{PE.toFixed(1)}}</td>
           <td class="lt">ROA</td>
-          <td class="rt">1{{(roa_median * 100).toFixed(2)}}%</td>
+          <td class="rt">{{(roa_median * 100).toFixed(1)}}%</td>
           <td class="lt">Gross Profit</td>
-          <td class="rt">{{((gross_margin_median * 100).toFixed(2))}}%</td>
+          <td class="rt">{{((gross_margin_median * 100).toFixed(1))}}%</td>
         </tr>
         <tr>
           <td class="lt">P/B</td>
-          <td class="rt" id="ks-pb">{{PB.toFixed(2)}}</td>
+          <td class="rt" id="ks-pb">{{PB.toFixed(1)}}</td>
           <td class="lt">ROE</td>
-          <td class="rt">{{(roe_median * 100).toFixed(2)}}%</td>
+          <td class="rt">{{(roe_median * 100).toFixed(1)}}%</td>
           <td class="lt">EBIT</td>
           <td class="rt">33.1%</td>
         </tr>
         <tr>
           <td class="lt">P/S</td>
-          <td class="rt" id="ks-ps">{{PS.toFixed(2)}}</td>
+          <td class="rt" id="ks-ps">{{PS.toFixed(1)}}</td>
           <td class="lt">ROIC</td>
-          <td class="rt">{{(roic_median * 100).toFixed(2)}}%</td>
+          <td class="rt">{{(roic_median * 100).toFixed(1)}}%</td>
           <td class="lt">Pre-Tax Income</td>
-          <td class="rt">{{(pretax_margin_median * 100).toFixed(2)}}%</td>
+          <td class="rt">{{(pretax_margin_median * 100).toFixed(1)}}%</td>
         </tr>
         <tr>
           <td class="lt">EV/S</td>
-          <td class="rt" id="ks-ev_s">{{enterprise_value_to_sales.toFixed(2)}}</td>
+          <td class="rt" id="ks-ev_s">{{enterprise_value_to_sales.toFixed(1)}}</td>
           <td class="table_header" colspan="2">10-Year CAGR</td>
           <td class="lt">FCF</td>
-          <td class="rt">{{(fcf_margin_median * 100).toFixed(2)}}%</td>
+          <td class="rt">{{(fcf_margin_median * 100).toFixed(1)}}%</td>
         </tr>
         <tr>
           <td class="lt">EV/EBITDA</td>
           <td class="rt" id="ks-ev_ebitda"></td>
           <td class="lt">Revenue</td>
-          <td class="rt">{{(revenue_cagr_10 * 100).toFixed(2)}}%</td>
+          <td class="rt">{{(revenue_cagr_10 * 100).toFixed(1)}}%</td>
           <td class="table_header" colspan="2">Capital Structure (Median)</td>
         </tr>
         <tr>
           <td class="lt">EV/EBIT</td>
-          <td class="rt" id="ks-ev_ebit"></td>
+          <td class="rt" id="ks-ev_ebit">{{enterprise_value_to_earnings.toFixed(1)}}</td>
           <td class="lt">Assets</td>
-          <td class="rt">{{(total_assets_cagr_10 * 100).toFixed(2)}}%</td>
+          <td class="rt">{{(total_assets_cagr_10 * 100).toFixed(1)}}%</td>
           <td class="lt">Assets / Equity</td>
-          <td class="rt">{{assets_to_equity_median.toFixed(2)}}</td>
+          <td class="rt">{{assets_to_equity_median.toFixed(1)}}</td>
         </tr>
         <tr>
           <td class="lt">EV/Pretax</td>
-          <td class="rt" id="ks-ev_pretax_income">{{enterprise_value_to_pretax_income}}</td>
+          <td class="rt" id="ks-ev_pretax_income">{{enterprise_value_to_pretax_income.toFixed(1)}}</td>
           <td class="lt">FCF</td>
-          <td class="rt">{{(fcf_cagr_10 * 100).toFixed(2)}}%</td>
+          <td class="rt">{{(fcf_cagr_10 * 100).toFixed(1)}}%</td>
           <td class="lt">Debt / Equity</td>
-          <td class="rt">{{debt_to_equity_median.toFixed(2)}}</td>
+          <td class="rt">{{debt_to_equity_median.toFixed(1)}}</td>
         </tr>
         <tr>
           <td class="lt">EV/FCF</td>
           <td class="rt" id="ks-ev_fcf">39.4</td>
           <td class="lt">EPS</td>
-          <td class="rt">{{(eps_diluted_cagr_10 * 100).toFixed(2)}}%</td>
+          <td class="rt">{{(eps_diluted_cagr_10 * 100).toFixed(1)}}%</td>
           <td class="lt">Debt / Assets</td>
-          <td class="rt">{{debt_to_assets_median.toFixed(2)}}</td>
+          <td class="rt">{{debt_to_assets_median.toFixed(1)}}</td>
         </tr>
 
       </tbody>

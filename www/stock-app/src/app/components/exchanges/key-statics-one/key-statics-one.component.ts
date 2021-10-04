@@ -32,15 +32,17 @@ export class KeyStaticsOneComponent implements OnInit {
   debt_to_assets_median :any;
   debt_to_equity_median : any;
   assets_to_equity_median : any;
+  enterprise_value_to_earnings : any;
 
 
   ngOnInit(): void {
-    this.PE = this.data.data.financials.annual.price_to_earnings.splice(-1)[0];
-    this.PB = this.data.data.financials.annual.price_to_book.splice(-1)[0];
-    this.PS = this.data.data.financials.annual.price_to_sales.splice(-1)[0];
+    this.PE = this.data.data.financials.ttm.price_to_earnings;
+    this.PB = this.data.data.financials.ttm.price_to_book;
+    this.PS = this.data.data.financials.ttm.price_to_sales;
+    this.enterprise_value_to_earnings = this.data.data.financials.annual.enterprise_value_to_earnings.splice(-1)[0];
     this.enterprise_value_to_sales = this.data.data.financials.annual.enterprise_value_to_sales.splice(-1)[0];
     this.ebitda_per_share = this.data.data.financials.annual.ebitda_per_share.splice(-1);
-    this.enterprise_value_to_pretax_income = this.data.data.financials.annual.enterprise_value_to_pretax_income.splice(-1);
+    this.enterprise_value_to_pretax_income = this.data.data.financials.annual.enterprise_value_to_pretax_income.splice(-1)[0];
     this.enterprise_value_to_fcf = this.data.data.financials.annual.enterprise_value_to_fcf.splice(-1);
     this.roa_median = this.data.data.financials.annual.roa_median;
     this.roe_median = this.data.data.financials.annual.roe_median;

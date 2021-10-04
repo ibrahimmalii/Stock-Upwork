@@ -22,9 +22,11 @@ export class KeyStaticsComponent implements OnInit {
   roa : any;
   roe : any;
   roic : any;
+  eps_diluted : any;
+  dividends_per_share_growth : any;
 
   splicedArray(arr:any){
-    return arr.splice(0, 10);
+    return arr.splice(-11);
   }
 
 
@@ -35,8 +37,10 @@ export class KeyStaticsComponent implements OnInit {
     this.gross_margin = this.splicedArray(this.data.data.financials.annual.gross_margin);
     this.operating_income = this.splicedArray(this.data.data.financials.annual.operating_income);
     this.operating_margin = this.splicedArray(this.data.data.financials.annual.operating_margin);
+    this.eps_diluted = this.splicedArray(this.data.data.financials.annual.eps_diluted)
     this.eps_diluted_growth = this.splicedArray(this.data.data.financials.annual.eps_diluted_growth);
     this.dividends = this.splicedArray(this.data.data.financials.annual.dividends);
+    this.dividends_per_share_growth = this.splicedArray(this.data.data.financials.annual.dividends_per_share_growth)
     this.roa = this.splicedArray(this.data.data.financials.annual.roa);
     this.roe = this.splicedArray(this.data.data.financials.annual.roe);
     this.roic = this.splicedArray(this.data.data.financials.annual.roic);
