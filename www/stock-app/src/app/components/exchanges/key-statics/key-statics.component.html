@@ -25,7 +25,7 @@
     </tr>
     <tr>
       <th scope="row">Gross Profit</th>
-      <td *ngFor="let gross of gross_profit">{{gross}}</td>
+      <td *ngFor="let gross of gross_profit">{{gross / 1000000}}</td>
     </tr>
     <tr>
       <th scope="row">Gross Margin %</th>
@@ -33,7 +33,7 @@
     </tr>
     <tr>
       <th scope="row">Operating Profit</th>
-      <td *ngFor="let operating of operating_income">{{operating}}</td>
+      <td *ngFor="let operating of operating_income">{{operating / 1000000}}</td>
     </tr>
     <tr>
       <th scope="row">Operating Margin %</th>

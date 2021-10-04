@@ -24,7 +24,7 @@ export class KeyStaticsComponent implements OnInit {
   roic : any;
 
   splicedArray(arr:any){
-    return arr.splice(arr.length - 10);
+    return arr.splice(0,10);
   }
 
 
