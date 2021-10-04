@@ -35,10 +35,10 @@ export class KeyStaticsOneComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.PE = this.data.data.financials.annual.price_to_earnings.splice(-1);
-    this.PB = this.data.data.financials.annual.price_to_book.splice(-1);
-    this.PS = this.data.data.financials.annual.price_to_sales.splice(-1);
-    this.enterprise_value_to_sales = this.data.data.financials.annual.enterprise_value_to_sales.splice(-1);
+    this.PE = this.data.data.financials.annual.price_to_earnings.splice(-1)[0];
+    this.PB = this.data.data.financials.annual.price_to_book.splice(-1)[0];
+    this.PS = this.data.data.financials.annual.price_to_sales.splice(-1)[0];
+    this.enterprise_value_to_sales = this.data.data.financials.annual.enterprise_value_to_sales.splice(-1)[0];
     this.ebitda_per_share = this.data.data.financials.annual.ebitda_per_share.splice(-1);
     this.enterprise_value_to_pretax_income = this.data.data.financials.annual.enterprise_value_to_pretax_income.splice(-1);
     this.enterprise_value_to_fcf = this.data.data.financials.annual.enterprise_value_to_fcf.splice(-1);

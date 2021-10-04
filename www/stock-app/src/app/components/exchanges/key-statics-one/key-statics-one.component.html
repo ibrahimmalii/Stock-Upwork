@@ -24,7 +24,7 @@
         </tr>
         <tr>
           <td class="lt">P/E</td>
-          <td class="rt" id="ks-pe">{{PE}}</td>
+          <td class="rt" id="ks-pe">{{PE.toFixed(2)}}</td>
           <td class="lt">ROA</td>
           <td class="rt">1{{(roa_median * 100).toFixed(2)}}%</td>
           <td class="lt">Gross Profit</td>
@@ -32,7 +32,7 @@
         </tr>
         <tr>
           <td class="lt">P/B</td>
-          <td class="rt" id="ks-pb">{{PB}}</td>
+          <td class="rt" id="ks-pb">{{PB.toFixed(2)}}</td>
           <td class="lt">ROE</td>
           <td class="rt">{{(roe_median * 100).toFixed(2)}}%</td>
           <td class="lt">EBIT</td>
@@ -40,7 +40,7 @@
         </tr>
         <tr>
           <td class="lt">P/S</td>
-          <td class="rt" id="ks-ps">{{PS}}</td>
+          <td class="rt" id="ks-ps">{{PS.toFixed(2)}}</td>
           <td class="lt">ROIC</td>
           <td class="rt">{{(roic_median * 100).toFixed(2)}}%</td>
           <td class="lt">Pre-Tax Income</td>
@@ -48,7 +48,7 @@
         </tr>
         <tr>
           <td class="lt">EV/S</td>
-          <td class="rt" id="ks-ev_s">{{enterprise_value_to_sales}}</td>
+          <td class="rt" id="ks-ev_s">{{enterprise_value_to_sales.toFixed(2)}}</td>
           <td class="table_header" colspan="2">10-Year CAGR</td>
           <td class="lt">FCF</td>
           <td class="rt">{{(fcf_margin_median * 100).toFixed(2)}}%</td>
