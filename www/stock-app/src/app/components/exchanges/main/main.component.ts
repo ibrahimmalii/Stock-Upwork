@@ -12,12 +12,14 @@ export class MainComponent implements OnInit {
 
   responseData : any;
   financials : any;
-
-  data = localStorage.responseData
+  data : any;
   ngOnInit(): void {
+    this.data = localStorage.responseData
     this.data = JSON.parse(this.data);
+    console.log(this.data)
+    
     // console.log(this.data.financials.annual.revenue);
-    console.log(this.data);
+    // console.log(this.data);
     // this.financials = this.data.financials;
     // console.log(this.data.financials)
     // console.log(this.data.metadata.name)
