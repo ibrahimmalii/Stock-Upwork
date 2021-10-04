@@ -16,8 +16,7 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
     this.data = localStorage.responseData
     this.data = JSON.parse(this.data);
-    console.log(this.data)
-    
+
     // console.log(this.data.financials.annual.revenue);
     // console.log(this.data);
     // this.financials = this.data.financials;
