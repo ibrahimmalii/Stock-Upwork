@@ -26,7 +26,7 @@ export class MainComponent implements OnInit {
     // this.http.get('http://public-api.quickfs.net/v1/data/all-data/MSFT?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07').subscribe(res => {
     //   console.log(res);
     //   this.responseData = res;
-    //   localStorage.responseData = JSON.stringify(this.responseData.data)
+    //   localStorage.responseData = JSON.stringify(this.responseData)
     // })
   }
 
