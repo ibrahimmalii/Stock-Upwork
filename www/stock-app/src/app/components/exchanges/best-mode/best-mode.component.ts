@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-best-mode',
@@ -9,7 +9,13 @@ export class BestModeComponent implements OnInit {
 
   constructor() { }
 
+  @Input() data : any;
+
+
   ngOnInit(): void {
+
   }
+
+
 
 }
