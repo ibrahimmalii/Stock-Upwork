@@ -12,6 +12,7 @@
       <th scope="col">2018</th>
       <th scope="col">2019</th>
       <th scope="col">2020</th>
+      <th scope="col">2021</th>
     </tr>
   </thead>
   <tbody>
@@ -21,7 +22,7 @@
     </tr>
     <tr>
       <th scope="row">Revenue Growth</th>
-      <td *ngFor="let rev of revenue_growth">{{(rev * 100).toFixed(2)}}%</td>
+      <td *ngFor="let rev of revenue_growth">{{(rev * 100).toFixed(1)}}%</td>
     </tr>
     <tr>
       <th scope="row">Gross Profit</th>
@@ -29,35 +30,43 @@
     </tr>
     <tr>
       <th scope="row">Gross Margin %</th>
-      <td *ngFor="let gross of gross_margin">{{(gross * 100).toFixed(2)}}%</td>
+      <td *ngFor="let gross of gross_margin">{{(gross * 100).toFixed(1)}}%</td>
     </tr>
     <tr>
       <th scope="row">Operating Profit</th>
-      <td *ngFor="let operating of operating_income">{{operating / 1000000}}</td>
+      <td *ngFor="let operating of operating_income">{{(operating / 1000000).toLocaleString(undefined,{ minimumFractionDigits: 0 })}}</td>
     </tr>
     <tr>
       <th scope="row">Operating Margin %</th>
-      <td *ngFor="let operating of operating_margin">{{(operating * 100).toFixed(2)}}%</td>
+      <td *ngFor="let operating of operating_margin">{{(operating * 100).toFixed(1)}}%</td>
+    </tr>
+    <tr>
+      <th scope="row">Earnings Per Share</th>
+      <td *ngFor="let eps of eps_diluted">${{eps}}%</td>
     </tr>
     <tr>
       <th scope="row">EPS Growth</th>
-      <td *ngFor="let eps of eps_diluted_growth">{{(eps * 100).toFixed(2)}} </td>
+      <td *ngFor="let eps of eps_diluted_growth">{{(eps * 100).toFixed(1)}} </td>
     </tr>
     <tr>
       <th scope="row">Dividends Per Share</th>
-      <td *ngFor="let div of dividends">{{div}} </td>
+      <td *ngFor="let div of dividends">${{div}} </td>
+    </tr>
+    <tr>
+      <th scope="row">Dividends Growth</th>
+      <td *ngFor="let div of dividends_per_share_growth">{{(div * 100).toFixed(1)}}% </td>
     </tr>
     <tr>
       <th scope="row">Return On Assets</th>
-      <td *ngFor="let item of roa">{{(item * 100).toFixed(2)}}%</td>
+      <td *ngFor="let item of roa">{{(item * 100).toFixed(1)}}%</td>
     </tr>
     <tr>
       <th scope="row">Return On Equity</th>
-      <td *ngFor="let item of roe">{{(item * 100).toFixed(2)}}%</td>
+      <td *ngFor="let item of roe">{{(item * 100).toFixed(1)}}%</td>
     </tr>
     <tr>
       <th scope="row">Return On Invested Capital</th>
-      <td *ngFor="let item of roic">{{(item * 100).toFixed(2)}}%</td>
+      <td *ngFor="let item of roic">{{(item * 100).toFixed(1)}}%</td>
     </tr>
   </tbody>
 </table>

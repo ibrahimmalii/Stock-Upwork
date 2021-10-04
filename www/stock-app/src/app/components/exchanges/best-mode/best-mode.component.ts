@@ -44,6 +44,8 @@ export class BestModeComponent implements OnInit {
   dividendsFixed:any
   deptToEquity:any
   deptToEquityFixed:any
+  revenueGrowthFixed:any
+  enterprise:any
 
   oparator(op:any , arr:any){
       return eval(arr.join(op)).toFixed(2)+'%'
@@ -63,15 +65,18 @@ export class BestModeComponent implements OnInit {
     this.pretax_income_per_share =this.oparator( '+' ,this.data.data.financials.quarterly.pretax_income_per_share);
     this.dividends =this.oparator( '+' ,this.data.data.financials.quarterly.dividends);
     this.deptToEquity =this.oparator( '+' ,this.data.data.financials.quarterly.debt_to_equity);
+    this.enterprise =this.oparator( '+' ,this.data.data.financials.quarterly.enterprise_value);
+    this.revenueGrowthFixed =(parseInt(this.enterprise))/1000000
     this.deptToEquityFixed = (parseInt(this.deptToEquity))/100
     this.revenueRatio = (parseInt(this.pretax_income_per_share) - parseInt(this.operating_income_per_share))
     this.dividendsFixed = ((parseInt(this.dividends) / 100))+'%'
-    console.log(this.deptToEquity)
+    // console.log(this.deptToEquity)
     this.total = (parseInt(this.totalAssets) /parseInt (this.totalLibilites)).toFixed(1)
     this.revenueGrowth =(this.data.data.financials.quarterly.revenue_growth).splice(-2)
     this.calculater = (((this.revenueGrowth[1] - this.revenueGrowth[0])/this.revenueGrowth[0])*100).toFixed(0)+'%'
     this.roeMedian =((this.data.data.financials.quarterly.roe_median)*100).toFixed(0) +'%'
     this.roceFixed =(parseInt(this.roce).toFixed(0)+'%')
+    console.log(this.roceFixed)
     this.flowPerShareFixed =(parseInt(this.flowPerShare).toFixed(0)+'%')
     this.marketCapFixed = ((parseInt(this.marketCap))/1000000).toFixed(0) +'$'
     this.industry = this.data.data.metadata. industry
