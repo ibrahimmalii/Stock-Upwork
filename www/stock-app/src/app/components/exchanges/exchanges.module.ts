@@ -19,6 +19,9 @@ const routes :Routes = [
   ],
   imports: [
     CommonModule, RouterModule.forChild(routes)
+  ],
+  exports : [
+    KeyStaticsOneComponent,KeyStaticsComponent
   ]
 })
 export class ExchangesModule { }

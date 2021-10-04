@@ -8,11 +8,13 @@ import { AppComponent } from './app.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { SharedModule } from './components/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+// import { FilterCompaniesComponent } from './components/filter-companies/filter-companies.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContactComponent,
+    // FilterCompaniesComponent,
   ],
   imports: [
     BrowserModule,
