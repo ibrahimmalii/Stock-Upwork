@@ -18,7 +18,7 @@ export class MainComponent implements OnInit {
     this.data = JSON.parse(this.data);
     // console.log(this.data.financials.annual.revenue);
     console.log(this.data);
-    this.financials = this.data.financials;
+    // this.financials = this.data.financials;
     // console.log(this.data.financials)
     // console.log(this.data.metadata.name)
     // this.http.get('http://public-api.quickfs.net/v1/data/all-data/MSFT?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07').subscribe(res => {

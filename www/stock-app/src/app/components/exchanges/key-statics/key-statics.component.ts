@@ -14,7 +14,7 @@ export class KeyStaticsComponent implements OnInit {
   metaData : any;
   ngOnInit(): void {
     // console.log(this.data);
-    this.metaData = this.data.metaData;
+    // this.metaData = this.data.metaData;
   }
 
 
