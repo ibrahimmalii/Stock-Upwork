@@ -17,7 +17,7 @@
   <tbody>
     <tr>
       <th scope="row">Revenue</th>
-      <td *ngFor="let rev of revenue">{{rev}}</td>
+      <td *ngFor="let rev of revenue">{{(rev / 1000000).toLocaleString(undefined,{ minimumFractionDigits: 0 })}}</td>
     </tr>
     <tr>
       <th scope="row">Revenue Growth</th>
@@ -25,7 +25,7 @@
     </tr>
     <tr>
       <th scope="row">Gross Profit</th>
-      <td *ngFor="let gross of gross_profit">{{gross / 1000000}}</td>
+      <td *ngFor="let gross of gross_profit">{{(gross / 1000000).toLocaleString(undefined,{ minimumFractionDigits: 0 })}}</td>
     </tr>
     <tr>
       <th scope="row">Gross Margin %</th>
