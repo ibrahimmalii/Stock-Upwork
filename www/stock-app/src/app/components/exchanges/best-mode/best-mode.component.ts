@@ -7,11 +7,13 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class BestModeComponent implements OnInit {
 
-  constructor() { 
+  constructor() {
 
   }
 
   @Input() data : any;
+  PE : any;
+  PS : any;
   maps:any;
   collect:any;
   fixed:any;
@@ -33,11 +35,16 @@ export class BestModeComponent implements OnInit {
   marketCapFixed:any
   industry :any
   currency:any
+  revenue_per_share : any;
+  ebitda_per_share : any;
+
   oparator(op:any , arr:any){
       return eval(arr.join(op)).toFixed(2)+'%'
   }
 
   ngOnInit(): void {
+    this.PE = this.data.data.financials.annual.price_to_earnings.splice(-1)[0];
+    this.PS = this.data.data.financials.annual.price_to_sales.splice(-1)[0];
     this.operatingMargin =this.oparator ( '+' , this.data.data.financials.quarterly.operating_margin);
     this.netIncomeMargin =this.oparator( '+' ,this.data.data.financials.quarterly.net_income_margin);
     this.totalAssets =this.oparator( '+' ,this.data.data.financials.quarterly.total_current_assets);
@@ -55,10 +62,10 @@ export class BestModeComponent implements OnInit {
     this.marketCapFixed = ((parseInt(this.marketCap))/1000000).toFixed(0) +'$'
     this.industry = this.data.data.metadata. industry
     this.currency = this.data.data.metadata. currency
-    console.log(this.data.data.metadata. industry)
-    
+    this.revenue_per_share = this.data.data.financials.annual.revenue_per_share.splice(-1)[0];
+    this.ebitda_per_share = this.data.data.financials.annual.ebitda_per_share.splice(-1)[0];
   }
-  
+
 
 
 
