@@ -23,20 +23,23 @@ export class KeyStaticsComponent implements OnInit {
   roe : any;
   roic : any;
 
+  splicedArray(arr:any){
+    return arr.splice(arr.length - 10);
+  }
 
 
   ngOnInit(): void {
-    this.revenue = this.data.data.financials.quarterly.revenue.splice(0,10);
-    this.revenue_growth = this.data.data.financials.quarterly.revenue_growth.splice(0,10);
-    this.gross_profit = this.data.data.financials.annual.gross_profit.splice(0,10);
-    this.gross_margin = this.data.data.financials.annual.gross_margin.splice(0,10);
-    this.operating_income = this.data.data.financials.annual.operating_income.splice(0,10);
-    this.operating_margin = this.data.data.financials.quarterly.operating_margin.splice(0,10);
-    this.eps_diluted_growth = this.data.data.financials.quarterly.eps_diluted_growth.splice(0,10);
-    this.dividends = this.data.data.financials.quarterly.dividends.splice(0,10);
-    this.roa = this.data.data.financials.annual.roa.splice(0,10);
-    this.roe = this.data.data.financials.annual.roe.splice(0,10);
-    this.roic = this.data.data.financials.annual.roic.splice(0,10);
+    this.revenue = this.splicedArray(this.data.data.financials.quarterly.revenue);
+    this.revenue_growth = this.splicedArray(this.data.data.financials.quarterly.revenue_growth);
+    this.gross_profit = this.splicedArray(this.data.data.financials.annual.gross_profit);
+    this.gross_margin = this.splicedArray(this.data.data.financials.annual.gross_margin);
+    this.operating_income = this.splicedArray(this.data.data.financials.annual.operating_income);
+    this.operating_margin = this.splicedArray(this.data.data.financials.quarterly.operating_margin);
+    this.eps_diluted_growth = this.splicedArray(this.data.data.financials.quarterly.eps_diluted_growth);
+    this.dividends = this.splicedArray(this.data.data.financials.quarterly.dividends);
+    this.roa = this.splicedArray(this.data.data.financials.annual.roa);
+    this.roe = this.splicedArray(this.data.data.financials.annual.roe);
+    this.roic = this.splicedArray(this.data.data.financials.annual.roic);
 
   }
 

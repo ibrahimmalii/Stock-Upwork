@@ -29,7 +29,7 @@
     </tr>
     <tr>
       <th scope="row">Gross Margin %</th>
-      <td *ngFor="let gross of gross_margin">{{gross * 100}}%</td>
+      <td *ngFor="let gross of gross_margin">{{(gross * 100).toFixed(2)}}%</td>
     </tr>
     <tr>
       <th scope="row">Operating Profit</th>
