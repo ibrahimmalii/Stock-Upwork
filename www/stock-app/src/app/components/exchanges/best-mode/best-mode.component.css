@@ -4,7 +4,7 @@
     background-color: var(--bg);
    color: #868096;
     font-weight: bolder;
-   
+
 }
 
  */
@@ -13,7 +13,7 @@
      background-color: aqua;
  }
 
-@media (min-width: 400px) { 
+@media (min-width: 400px) {
 
     .div1{
         background-color: var(--tc);
@@ -26,7 +26,7 @@
         font-weight: bolder;
 
         /* flex-wrap: wrap; */
-    } 
+    }
     .art1>p{
         margin: 20px 10px;
     }
@@ -65,7 +65,7 @@
  }
 
 
- 
+
 
  .table_header{
     color: brown; border-bottom: 1px solid black;
@@ -105,8 +105,8 @@
 }
 
 /* // Large devices (desktops, 992px and up) */
-@media (min-width: 992px) { 
-   
+@media (min-width: 992px) {
+
 }
 
 /* // X-Large devices (large desktops, 1200px and up) */

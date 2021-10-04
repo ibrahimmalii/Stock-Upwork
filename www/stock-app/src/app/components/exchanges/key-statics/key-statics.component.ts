@@ -24,23 +24,22 @@ export class KeyStaticsComponent implements OnInit {
   roic : any;
 
   splicedArray(arr:any){
-    return arr.splice(0,10);
+    return arr.splice(0, 10);
   }
 
 
   ngOnInit(): void {
-    this.revenue = this.splicedArray(this.data.data.financials.quarterly.revenue);
-    this.revenue_growth = this.splicedArray(this.data.data.financials.quarterly.revenue_growth);
+    this.revenue = this.splicedArray(this.data.data.financials.annual.revenue);
+    this.revenue_growth = this.splicedArray(this.data.data.financials.annual.revenue_growth);
     this.gross_profit = this.splicedArray(this.data.data.financials.annual.gross_profit);
     this.gross_margin = this.splicedArray(this.data.data.financials.annual.gross_margin);
     this.operating_income = this.splicedArray(this.data.data.financials.annual.operating_income);
-    this.operating_margin = this.splicedArray(this.data.data.financials.quarterly.operating_margin);
-    this.eps_diluted_growth = this.splicedArray(this.data.data.financials.quarterly.eps_diluted_growth);
-    this.dividends = this.splicedArray(this.data.data.financials.quarterly.dividends);
+    this.operating_margin = this.splicedArray(this.data.data.financials.annual.operating_margin);
+    this.eps_diluted_growth = this.splicedArray(this.data.data.financials.annual.eps_diluted_growth);
+    this.dividends = this.splicedArray(this.data.data.financials.annual.dividends);
     this.roa = this.splicedArray(this.data.data.financials.annual.roa);
     this.roe = this.splicedArray(this.data.data.financials.annual.roe);
     this.roic = this.splicedArray(this.data.data.financials.annual.roic);
-
   }
 
 
