@@ -18,7 +18,7 @@ export class KeyStaticsComponent implements OnInit {
   operating_income : any;
   operating_margin : any;
   eps_diluted_growth : any;
-  dividends : any;
+  dividends_annual : any;
   roa : any;
   roe : any;
   roic : any;
@@ -39,7 +39,7 @@ export class KeyStaticsComponent implements OnInit {
     this.operating_margin = this.splicedArray(this.data.operating_margin);
     this.eps_diluted = this.splicedArray(this.data.eps_diluted)
     this.eps_diluted_growth = this.splicedArray(this.data.eps_diluted_growth);
-    this.dividends = this.splicedArray(this.data.dividends);
+    this.dividends_annual = this.splicedArray(this.data.dividends_annual);
     this.dividends_per_share_growth = this.splicedArray(this.data.dividends_per_share_growth)
     this.roa = this.splicedArray(this.data.roa);
     this.roe = this.splicedArray(this.data.roe);

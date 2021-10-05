@@ -40,7 +40,7 @@ export class BestModeComponent implements OnInit {
   operating_income_per_share : any
   pretax_income_per_share: any
   revenueRatio:any
-  dividends:any
+  dividends_quarterly:any
   dividendsFixed:any
   deptToEquity:any
   deptToEquityFixed:any
@@ -62,11 +62,11 @@ export class BestModeComponent implements OnInit {
     this.marketCap =this.oparator( '+' ,this.data.market_cap);
     this.operating_income_per_share =this.oparator( '+' ,this.data.operating_income_per_share);
     this.pretax_income_per_share =this.oparator( '+' ,this.data.pretax_income_per_share);
-    this.dividends =this.oparator( '+' ,this.data.dividends);
+    this.dividends_quarterly =this.oparator( '+' ,this.data.dividends_quarterly);
     this.deptToEquity =this.oparator( '+' ,this.data.debt_to_equity);
     this.deptToEquityFixed = (parseInt(this.deptToEquity))/100
     this.revenueRatio = (parseInt(this.pretax_income_per_share) - parseInt(this.operating_income_per_share))
-    this.dividendsFixed = ((parseInt(this.dividends) / 100))+'%'
+    this.dividendsFixed = ((parseInt(this.dividends_quarterly) / 100))+'%'
     // console.log(this.deptToEquity)
     this.total = (parseInt(this.totalAssets) /parseInt (this.totalLibilites)).toFixed(1)
     this.revenueGrowth =(this.data.revenue_growth).splice(-2)
