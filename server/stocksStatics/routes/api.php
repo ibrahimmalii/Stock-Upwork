@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Auth\AuthController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Client\Response;
 use App\Models\Test;
+use App\Http\Controllers\KeyStatisticsController;
 use Illuminate\Support\Facades\Http;
 
 
@@ -39,3 +40,7 @@ Route::get('/test', function(Request $request){
     $responseData = $response->json();
     dd($responseData);
 });
+
+
+// Crud For Key Statistics
+Route::post('/keyStatistics', [KeyStatisticsController::class , 'create']);
