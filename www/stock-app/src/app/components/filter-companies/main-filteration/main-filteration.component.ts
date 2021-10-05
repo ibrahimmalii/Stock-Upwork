@@ -4,22 +4,19 @@ import { RequestFunctionsService } from 'src/app/services/request-functions.serv
 import { RequestService } from 'src/app/services/request.service';
 
 @Component({
-  selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css']
+  selector: 'app-main-filteration',
+  templateUrl: './main-filteration.component.html',
+  styleUrls: ['./main-filteration.component.css']
 })
-export class MainComponent implements OnInit {
+export class MainFilterationComponent implements OnInit {
 
-  constructor(private http: HttpClient, private requestService : RequestService, private requests : RequestFunctionsService) { }
+  constructor(private http: HttpClient, private requests : RequestFunctionsService) { }
 
   responseData: any;
   financials: any;
   data: any;
-  requestData: any;
-  apiRequest : any;
-  isPageLoaded : boolean = false;
-
-
+  apiRequest: any;
+  isPageLoaded : any;
 
   ngOnInit(): void {
     this.data = localStorage.responseData;
@@ -31,5 +28,11 @@ export class MainComponent implements OnInit {
       console.log('No data found');
     }
   }
+
+  //=====================> Request Service To Get Data. =========================//
+  getData(searchKey: string){
+    this.data = this.requests.getData(searchKey);
+  }
+
 
 }

@@ -5,7 +5,7 @@
 <article class="art1" >
     <p class="">Last Close: $280.98</p>
     <p>Market Cap: ${{marketCapFixed}}M</p>
-    <p>EV:${{revenueGrowthFixed.toFixed(0)}}M </p>
+    <!-- <p>EV:${{revenueGrowthFixed.toFixed(0)}}M </p> -->
     <p>Industry: Software</p>
     <p>Display Currency: {{currency}}</p>
 
@@ -20,8 +20,8 @@
             <img src="/assets/images/1.png" width="120px" height="40px">
         </div>
         <div>
-          <h4>{{data.data.metadata.name}}</h4>
-          <h5>{{data.data.metadata.symbol}}</h5>
+          <h4>{{data.name}}</h4>
+          <h5>{{data.symbol}}</h5>
         </div>
         <div>
           <h4>Current Price</h4>
@@ -98,7 +98,7 @@
     </article>
     <article class="col-lg-6 col-md-11">
         <h4>Business Description :</h4>
-        <p>{{data.data.metadata.description}}</p>
+        <p>{{data.description}}</p>
     </article>
 </section>
 
