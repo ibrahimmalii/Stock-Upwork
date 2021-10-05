@@ -46,6 +46,7 @@ export class BestModeComponent implements OnInit {
   deptToEquityFixed:any
   revenueGrowthFixed:any
   enterprise:any
+  totalCurrentAssets :any
 
   oparator(op:any , arr:any){
       return eval(arr.join(op)).toFixed(2)+'%'
@@ -66,6 +67,7 @@ export class BestModeComponent implements OnInit {
     this.dividends =this.oparator( '+' ,this.data.data.financials.quarterly.dividends);
     this.deptToEquity =this.oparator( '+' ,this.data.data.financials.quarterly.debt_to_equity);
     this.enterprise =this.oparator( '+' ,this.data.data.financials.quarterly.enterprise_value);
+    this.totalCurrentAssets =this.oparator( '+' ,this.data.data.financials.quarterly.total_current_assets);
     this.revenueGrowthFixed =(parseInt(this.enterprise))/1000000
     this.deptToEquityFixed = (parseInt(this.deptToEquity))/100
     this.revenueRatio = (parseInt(this.pretax_income_per_share) - parseInt(this.operating_income_per_share))
@@ -81,7 +83,8 @@ export class BestModeComponent implements OnInit {
     this.marketCapFixed = ((parseInt(this.marketCap))/1000000).toFixed(0) +'$'
     this.industry = this.data.data.metadata. industry
     this.currency = this.data.data.metadata. currency
-    console.log(this.data.data.financials.quarterly.ebitda_per_share)
+    // console.log(this.data.data.financials.quarterly.ebitda_per_share)
+    // console.log(this.totalCurrentAssets )
     // this.revenue_per_share = this.data.data.financials.annual.revenue_per_share.splice(-1)[0];
     // this.ebitda_per_share = this.data.data.financials.annual.ebitda_per_share.splice(-1)[0];
   }
