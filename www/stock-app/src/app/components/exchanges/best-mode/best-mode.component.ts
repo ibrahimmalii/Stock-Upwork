@@ -44,6 +44,7 @@ export class BestModeComponent implements OnInit {
   dividendsFixed:any
   deptToEquity:any
   deptToEquityFixed:any
+  total_revenue :any
 
   oparator(op:any , arr:any){
       return eval(arr.join(op)).toFixed(2)+'%'
@@ -66,7 +67,7 @@ export class BestModeComponent implements OnInit {
     this.deptToEquityFixed = (parseInt(this.deptToEquity))/100
     this.revenueRatio = (parseInt(this.pretax_income_per_share) - parseInt(this.operating_income_per_share))
     this.dividendsFixed = ((parseInt(this.dividends) / 100))+'%'
-    console.log(this.deptToEquity)
+    // console.log(this.deptToEquity)
     this.total = (parseInt(this.totalAssets) /parseInt (this.totalLibilites)).toFixed(1)
     this.revenueGrowth =(this.data.data.financials.quarterly.revenue_growth).splice(-2)
     this.calculater = (((this.revenueGrowth[1] - this.revenueGrowth[0])/this.revenueGrowth[0])*100).toFixed(0)+'%'
@@ -74,9 +75,9 @@ export class BestModeComponent implements OnInit {
     this.roceFixed =(parseInt(this.roce).toFixed(0)+'%')
     this.flowPerShareFixed =(parseInt(this.flowPerShare).toFixed(0)+'%')
     this.marketCapFixed = ((parseInt(this.marketCap))/1000000).toFixed(0) +'$'
-    this.industry = this.data.data.metadata. industry
-    this.currency = this.data.data.metadata. currency
-    console.log(this.data.data.financials.quarterly.ebitda_per_share)
+    this.industry = this.data.data.metadata.industry
+    this.currency = this.data.data.metadata.currency
+    // console.log(this.data.data.financials.quarterly.ebitda_per_share)
     // this.revenue_per_share = this.data.data.financials.annual.revenue_per_share.splice(-1)[0];
     // this.ebitda_per_share = this.data.data.financials.annual.ebitda_per_share.splice(-1)[0];
   }
