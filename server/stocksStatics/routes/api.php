@@ -44,3 +44,5 @@ Route::get('/test', function(Request $request){
 
 // Crud For Key Statistics
 Route::post('/keyStatistics', [KeyStatisticsController::class , 'create']);
+Route::get('/keyStatistics', [KeyStatisticsController::class , 'index']);
+Route::get('/keyStatistics/{key}', [KeyStatisticsController::class , 'show']);
