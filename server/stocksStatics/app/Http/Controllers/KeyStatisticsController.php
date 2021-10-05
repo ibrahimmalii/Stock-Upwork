@@ -22,8 +22,6 @@ class KeyStatisticsController extends Controller
             'qfs_symbol'=> $request->qfs_symbol,
             'market_cap' => $request->market_cap,
             'enterprise_value'=> $request->enterprise_value,
-            'pe_ratio' => $request->pe_ratio,
-            'ps_ratio' => $request->ps_ratio,
             'total_revenue' => $request->total_revenue,
             'cogs' => $request->cogs,
             'gross_profit' => $request->gross_profit,
@@ -72,7 +70,8 @@ class KeyStatisticsController extends Controller
             'fcf_cagr_10' => $request->fcf_cagr_10,
             'price_to_earnings' => $request->price_to_earnings,
             'price_to_sales' => $request->price_to_sales,
-            'dividends' => $request->dividends,
+            'dividends_quarterly' => $request->dividends_quarterly,
+            'dividends_annual' => $request->dividends_annual,
             'roe_median' => $request->roe_median,
 
             'price_to_book' => $request->price_to_book,

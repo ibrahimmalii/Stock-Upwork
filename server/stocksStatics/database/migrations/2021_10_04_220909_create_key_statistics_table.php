@@ -78,7 +78,8 @@ class CreateKeyStatisticsTable extends Migration
             $table->json('fcf_cagr_10')->nullable();
             $table->json('price_to_earnings')->nullable();
             $table->json('price_to_sales')->nullable();
-            $table->json('dividends')->nullable();
+            $table->json('dividends_quarterly')->nullable();
+            $table->json('dividends_annual')->nullable();
             $table->json('roe_median')->nullable();
 
             $table->json('price_to_book')->nullable();
