@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\KeyStatistics;
 use Illuminate\Http\Request;
 use Mockery\Undefined;
+use PhpParser\Node\Stmt\Foreach_;
 
 class KeyStatisticsController extends Controller
 {
@@ -116,6 +117,26 @@ class KeyStatisticsController extends Controller
         $data = $company[0];
         return $data;
 
+    }
+
+    public function getAllNames(){
+        $companies = KeyStatistics::get();
+        $names = [];
+        $symbols = [];
+        $item = [];
+        foreach ($companies as $company){
+            array_push($names, $company->name);
+        };
+
+        foreach ($companies as $element){
+            array_push($symbols, $element->symbol);
+        };
+
+        $data = [
+            'names' => $names,
+            'symbols' => $symbols,
+        ];
+        return $data;
     }
 
 
