@@ -17,19 +17,41 @@ export class MainFilterationComponent implements OnInit {
   data: any;
   apiRequest: any;
   isPageLoaded: any;
+  names : any;
+  symbols: any;
+  searchData : any;
+  associatedArr : any;
+  symbol : any;
+  name : any;
 
   ngOnInit(): void {
-    // this.requests.getCurrentData();
+    this.http.get(`http://localhost:8000/api/keyStatistics/all`).subscribe(res => {
+      this.responseData = res;
+      this.names = this.responseData.names;
+      this.symbols = this.responseData.symbols;
+      console.log(res);
 
-    // this.requests.getCompanyData().subscribe(res => {
-    //   this.data = res;
-    // })
+      // this.searchData = res;
+      // this.names = this.searchData.names;
+      // this.symbols = this.searchData.symbols;
+
+      // for(let i:any = 0 ; i < this.names.length ; i++){
+
+      //   let obj = {this.symbols[i] : this.names[i]};
+      //   this.associatedArr.push(obj);
+      //   console.log(this.associatedArr);
+      // };
+      // console.log(this.associatedArr.length);
+      // console.log(res);
+      this.isPageLoaded = true;
+    })
   }
 
   //=====================> Request Service To Get Data. =========================//
   getData(searchKey: string) {
     this.requests.getData(searchKey);
   }
+
 
 
 }

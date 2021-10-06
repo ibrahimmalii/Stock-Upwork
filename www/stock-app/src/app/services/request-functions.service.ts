@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject} from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { RequestService } from './request.service';
 
 @Injectable({
@@ -9,28 +10,30 @@ import { RequestService } from './request.service';
 export class RequestFunctionsService {
 
   local: any;
-  Data = new Subject<any>();
+  // Data = new BehaviourSubject<any>();
 
-
+  Data = new BehaviorSubject<any>(null);
+  setCompanyData(info: any) {
+    this.Data.next(info);
+    console.log(info);
+  }
 
 
   constructor(private requestService: RequestService, private http: HttpClient) {
-    let localData = localStorage.responseData
-    if (localData) {
-      let parsedData = JSON.parse(localData);
-      this.Data.next(parsedData);
-    }
+    this.http.get(`http://localhost:8000/api/keyStatistics/FB`).subscribe(res => {
+      let data = res;
+      this.Data.next(data);
+    });
   }
 
-  getCurrentData() {
-    let localData = localStorage.responseData;
-    let parsedData = JSON.parse(localData);
-    this.setCompanyData(parsedData)
-  }
+  // getCurrentData() {
+  //   console.log('from get curr');
+  //   let localData = localStorage.responseData;
+  //   let parsedData = JSON.parse(localData);
+  //   return this.setCompanyData(parsedData)
+  // }
 
-  setCompanyData(info: any) {
-    this.Data.next(info)
-  }
+
 
 
   data: any;
@@ -40,7 +43,7 @@ export class RequestFunctionsService {
   getData(searchKey: string) {
     // Chanang Of Requests
     // 1- Check If Country In DataBase Or Not
-    this.http.get(`http://localhost:8000/api/keyStatistics/${searchKey}`).subscribe(res => {
+    this.http.get(`http://localhost:8000/api/keyStatistics/${searchKey.toUpperCase()}`).subscribe(res => {
 
       // If Company Does't exist
       if (res == null) {
@@ -49,6 +52,7 @@ export class RequestFunctionsService {
         this.http.get(`http://public-api.quickfs.net/v1/data/all-data/${searchKey}?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07`).subscribe(res => {
           this.data = res;
           if (this.data.errors) {
+            alert('Company Not Found');
             return console.log('not found')
           };
 
@@ -121,7 +125,6 @@ export class RequestFunctionsService {
           this.apiRequest.dividends_quarterly = this.data.data.financials.quarterly.dividends;
           this.apiRequest.dividends_annual = this.data.data.financials.annual.dividends;
           this.apiRequest.roe_median = this.data.data.financials.annual.roe_median;
-
           this.apiRequest.price_to_book = this.data.data.financials.quarterly.price_to_book;
           this.apiRequest.enterprise_value_to_earnings = this.data.data.financials.annual.enterprise_value_to_earnings;
           this.apiRequest.enterprise_value_to_sales = this.data.data.financials.annual.enterprise_value_to_sales;
@@ -145,17 +148,22 @@ export class RequestFunctionsService {
 
           //Store Company In Our DataBase And Return Data From There
           this.http.post('http://localhost:8000/api/keyStatistics', this.requestService.data).subscribe(res => {
-            this.setCompanyData(res);
-            localStorage.responseData = res;
+            // localStorage.responseData =JSON.stringify(res);
+            // let data = localStorage.responseData
+            // let parsedData = JSON.parse(data);
+            // this.setCompanyData(parsedData);
+            this.Data.next(res);
           }, console.error);
 
         }, console.error);
 
       } else {
-        this.setCompanyData(res);
-        localStorage.responseData = res;
+        // localStorage.responseData =JSON.stringify(res);
+        // let data = localStorage.responseData
+        // let parsedData = JSON.parse(data);
+        // this.setCompanyData(parsedData);
+        this.Data.next(res);
       }
-
 
     }, console.error);
 

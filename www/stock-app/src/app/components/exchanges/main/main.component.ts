@@ -10,11 +10,10 @@ import { RequestService } from 'src/app/services/request.service';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  constructor(private requests: RequestFunctionsService) { }
 
 
   ngOnInit(): void {
-
   }
 
 }

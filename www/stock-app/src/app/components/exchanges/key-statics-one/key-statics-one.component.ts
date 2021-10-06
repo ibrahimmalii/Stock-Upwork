@@ -8,42 +8,46 @@ import { RequestFunctionsService } from 'src/app/services/request-functions.serv
 })
 export class KeyStaticsOneComponent implements OnInit {
 
-  constructor(private requests : RequestFunctionsService) { }
+  constructor(private requests: RequestFunctionsService) { }
 
 
   // @Input() data : any;
-  data : any;
+  data: any;
 
 
-  PE : any;
-  PB : any;
-  PS : any;
-  enterprise_value_to_sales : any;
-  ebitda_per_share : any;
-  enterprise_value_to_pretax_income : any;
-  enterprise_value_to_fcf : any;
-  roa_median : any;
-  roe_median : any;
-  roic_median : any;
-  revenue_cagr_10 : any;
-  total_assets_cagr_10 : any;
-  fcf_cagr_10 : any;
-  eps_diluted_cagr_10 : any;
-  gross_margin_median : any;
-  pretax_margin_median : any;
-  fcf_margin_median : any;
-  debt_to_assets_median :any;
-  debt_to_equity_median : any;
-  assets_to_equity_median : any;
-  enterprise_value_to_earnings : any;
-  isPageLoaded : boolean = false;
+  PE: any;
+  PB: any;
+  PS: any;
+  enterprise_value_to_sales: any;
+  ebitda_per_share: any;
+  enterprise_value_to_pretax_income: any;
+  enterprise_value_to_fcf: any;
+  roa_median: any;
+  roe_median: any;
+  roic_median: any;
+  revenue_cagr_10: any;
+  total_assets_cagr_10: any;
+  fcf_cagr_10: any;
+  eps_diluted_cagr_10: any;
+  gross_margin_median: any;
+  pretax_margin_median: any;
+  fcf_margin_median: any;
+  debt_to_assets_median: any;
+  debt_to_equity_median: any;
+  assets_to_equity_median: any;
+  enterprise_value_to_earnings: any;
+  isPageLoaded: boolean = false;
 
 
   ngOnInit(): void {
 
 
-    this.requests.getCompanyData().subscribe(res=>{
+
+
+
+    this.requests.getCompanyData().subscribe(res => {
       this.data = res;
+      // if(!this.data) return;
       this.PE = this.data.price_to_earnings.splice(-1)[0];
       this.PB = this.data.price_to_book.splice(-1)[0];
       this.PS = this.data.price_to_sales.splice(-1)[0];
@@ -67,6 +71,8 @@ export class KeyStaticsOneComponent implements OnInit {
       this.debt_to_assets_median = this.data.debt_to_assets_median;
       this.isPageLoaded = true;
     })
+
+
 
   }
 
