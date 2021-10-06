@@ -1,4 +1,6 @@
 <p class="h1 text-center mt-3">Best Mode</p>
 <input type="text" #searchKey (keyup.enter)="getData(searchKey.value)" placeholder="Search by ticker symbol or company name" class="form-control mb-5 w-50 m-auto">
-<app-key-statics-one *ngIf="isPageLoaded" [data]="data"></app-key-statics-one>
-<app-key-statics *ngIf="isPageLoaded" [data]="data"></app-key-statics>
+<div class="row text-center" >
+  <app-key-statics-one></app-key-statics-one>
+</div>
+<app-key-statics></app-key-statics>

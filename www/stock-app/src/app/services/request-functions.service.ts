@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { RequestService } from './request.service';
 
 @Injectable({
@@ -7,7 +8,30 @@ import { RequestService } from './request.service';
 })
 export class RequestFunctionsService {
 
-  constructor(private requestService: RequestService, private http: HttpClient) { }
+  local: any;
+  Data = new Subject<any>();
+
+
+
+
+  constructor(private requestService: RequestService, private http: HttpClient) {
+    let localData = localStorage.responseData
+    if (localData) {
+      let parsedData = JSON.parse(localData);
+      this.Data.next(parsedData);
+    }
+  }
+
+  getCurrentData() {
+    let localData = localStorage.responseData;
+    let parsedData = JSON.parse(localData);
+    this.setCompanyData(parsedData)
+  }
+
+  setCompanyData(info: any) {
+    this.Data.next(info)
+  }
+
 
   data: any;
   responseData: any;
@@ -121,23 +145,24 @@ export class RequestFunctionsService {
 
           //Store Company In Our DataBase And Return Data From There
           this.http.post('http://localhost:8000/api/keyStatistics', this.requestService.data).subscribe(res => {
-            this.data = res;
-            localStorage.responseData = JSON.stringify(this.data);
-            return this.data;
+            this.setCompanyData(res);
+            localStorage.responseData = res;
           }, console.error);
 
         }, console.error);
 
       } else {
-        this.data = res;
-        console.log(this.data);
-        localStorage.responseData = JSON.stringify(this.data);
-        return this.data;
+        this.setCompanyData(res);
+        localStorage.responseData = res;
       }
 
 
     }, console.error);
 
   }// End of Get Data
+
+  getCompanyData() {
+    return this.Data.asObservable();
+  }
 
 }

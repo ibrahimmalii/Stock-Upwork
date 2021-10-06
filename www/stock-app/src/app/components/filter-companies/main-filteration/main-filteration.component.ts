@@ -10,28 +10,25 @@ import { RequestService } from 'src/app/services/request.service';
 })
 export class MainFilterationComponent implements OnInit {
 
-  constructor(private http: HttpClient, private requests : RequestFunctionsService) { }
+  constructor(private http: HttpClient, private requests: RequestFunctionsService) { }
 
   responseData: any;
   financials: any;
   data: any;
   apiRequest: any;
-  isPageLoaded : any;
+  isPageLoaded: any;
 
   ngOnInit(): void {
-    this.data = localStorage.responseData;
-    if(this.data){
-      console.log('done');
-      this.data = JSON.parse(this.data);
-      this.isPageLoaded = true;
-    }else{
-      console.log('No data found');
-    }
+    // this.requests.getCurrentData();
+
+    // this.requests.getCompanyData().subscribe(res => {
+    //   this.data = res;
+    // })
   }
 
   //=====================> Request Service To Get Data. =========================//
-  getData(searchKey: string){
-    this.data = this.requests.getData(searchKey);
+  getData(searchKey: string) {
+    this.requests.getData(searchKey);
   }
 
 
