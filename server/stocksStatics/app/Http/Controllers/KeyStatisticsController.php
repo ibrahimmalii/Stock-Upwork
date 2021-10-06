@@ -123,13 +123,12 @@ class KeyStatisticsController extends Controller
         $companies = KeyStatistics::get();
         $names = [];
         $symbols = [];
-        $item = [];
         foreach ($companies as $company){
             array_push($names, $company->name);
         };
 
-        foreach ($companies as $element){
-            array_push($symbols, $element->symbol);
+        foreach ($companies as $company){
+            array_push($symbols, $company->symbol);
         };
 
         $data = [
