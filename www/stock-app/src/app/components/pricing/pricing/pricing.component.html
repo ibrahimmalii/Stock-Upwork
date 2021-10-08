@@ -72,35 +72,35 @@
     <div class=""><input type='text' id="0" class="text-light bg-info text-center w-100"
         (keyup.enter)="getData($event, inputOne.value)" #inputOne style="height:60px"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[0] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[0]; let i = index"><input [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}"></li>
+      <li *ngFor="let item of ArrayOfData[0]; let i = index" ><input [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}"></li>
     </ul>
   </div>
   <div class="col">
     <div class="bg-dark"><input type='text' id="1" (keyup.enter)="getData($event, inputTwo.value)" #inputTwo
         class="text-light bg-info text-center w-100" style="height:60px"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[1] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[1]; let i = index"><input value="{{item}}"></li>
+      <li *ngFor="let item of ArrayOfData[1]; let i = index"><input [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}"></li>
     </ul>
   </div>
   <div class="col">
     <div class=""><input type='text' id="2" class="text-light bg-info text-center w-100"
         (keyup.enter)="getData($event, inputThree.value)" #inputThree style="height:60px"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[2] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[2]; let i = index"><input value="{{item}}"></li>
+      <li *ngFor="let item of ArrayOfData[2]; let i = index"><input [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}"></li>
     </ul>
   </div>
   <div class="col">
     <div class=""><input type='text' id="3" class="text-light bg-info text-center w-100"
         (keyup.enter)="getData($event, inputFour.value)" #inputFour style="height:60px"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[3] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[3]; let i = index"><input value="{{item}}"></li>
+      <li *ngFor="let item of ArrayOfData[3]; let i = index"><input [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}"></li>
     </ul>
   </div>
   <div class="col">
     <div class=""><input type='text' id="4" class="text-light bg-info text-center w-100"
         (keyup.enter)="getData($event, inputFive.value)" #inputFive style="height:60px"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[4] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[4]; let i = index"><input value="{{item}}"></li>
+      <li *ngFor="let item of ArrayOfData[4]; let i = index"><input [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}"></li>
     </ul>
   </div>
   <div class="col">
