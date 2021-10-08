@@ -1,197 +1,115 @@
-<div class="row my-5">
-  <div class="col-10 offset-2">
 
+<div class='row'>
+  <div class="col-2">
+    <ul>
+      <li class="bg-dark text-warning">STOCK TICKER <br> <img src="./../../../../assets/images/1.png" width="80px" height="30px"></li>
+      <li>Current Stock Price</li>
+      <li>Cost Basis</li>
+      <li>Industry</li>
+      <li>Sector</li>
+      <li>Exchange Traded On</li>
+      <li>Market Cap</li>
+      <li>Enterpise Value (Latest)</li>
+      <li>Volume</li>
+      <li style="font-size: 14px;">Average Daily Volume (14 days)</li>
+      <li>Volume Increase/Decrease</li>
+      <li>Share Float > 40-50%</li>
+      <li class='bg-black text-warning'>stock performance</li>
+      <li class="bg-info">PE RATIO</li>
+      <li style="background-color: rgb(117, 201, 162);">PS Ratio < 2 ideal, < 1 Great</li>
+      <li class="bg-dark text-warning">income statement</li>
+      <li>Total Revenuet</li>
+      <li>Cost of goods sold</li>
+      <li>Gross profit</li>
+      <li>Total operating expense</li>
+      <li style="font-size: 14px;">ROIC - return on invested capital</li>
+      <li style="font-size: 13px;">ROIC - return on capital employee</li>
+      <li class="bg-info">Five R indicator</li>
+      <li>Dividends per share(YR)</li>
+      <li style="background-color: rgb(228, 201, 201);">Dividend Yield 4%</li>
+      <li>Payout ratio</li>
+      <li class="bg-dark text-warning">capital ratio</li>
+      <li style="background-color: rgb(73, 236, 73);">Debt to equity</li>
+      <li>Debt to assets</li>
+      <li>Assets to equity</li>
+      <li class="bg-dark text-warning">per share data</li>
+      <li>Revenue per share</li>
+      <li class="bg-info">EBITDA per share</li>
+      <li>Revenue per share ratio</li>
+      <li style="background-color: rgb(85, 248, 85);">EDITDA Per Share Ratio</li>
+      <li>Operating income per share</li>
+      <li style="font-size: 14px;">Operating income per share ratio</li>
+      <li>Pretax income per share</li>
+      <li>Pretaz income per share ratio</li>
+      <li>Free cash flow per share</li>
+      <li>Shares outstanding</li>
+      <li>Avaliable float shares</li>
+      <li style="font-size: 14px;">Beta Ratio 5 YR (Risk Volatility)</li>
+      <li>Total Assets Growth</li>
+      <li>Total Equity Growth</li>
+      <li style="font-size: 14px;">Cash From Operations Growth</li>
+      <li class="bg-dark text-warning width 100%"  style="font-size: 15px;">CAGR-COMPOUNDED ANNUAL</li>
+      <li style="background-color: rgb(228, 201, 201);">Revenue 10-Period CAGR</li>
+      <li>Diluted EPS 10-Period CAGR</li>
+      <li>Total Assets 10-Period CAGR</li>
+      <li>Total Equity 10-Period CAGR</li>
+      <li style="font-size: 14px;">Free CAsh Flow 10-Period CAGR</li>
+      <li class="bg-primary">My Picks & Patreon Notes</li>
+      <li>STOCKS COVERED</li>
+      <li>AMC Stock</li>
+      <li>ENPH Stock</li>
+      <li>PVLV Stock</li>
+      <li>CLAR Stock</li>
+      <li>GNK Stock</li>
+      <li>DAC Stock</li>
+      <li>TSLA Stock</li>
+      <li>F Stock</li>
+      <li>NIO Stock</li>
+    </ul>
   </div>
-  <div class="row">
-    <div class="col-2 text-center fw-bold text-secondary">
-      <div class="fas fa-patreon">
-
-      </div>
-    </div>
+  <div class=col-1>
+    <div class="bg-dark"><input type='text' (keyup.enter)="getData(input.value)" #input  
+      class="bg-dark text-warning" style="height:54px"></div>
+    <ul [ngClass]="status ? 'success' : 'danger'" #input>
+      <li>ibrahim</li>
+      <li>..</li>
+      <li>ali</li>
+      <li>name</li>
+      <li>name</li>
+      <li>name</li>
+      <li>name</li>
+      <li>name</li>
+      <li>name</li>
+      <li>name</li>
+      <li>name</li>
+      <li>name</li>
+      <li class="bg-dark ">name</li>
+    </ul>
   </div>
-
-</div>
-
-
-<div class="row">
-  <div class="col tableDeatails">
-    <table>
-      <tr>
-        <td></td>
-        <td><input type="text" id=one ></td>
-        <td><input type="text" id=two></td>
-        <td><input type="text" id=three></td>
-        <td><input type="text" id=four></td>
-        <td><input type="text" id=five></td>
-       
-      </tr>
-      <tr>
-        <td><span class="p-2">Current Stock Price</span></td>
-        <td class="one">name</td>
-        <td class="two">name</td>
-        <td class="three">name</td>
-        <td class="four">name</td>
-        <td class="five">name</td>
-     
-      </tr>
-      <tr>
-        <td><span class="p-2">Cost Basis</span></td>
-        <td class="one">name</td>
-        <td class="two">name</td>
-        <td class="three">name</td>
-        <td class="four">name</td>
-        <td class="five">name</td>
-
-      </tr>
-      <tr>
-        <td><span class="p-2">Industry</span></td>
-        <td class="one">name</td>
-        <td class="two">name</td>
-        <td class="three">name</td>
-        <td class="four">name</td>
-        <td class="five">name</td>
-
-      </tr>
-      <tr>
-        <td><span class="p-2">Sector</span></td>
-        <td class="one">name</td>
-        <td class="two">name</td>
-        <td class="three">name</td>
-        <td class="four">name</td>
-        <td class="five">name</td>
-
-      </tr>
-      <tr>
-        <td><span class="p-2">Exchange Traded On</span></td>
-        <td class="one">name</td>
-        <td class="two">name</td>
-        <td class="three">name</td>
-        <td class="four">name</td>
-        <td class="five">name</td>
-      </tr>
-      <tr>
-        <td><span class="p-2">Market Cap</span></td>
-        <td class="one">name</td>
-        <td class="two">name</td>
-        <td class="three">name</td>
-        <td class="four">name</td>
-        <td class="five">name</td>
-      </tr>
-      <tr>
-        <td><span class="p-2">Enterpise Value (Latest)</span></td>
-        <td class="one">name</td>
-        <td class="two">name</td>
-        <td class="three">name</td>
-        <td class="four">name</td>
-        <td class="five">name</td>
-      </tr>
-      <tr>
-        <td><span class="p-2">Volume</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">Average Daily Volume (14 days)</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">Volume Increase/Decrease</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">Share Float > 40-50%</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2 text-uppercase bg-dark text-light">stock performance</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">PE RATIO</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">PS Ratio < 2 ideal, < 1 Great</span>
-        </td>
-      </tr>
-      <tr>
-        <td><span class="p-2 text-uppercase bg-dark text-light">income statement</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">Total Revenuet</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">Cost of goods sold</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">Gross profit</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">Total operating expense</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">ROIC - return on invested capital</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">ROIC - return on capital employee</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2 bg-success">Five R indicator </span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">Dividends per share(YR)</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">Dividend Yield 4%</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">Payout ratio</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2 bg-dark text-light text-uppercase">capital ratio</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">Debt to equity</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">Debt to assets</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">Assets to equity</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2 bg-dark text-light text-uppercase">per share data</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">Revenue per share</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">EBITDA per share</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2 bg-success">Revenue per share ratio</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2 bg-success">EDITDA Per Share Ratio</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">Operating income per share</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">Operating income per share ratio</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">Pretax income per share</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">Pretaz income per share ratio</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">Free cash flow per share</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">Shares outstanding</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">Avaliable float shares</span></td>
-      </tr>
-      <tr>
-        <td><span class="p-2">Beta Ratio 5 YR (Risk Volatility)</span></td>
-      </tr>
-    </table>
+  <div class=col-1>
+    <div class="bg-dark"><input type='text' (keyup.enter)="getDataOne(inputOne.value)" #inputOne  class="bg-dark" style="height:54px"></div>
+    <ul #inputOne  [ngClass]="statusOne ? 'success' : 'danger'">
+      <li>name</li>
+      <li>ibrahim</li>
+      <li>ali</li>
+      <li>name</li>
+      <li>name</li>
+      <li>name</li>
+      <li>name</li>
+      <li>name</li>
+      <li>name</li>
+      <li>name</li>
+      <li>name</li>
+      <li>name</li>
+      <li class="bg-dark">name</li>
+    </ul>
   </div>
 </div>
+<div class="bg-primary text-warning">Patreon Notes</div>
+<div>Note 1 : Be Sure to watch the a campany in youtube vadio (when avaliable) because i call out import points for patrons when appropriate</div>
+<div><span  class='text-danger'>Note 2 : Download The Beast Mode Stack Analysis Cheat Sheet Here:</span> https://www.patreon.com/posts/37763798</div>
+<div class='bg-warning' style='font-size:14px'>disclaimer:I am not a financial advisor & This Content is For Informational & Entertainment Purposes Only , You Should Not Construe Any Such INformation Or Other Material Ad Legal ,Tax, investment</div>
+<div class='bg-dark text-center'><img src="./../../../../assets/images/1.png" width="80px" height="30px">       
+<span class=' text-light m-5'>Free Tools at www.Jerry.Romine.com</span>
+<img src="./../../../../assets/images/1.png" width="80px" height="30px" ></div>
 

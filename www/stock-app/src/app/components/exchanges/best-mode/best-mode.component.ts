@@ -78,7 +78,6 @@ export class BestModeComponent implements OnInit {
     this.calculater = (((this.revenueGrowth[1] - this.revenueGrowth[0])/this.revenueGrowth[0])*100).toFixed(0)+'%'
     this.roeMedian =((this.data.roe_median)*100).toFixed(0) +'%'
     this.roceFixed =(parseInt(this.roce).toFixed(0)+'%')
-    console.log(this.roceFixed)
     this.flowPerShareFixed =(parseInt(this.flowPerShare).toFixed(0)+'%')
     this.marketCapFixed = ((parseInt(this.marketCap))/1000000).toFixed(0) +'$'
     this.industry = this.data.industry
