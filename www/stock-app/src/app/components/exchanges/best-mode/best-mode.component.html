@@ -13,15 +13,15 @@
 
 <!--section2-->
 
-<section class="sec2 d-flex flex-wrap">
+<section class="sec2 d-flex flex-wrap" *ngIf="data">
     <article class="col-lg-5 col-sm-11">
         <div>
             <h3>Beast Mode Scorecard</h3>
             <img src="/assets/images/1.png" width="120px" height="40px">
         </div>
         <div>
-          <h4>{{data.name}}</h4>
-          <h5>{{data.symbol}}</h5>
+          <h4>{{name}}</h4>
+          <h5>{{symbol}}</h5>
         </div>
         <div>
           <h4>Current Price</h4>

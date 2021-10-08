@@ -10,26 +10,10 @@ import { RequestService } from 'src/app/services/request.service';
 })
 export class MainComponent implements OnInit {
 
-  constructor(private http: HttpClient, private requestService : RequestService, private requests : RequestFunctionsService) { }
-
-  responseData: any;
-  financials: any;
-  data: any;
-  requestData: any;
-  apiRequest : any;
-  isPageLoaded : boolean = false;
-
+  constructor(private requests: RequestFunctionsService) { }
 
 
   ngOnInit(): void {
-    this.data = localStorage.responseData;
-    if(this.data){
-      console.log('done');
-      this.data = JSON.parse(this.data);
-      this.isPageLoaded = true;
-    }else{
-      console.log('No data found');
-    }
   }
 
 }
