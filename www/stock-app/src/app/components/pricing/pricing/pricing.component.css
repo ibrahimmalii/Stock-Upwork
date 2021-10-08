@@ -1,3 +1,7 @@
+*{
+  margin: 0%;
+  padding: 0%;
+}
 
 .success{
   display: block;
@@ -8,12 +12,17 @@
 ul {
   list-style-type: none;
 }
+
+li{
+  border: 1px solid rgb(23, 243, 177);
+  padding: 2px;
+
+
+}
+
+
 input{
   outline: none;
   border: none;
-}
-*{
-  margin: 0%;
-  padding: 0%;
 }
 

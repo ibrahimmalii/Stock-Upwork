@@ -1,8 +1,8 @@
-
 <div class='row'>
   <div class="col-2">
     <ul>
-      <li class="bg-dark text-warning">STOCK TICKER <br> <img src="/assets/images/1.png" width="80px" height="30px"></li>
+      <li class="bg-dark text-warning">STOCK TICKER <br> <img src="/assets/images/1.png" width="80px" height="30px">
+      </li>
       <li>Current Stock Price</li>
       <li>Cost Basis</li>
       <li>Industry</li>
@@ -48,7 +48,7 @@
       <li>Total Assets Growth</li>
       <li>Total Equity Growth</li>
       <li style="font-size: 14px;">Cash From Operations Growth</li>
-      <li class="bg-dark text-warning width 100%"  style="font-size: 15px;">CAGR-COMPOUNDED ANNUAL</li>
+      <li class="bg-dark text-warning width 100%" style="font-size: 15px;">CAGR-COMPOUNDED ANNUAL</li>
       <li style="background-color: rgb(228, 201, 201);">Revenue 10-Period CAGR</li>
       <li>Diluted EPS 10-Period CAGR</li>
       <li>Total Assets 10-Period CAGR</li>
@@ -67,86 +67,81 @@
       <li>NIO Stock</li>
     </ul>
   </div>
-  <div class=col-1>
-    <div class=""><input type='text' data="one" id="0" class="text-light bg-info text-center w-100" (keyup.enter)="getData($event, inputOne.value)" #inputOne
-       style="height:54px"></div>
+  <div class="col">
+    <div class=""><input type='text' id="0" class="text-light bg-info text-center w-100"
+        (keyup.enter)="getData($event, inputOne.value)" #inputOne style="height:55px"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[0] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData; let i = index">{{item}}</li>
+      <li *ngFor="let item of ArrayOfData[0]; let i = index"><input value="{{item}}"></li>
     </ul>
   </div>
-  <div class=col-1>
-    <div class="bg-dark"><input type='text' id="1" (keyup.enter)="getData($event, inputTwo.value)" #inputTwo  class="text-light bg-info text-center w-100" style="height:54px"></div>
+  <div class="col">
+    <div class="bg-dark"><input type='text' id="1" (keyup.enter)="getData($event, inputTwo.value)" #inputTwo
+        class="text-light bg-info text-center w-100" style="height:55px"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[1] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData; let i = index">{{item}}</li>
+      <li *ngFor="let item of ArrayOfData[1]; let i = index"><input value="{{item}}"></li>
     </ul>
   </div>
-  <div class=col-1>
-    <div class=""><input type='text' data="one" id="2" class="text-light bg-info text-center w-100" (keyup.enter)="getData($event, inputThree.value)" #inputThree
-       style="height:54px"></div>
-       <ul class="text-center fw-bold" [ngClass]="allStatus[2] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-        <li *ngFor="let item of ArrayOfData; let i = index">{{item}}</li>
-      </ul>
-  </div>
-  <div class=col-1>
-    <div class=""><input type='text' data="one" id="3" class="text-light bg-info text-center w-100" (keyup.enter)="getData($event, inputFour.value)" #inputFour
-       style="height:54px"></div>
-    <ul [ngClass]="allStatus[3] ? 'success' : 'danger'" #inputFour>
-      <li>ibrahim</li>
-      <li>ali</li>
-      <li class="bg-dark ">name</li>
+  <div class="col">
+    <div class=""><input type='text' id="2" class="text-light bg-info text-center w-100"
+        (keyup.enter)="getData($event, inputThree.value)" #inputThree style="height:55px"></div>
+    <ul class="text-center fw-bold" [ngClass]="allStatus[2] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
+      <li *ngFor="let item of ArrayOfData[2]; let i = index"><input value="{{item}}"></li>
     </ul>
   </div>
-  <div class=col-1>
-    <div class=""><input type='text' data="one" id="4" class="text-light bg-info text-center w-100" (keyup.enter)="getData($event, inputFive.value)" #inputFive
-       style="height:54px"></div>
-    <ul [ngClass]="allStatus[4] ? 'success' : 'danger'" #inputFive>
-      <li>ibrahim</li>
-      <li>ali</li>
-      <li class="bg-dark ">name</li>
+  <div class="col">
+    <div class=""><input type='text' id="3" class="text-light bg-info text-center w-100"
+        (keyup.enter)="getData($event, inputFour.value)" #inputFour style="height:55px"></div>
+    <ul class="text-center fw-bold" [ngClass]="allStatus[3] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
+      <li *ngFor="let item of ArrayOfData[3]; let i = index"><input value="{{item}}"></li>
     </ul>
   </div>
-  <div class=col-1>
-    <div class=""><input type='text' data="one" id="5" class="text-light bg-info text-center w-100" (keyup.enter)="getData($event, inputSix.value)" #inputSix
-       style="height:54px"></div>
-    <ul [ngClass]="allStatus[5] ? 'success' : 'danger'" #inputSix>
-      <li>ibrahim</li>
-      <li>ali</li>
-      <li>name</li>
-      <li class="bg-dark ">name</li>
+  <div class="col">
+    <div class=""><input type='text' id="4" class="text-light bg-info text-center w-100"
+        (keyup.enter)="getData($event, inputFive.value)" #inputFive style="height:55px"></div>
+    <ul class="text-center fw-bold" [ngClass]="allStatus[4] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
+      <li *ngFor="let item of ArrayOfData[4]; let i = index"><input value="{{item}}"></li>
     </ul>
   </div>
-  <div class=col-1>
-    <div class=""><input type='text' data="one" id="6" class="text-light bg-info text-center w-100" (keyup.enter)="getData($event, inputSeven.value)" #inputSeven
-       style="height:54px"></div>
-    <ul [ngClass]="allStatus[6] ? 'success' : 'danger'" #inputSeven>
-      <li>ibrahim</li>
-      <li class="bg-dark ">name</li>
+  <div class="col">
+    <div class=""><input type='text' id="5" class="text-light bg-info text-center w-100"
+        (keyup.enter)="getData($event, inputSix.value)" #inputSix style="height:55px"></div>
+    <ul class="text-center fw-bold" [ngClass]="allStatus[5] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
+      <li *ngFor="let item of ArrayOfData[5]; let i = index"><input type="text" class="text-center w-100" value="{{item}}"></li>
     </ul>
   </div>
-  <div class=col-1>
-    <div class=""><input type='text' data="one" id="7" class="text-light bg-info text-center w-100" (keyup.enter)="getData($event, inputEight.value)" #inputEight
-       style="height:54px"></div>
-    <ul [ngClass]="allStatus[7] ? 'success' : 'danger'" #inputEight>
-      <li>ibrahim</li>
-      <li>ali</li>
-      <li class="bg-dark ">name</li>
+  <div class="col">
+    <div class=""><input type='text' id="6" class="text-light bg-info text-center w-100"
+        (keyup.enter)="getData($event, inputSeven.value)" #inputSeven style="height:55px"></div>
+    <ul class="text-center fw-bold" [ngClass]="allStatus[6] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
+      <li *ngFor="let item of ArrayOfData[6]; let i = index"><input value="{{item}}"></li>
     </ul>
   </div>
-  <div class=col-1>
-    <div class=""><input type='text' data="one" id="8" class="text-light bg-info text-center w-100" (keyup.enter)="getData($event, inputNine.value)" #inputNine
-       style="height:54px"></div>
-       <ul class="text-center fw-bold" [ngClass]="allStatus[8] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-        <li *ngFor="let item of ArrayOfData; let i = index">{{item}}</li>
-      </ul>
+  <div class="col">
+    <div class=""><input type='text' id="7" class="text-light bg-info text-center w-100"
+        (keyup.enter)="getData($event, inputEight.value)" #inputEight style="height:55px"></div>
+    <ul class="text-center fw-bold" [ngClass]="allStatus[7] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
+      <li *ngFor="let item of ArrayOfData[7]; let i = index"><input value="{{item}}"></li>
+    </ul>
   </div>
+  <!-- <div class="col">
+    <div class=""><input type='text' id="8" class="text-light bg-info text-center w-100"
+        (keyup.enter)="getData($event, inputNine.value)" #inputNine style="height:54px"></div>
+    <ul class="text-center fw-bold" [ngClass]="allStatus[8] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
+      <li *ngFor="let item of ArrayOfData[8]; let i = index"><input value="{{item}}"></li>
+    </ul>
+  </div> -->
 </div>
 <div class="bg-primary text-warning">Patreon Notes</div>
 <div>Note 1 : Be Sure to watch the a campany in youtube </div>
 <div class="bg-primary text-warning">Patreon Notes</div>
-<div>Note 1 : Be Sure to watch the a campany in youtube vadio (when avaliable) because i call out import points for patrons when appropriate</div>
-<div><span  class='text-danger'>Note 2 : Download The Beast Mode Stack Analysis Cheat Sheet Here:</span> https://www.patreon.com/posts/37763798</div>
-<div class='bg-warning' style='font-size:14px'>disclaimer:I am not a financial advisor & This Content is For Informational & Entertainment Purposes Only , You Should Not Construe Any Such INformation Or Other Material Ad Legal ,Tax, investment</div>
+<div>Note 1 : Be Sure to watch the a campany in youtube vadio (when avaliable) because i call out import points for
+  patrons when appropriate</div>
+<div><span class='text-danger'>Note 2 : Download The Beast Mode Stack Analysis Cheat Sheet Here:</span>
+  https://www.patreon.com/posts/37763798</div>
+<div class='bg-warning' style='font-size:14px'>disclaimer:I am not a financial advisor & This Content is For
+  Informational & Entertainment Purposes Only , You Should Not Construe Any Such INformation Or Other Material Ad Legal
+  ,Tax, investment</div>
 <div class='bg-dark text-center'><img src="./../../../../assets/images/1.png" width="80px" height="30px">
-<span class=' text-light m-5'>Free Tools at www.Jerry.Romine.com</span>
-<img src="./../../../../assets/images/1.png" width="80px" height="30px" ></div>
-
+  <span class=' text-light m-5'>Free Tools at www.Jerry.Romine.com</span>
+  <img src="./../../../../assets/images/1.png" width="80px" height="30px">
+</div>

@@ -18,7 +18,7 @@ export class PricingComponent implements OnInit {
   sector:any;
   exchange:any;
   marketCap:any;
-  marketCapFixed:any;
+  // marketCapFixed:any;
   enterprise:any;
   enterpriseFixed:any;
   PE:any;
@@ -63,7 +63,7 @@ export class PricingComponent implements OnInit {
 
 
   constructor(private requests: RequestFunctionsService, private requestService: RequestService, private http: HttpClient) { }
-  ArrayOfData : any[] = [];
+  ArrayOfData: any[] = [[],[],[],[],[],[],[],[],[]];
 
   ngOnInit(): void {
 
@@ -206,59 +206,62 @@ export class PricingComponent implements OnInit {
         });
 
       } else {
+        console.log(res);
         this.arraysData[id] = res;
         this.allStatus[id] = true;
 
-        this.ArrayOfData[0] = 'test';
-        this.ArrayOfData[1] = 'cost';
-        this.ArrayOfData[2] = this.arraysData[id].industry
-        this.ArrayOfData[3] = this.arraysData[id].sector
-        this.ArrayOfData[4] = this.arraysData[id].exchange
-        console.log(this.ArrayOfData[0])
-        this.ArrayOfData[5] = this.oparator( '+' ,this.arraysData[id].market_cap)
-        // this.ArrayOfData[5] = (this.ArrayOfData[5] / 1000000).toFixed(0)+'$';
-        this.ArrayOfData[6] = this.oparator( '+' ,this.arraysData[id].enterprise_value);
-        this.ArrayOfData[7] = ((parseInt(this.ArrayOfData[6]))/1000000).toFixed(0) +'$';
-        this.ArrayOfData[8] = 'volume';
-        this.ArrayOfData[9] = 'average daily volume';
-        this.ArrayOfData[10] = 'Volume inc /dec';
-        this.ArrayOfData[11] = 'space';
-        this.ArrayOfData[12] = this.arraysData[id].price_to_earnings.splice(-1)[0];
-        // this.ArrayOfData[13] = this.arraysData[id].price_to_sales.splice(-1)[0];
-        // this.ArrayOfData[14] = 'Are The Compay Making Money?';
-        // this.ArrayOfData[15] = 'Total Revenue';
-        // this.ArrayOfData[16] = this.arraysData[id].cogs;
-        // this.ArrayOfData[17] = this.arraysData[id].gross_profit;
-        // this.ArrayOfData[18] = this.arraysData[id].total_opex
-        // this.ArrayOfData[19] = this.arraysData[id].roic;
-        // this.ArrayOfData[20] = this.arraysData[id].roce;
-        // this.ArrayOfData[21] = (this.arraysData[id].roe / this.arraysData[id].rotce);
-        // this.ArrayOfData[22] = this.arraysData[id].dividends_quarterly
-        // this.ArrayOfData[23] = (this.arraysData[id].dividende_quarterly / this.arraysData[id].current_stock_price);
-        // this.ArrayOfData[24] = this.arraysData[id].payout_ratio;
-        // this.ArrayOfData[25] = this.arraysData[id].debt_to_equity;
-        // this.ArrayOfData[26] = this.arraysData[id].debt_to_assets;
-        // this.ArrayOfData[27] = this.arraysData[id].assets_to_equity;
-        // this.ArrayOfData[28] = this.arraysData[id].revenue_per_share;
-        // this.ArrayOfData[29] = this.arraysData[id].ebitda_per_share;
-        // this.ArrayOfData[30] = this.arraysData[id].revenue_per_share/ this.arraysData[id].current_stock_price;
-        // this.ArrayOfData[31] = this.arraysData[id].ebitda_per_share / this.arraysData[id].current_stock_price;
-        // this.ArrayOfData[32] = this.arraysData[id].operating_income;
-        // this.ArrayOfData[33] = (this.arraysData[id].operating_income / this.arraysData[id].current_stock_price)
-        // this.ArrayOfData[34] = this.arraysData[id].pretax_income_per_shar;
-        // this.ArrayOfData[35] = (this.arraysData[id].pretax_income_per_share / this.arraysData[id].current_stock_price);
-        // this.ArrayOfData[36] = this.arraysData[id].fcf_per_share;
-        // this.ArrayOfData[37] = 'shares outstanding';
-        // this.ArrayOfData[38] = 'avaliable share';
-        // this.ArrayOfData[39] = 'beta';
-        // this.ArrayOfData[40] = this.arraysData[id].total_assets_growth;
-        // this.ArrayOfData[41] = this.arraysData[id].total_equity_growth;
-        // this.ArrayOfData[42] = this.arraysData[id].cfo_growth;
-        // this.ArrayOfData[33] = this.arraysData[id].revenue_cagr_10;
-        // this.ArrayOfData[44] = 'Diluted EPS 10-Period CAGR';
-        // this.ArrayOfData[45] = this.arraysData[id].total_assets_cagr_10;
-        // this.ArrayOfData[46] = this.arraysData[id].total_equity_cagr_10;
-        // this.ArrayOfData[47] = this.arraysData[id].fcf_cagr_10;
+        this.ArrayOfData[id][0] = 'test';
+        this.ArrayOfData[id][1] = 'cost';
+        this.ArrayOfData[id][2] = this.arraysData[id].industry
+        this.ArrayOfData[id][3] = this.arraysData[id].sector
+        this.ArrayOfData[id][4] = this.arraysData[id].exchange
+        console.log(this.ArrayOfData[id][0])
+        // this.ArrayOfData[id][5] = this.oparator( '+' ,this.arraysData[id].market_cap)
+        // this.ArrayOfData[id][5] = (this.ArrayOfData[id][5] / 1000000).toFixed(0)+'$';
+        this.ArrayOfData[id][5] = this.arraysData[id].market_cap.splice(-1)+'$';
+        console.log(this.ArrayOfData[id][5])
+        this.ArrayOfData[id][6] = this.oparator( '+' ,this.arraysData[id].enterprise_value);
+        this.ArrayOfData[id][7] = ((parseInt(this.ArrayOfData[id][6]))/1000000).toFixed(0) +'$';
+        this.ArrayOfData[id][8] = 'volume';
+        this.ArrayOfData[id][9] = 'average daily volume';
+        this.ArrayOfData[id][10] = 'Volume inc /dec';
+        this.ArrayOfData[id][11] = 'space';
+        this.ArrayOfData[id][12] = this.arraysData[id].price_to_earnings.splice(-1)[0];
+        this.ArrayOfData[id][13] = this.arraysData[id].price_to_sales.splice(-1)[0];
+        this.ArrayOfData[id][14] = 'Are The Compay Making Money?';
+        this.ArrayOfData[id][15] = 'Total Revenue';
+        this.ArrayOfData[id][16] = this.arraysData[id].cogs;
+        this.ArrayOfData[id][17] = this.arraysData[id].gross_profit;
+        this.ArrayOfData[id][18] = this.arraysData[id].total_opex
+        this.ArrayOfData[id][19] = this.arraysData[id].roic;
+        this.ArrayOfData[id][20] = this.arraysData[id].roce;
+        this.ArrayOfData[id][21] = (this.arraysData[id].roe / this.arraysData[id].rotce);
+        this.ArrayOfData[id][22] = this.arraysData[id].dividends_quarterly
+        this.ArrayOfData[id][23] = (this.arraysData[id].dividende_quarterly / this.arraysData[id].current_stock_price);
+        this.ArrayOfData[id][24] = this.arraysData[id].payout_ratio;
+        this.ArrayOfData[id][25] = this.arraysData[id].debt_to_equity;
+        this.ArrayOfData[id][26] = this.arraysData[id].debt_to_assets;
+        this.ArrayOfData[id][27] = this.arraysData[id].assets_to_equity;
+        this.ArrayOfData[id][28] = this.arraysData[id].revenue_per_share;
+        this.ArrayOfData[id][29] = this.arraysData[id].ebitda_per_share;
+        this.ArrayOfData[id][30] = this.arraysData[id].revenue_per_share/ this.arraysData[id].current_stock_price;
+        this.ArrayOfData[id][31] = this.arraysData[id].ebitda_per_share / this.arraysData[id].current_stock_price;
+        this.ArrayOfData[id][32] = this.arraysData[id].operating_income;
+        this.ArrayOfData[id][33] = (this.arraysData[id].operating_income / this.arraysData[id].current_stock_price)
+        this.ArrayOfData[id][34] = this.arraysData[id].pretax_income_per_shar;
+        this.ArrayOfData[id][35] = (this.arraysData[id].pretax_income_per_share / this.arraysData[id].current_stock_price);
+        this.ArrayOfData[id][36] = this.arraysData[id].fcf_per_share;
+        this.ArrayOfData[id][37] = 'shares outstanding';
+        this.ArrayOfData[id][38] = 'avaliable share';
+        this.ArrayOfData[id][39] = 'beta';
+        this.ArrayOfData[id][40] = this.arraysData[id].total_assets_growth;
+        this.ArrayOfData[id][41] = this.arraysData[id].total_equity_growth;
+        this.ArrayOfData[id][42] = this.arraysData[id].cfo_growth;
+        this.ArrayOfData[id][33] = this.arraysData[id].revenue_cagr_10;
+        this.ArrayOfData[id][44] = 'Diluted EPS 10-Period CAGR';
+        this.ArrayOfData[id][45] = this.arraysData[id].total_assets_cagr_10;
+        this.ArrayOfData[id][46] = this.arraysData[id].total_equity_cagr_10;
+        this.ArrayOfData[id][47] = this.arraysData[id].fcf_cagr_10;
         console.log(this.ArrayOfData)
         this.isResponseBack = true;
 
