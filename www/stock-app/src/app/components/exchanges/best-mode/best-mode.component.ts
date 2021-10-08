@@ -1,5 +1,5 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { RequestFunctionsService } from 'src/app/services/request-functions.service';
 
 @Component({
   selector: 'app-best-mode',
@@ -8,11 +8,11 @@ import { RequestFunctionsService } from 'src/app/services/request-functions.serv
 })
 export class BestModeComponent implements OnInit {
 
-  constructor(private requests: RequestFunctionsService) {
-
+  constructor(private http : HttpClient) {
   }
 
-  @Input() data: any;
+  // @Input() data: any;
+  data : any;
   PE: any;
   PS: any;
   maps: any;
@@ -56,7 +56,10 @@ export class BestModeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.requests.getCompanyData().subscribe(res => {
+
+
+
+    this.http.get(`http://localhost:8000/api/keyStatistics/FB`).subscribe(res => {
       this.data = res;
       if(this.data) return;
       this.name = this.data.name;
