@@ -1,18 +1,6 @@
 <!-----------------------------------secction of table one--------------------------------------->
 
-<!-- <pre>
-  {{firstTable | json}}
-</pre> -->
-
-<p class="h1 text-center mt-3">Best Mode</p>
-<input #searchKey (keyup.enter)="getData(searchKey.value)" placeholder="Search by ticker symbol or company name"
-  list="company" name="company" class="form-control mb-5 w-50 m-auto">
-<datalist id="company" *ngIf="isPageLoaded">
-  <!-- <option *ngFor="let name of names; let i = index" value={{symbols[i]}}>{{name}}</option> -->
-</datalist>
-
-<div  *ngIf="firstTable">
-<section class="" *ngIf="firstTable">
+<section class="" *ngIf="data">
   <table class=" t table-responsive">
       <thead>
         <tr>
@@ -100,4 +88,3 @@
       </tbody>
     </table>
   </section>
-</div>

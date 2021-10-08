@@ -50,6 +50,7 @@ export class PricingComponent implements OnInit {
   total_assets_cagr_10 : any;
   total_equity_cagr_10 : any;
   free_cash_flow_10_period : any;
+  dlkfj:any
 
   isResponseBack : boolean = false;
 
@@ -215,28 +216,38 @@ export class PricingComponent implements OnInit {
         this.ArrayOfData[id][2] = this.arraysData[id].industry
         this.ArrayOfData[id][3] = this.arraysData[id].sector
         this.ArrayOfData[id][4] = this.arraysData[id].exchange
-        console.log(this.ArrayOfData[id][0])
-        // this.ArrayOfData[id][5] = this.oparator( '+' ,this.arraysData[id].market_cap)
-        // this.ArrayOfData[id][5] = (this.ArrayOfData[id][5] / 1000000).toFixed(0)+'$';
         this.ArrayOfData[id][5] = this.arraysData[id].market_cap.splice(-1)+'$';
-        console.log(this.ArrayOfData[id][5])
-        this.ArrayOfData[id][6] = this.oparator( '+' ,this.arraysData[id].enterprise_value);
-        this.ArrayOfData[id][7] = ((parseInt(this.ArrayOfData[id][6]))/1000000).toFixed(0) +'$';
-        this.ArrayOfData[id][8] = 'volume';
-        this.ArrayOfData[id][9] = 'average daily volume';
-        this.ArrayOfData[id][10] = 'Volume inc /dec';
-        this.ArrayOfData[id][11] = 'space';
-        this.ArrayOfData[id][12] = this.arraysData[id].price_to_earnings.splice(-1)[0];
-        this.ArrayOfData[id][13] = this.arraysData[id].price_to_sales.splice(-1)[0];
+        this.ArrayOfData[id][5] = (parseInt(this.ArrayOfData[id][5]) / 1000000).toFixed(0)
+        this.ArrayOfData[id][6] = this.arraysData[id].enterprise_value.splice(-1)
+        this.ArrayOfData[id][6] = (parseInt(this.ArrayOfData[id][6])/1000000).toFixed(0)
+        this.ArrayOfData[id][7] = 'volume';
+        this.ArrayOfData[id][8] = 'average daily volume';
+        this.ArrayOfData[id][9] = 'Volume inc /dec';
+        this.ArrayOfData[id][10] = 'space';
+        this.ArrayOfData[id][12] = this.arraysData[id].price_to_earnings.splice(-1);
+        this.ArrayOfData[id][13] = this.arraysData[id].price_to_sales.splice(-1);
         this.ArrayOfData[id][14] = 'Are The Compay Making Money?';
         this.ArrayOfData[id][15] = 'Total Revenue';
-        this.ArrayOfData[id][16] = this.arraysData[id].cogs;
-        this.ArrayOfData[id][17] = this.arraysData[id].gross_profit;
-        this.ArrayOfData[id][18] = this.arraysData[id].total_opex
-        this.ArrayOfData[id][19] = this.arraysData[id].roic;
-        this.ArrayOfData[id][20] = this.arraysData[id].roce;
-        this.ArrayOfData[id][21] = (this.arraysData[id].roe / this.arraysData[id].rotce);
+        this.ArrayOfData[id][16] = parseInt(this.arraysData[id].cogs)/1000000;
+        this.ArrayOfData[id][17] = parseInt(this.arraysData[id].gross_profit.splice(-1))/1000000;
+        this.ArrayOfData[id][18] = parseInt(this.arraysData[id].total_opex.splice(-1))/1000000
+        this.ArrayOfData[id][19] = (this.arraysData[id].roic.splice(-2));
+        this.ArrayOfData[id][19] =(parseFloat(this.ArrayOfData[id][19][1])-parseFloat(this.ArrayOfData[id][19][0]))/parseFloat(this.ArrayOfData[id][19][1])
+        this.ArrayOfData[id][19] = (this.ArrayOfData[id][19] * 100).toFixed(2) +'%'
+        this.ArrayOfData[id][20] = (this.arraysData[id].roce.splice(-2));
+        this.ArrayOfData[id][20] =(parseFloat(this.ArrayOfData[id][20][1])-parseFloat(this.ArrayOfData[id][20][0]))/parseFloat(this.ArrayOfData[id][20][1])
+        this.ArrayOfData[id][20] = (this.ArrayOfData[id][20] * 100).toFixed(2) +'%'
+        this.ArrayOfData[id][21] = this.oparator('+',this.arraysData[id].roe);
+        this.ArrayOfData[id][21] = this.oparator('+',this.arraysData[id].rotce);
+        // console.log(this.ArrayOfData[id][21])
+        // this.ArrayOfData[id][21] = (parseFloat(this.arraysData[id][21].roe) /parseFloat(this.arraysData[id][21].rotce));
+        // this.ArrayOfData[id][21] = (this.ArrayOfData[id][21]).toFixed(2) * 100  +'%'
         this.ArrayOfData[id][22] = this.arraysData[id].dividends_quarterly
+        // this.ArrayOfData[id][22] = (this.arraysData[id][22].dividends_quarterly.splice(-5));
+        // this.ArrayOfData[id][22] = this.oparator('+',this.ArrayOfData[id][22]);
+        // this.ArrayOfData[id][22] = (parseFloat(this.ArrayOfData[id][22]) * 100).toFixed(0) +'%'
+
+        console.log(this.ArrayOfData[id][22])
         this.ArrayOfData[id][23] = (this.arraysData[id].dividende_quarterly / this.arraysData[id].current_stock_price);
         this.ArrayOfData[id][24] = this.arraysData[id].payout_ratio;
         this.ArrayOfData[id][25] = this.arraysData[id].debt_to_equity;
@@ -311,6 +322,19 @@ export class PricingComponent implements OnInit {
     }, console.error);
   }
 
+status: boolean = false;
+
+// getData(searchKey: string){
+//   this.data = this.requests.getData(searchKey);
+//   console.log(this.data);
+//   this.status = true; 
+// }
+
+statusOne: boolean = false;
+getDataOne(searchKey: string){
+  this.data = this.requests.getData(searchKey);
+  this.statusOne =true; 
+}
 
 
 

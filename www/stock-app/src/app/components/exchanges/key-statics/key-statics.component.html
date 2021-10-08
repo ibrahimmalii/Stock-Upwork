@@ -1,11 +1,4 @@
-<!-----------------------------------secction of table Two--------------------------------------->
-
-<!-- <pre>
-  {{secondTable | json}}
-</pre> -->
-
-<div *ngIf="secondTable">
-<table class="table my-5" *ngIf="secondTable">
+<table class="table my-5" *ngIf="data">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -29,7 +22,7 @@
     </tr>
     <tr>
       <th scope="row">Revenue Growth</th>
-      <td *ngFor="let rev of revenue_growth">{{(rev * 100)?.toFixed(1)}}%</td>
+      <td *ngFor="let rev of revenue_growth">{{(rev * 100).toFixed(1)}}%</td>
     </tr>
     <tr>
       <th scope="row">Gross Profit</th>
@@ -37,7 +30,7 @@
     </tr>
     <tr>
       <th scope="row">Gross Margin %</th>
-      <td *ngFor="let gross of gross_margin">{{(gross * 100)?.toFixed(1)}}%</td>
+      <td *ngFor="let gross of gross_margin">{{(gross * 100).toFixed(1)}}%</td>
     </tr>
     <tr>
       <th scope="row">Operating Profit</th>
@@ -45,7 +38,7 @@
     </tr>
     <tr>
       <th scope="row">Operating Margin %</th>
-      <td *ngFor="let operating of operating_margin">{{(operating * 100)?.toFixed(1)}}%</td>
+      <td *ngFor="let operating of operating_margin">{{(operating * 100).toFixed(1)}}%</td>
     </tr>
     <tr>
       <th scope="row">Earnings Per Share</th>
@@ -53,7 +46,7 @@
     </tr>
     <tr>
       <th scope="row">EPS Growth</th>
-      <td *ngFor="let eps of eps_diluted_growth">{{(eps * 100)?.toFixed(1)}} </td>
+      <td *ngFor="let eps of eps_diluted_growth">{{(eps * 100).toFixed(1)}} </td>
     </tr>
     <tr>
       <th scope="row">Dividends Per Share</th>
@@ -77,5 +70,3 @@
     </tr>
   </tbody>
 </table>
-</div>
-

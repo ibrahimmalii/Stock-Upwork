@@ -10,15 +10,10 @@ import { RequestService } from 'src/app/services/request.service';
 })
 export class MainComponent implements OnInit {
 
-  constructor(private requests: RequestFunctionsService, private http : HttpClient) { }
-  data : any;
+  constructor(private requests: RequestFunctionsService) { }
 
 
-  getFaceBookData(){
-    return this.http.get(`http://localhost:8000/api/keyStatistics/FB`)
-  }
   ngOnInit(): void {
-    this.getFaceBookData();
   }
 
 }

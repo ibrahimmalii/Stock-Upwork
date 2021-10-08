@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { RequestFunctionsService } from 'src/app/services/request-functions.service';
 
 @Component({
   selector: 'app-best-mode',
@@ -8,11 +8,11 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class BestModeComponent implements OnInit {
 
-  constructor(private http : HttpClient) {
+  constructor(private requests: RequestFunctionsService) {
+
   }
 
-  // @Input() data: any;
-  data : any;
+  @Input() data: any;
   PE: any;
   PS: any;
   maps: any;
@@ -40,7 +40,6 @@ export class BestModeComponent implements OnInit {
   ebitda_per_share: any;
   operating_income_per_share: any
   pretax_income_per_share: any
-<<<<<<< HEAD
   revenueRatio: any
   dividends_quarterly: any
   dividendsFixed: any
@@ -50,30 +49,15 @@ export class BestModeComponent implements OnInit {
   name : any
   symbol : any
   isPageLoaded : boolean = false;
-=======
-  revenueRatio:any
-  dividends_quarterly:any
-  dividendsFixed:any
-  deptToEquity:any
-  deptToEquityFixed:any
-  revenueGrowthFixed:any
-  enterprise:any
-  totalCurrentAssets :any
-  total_revenue :any
   
->>>>>>> 97d7ddce479aaa78f62ab8be767d54dc17f15f9d
 
   oparator(op: any, arr: any) {
     return eval(arr.join(op)).toFixed(2) + '%'
   }
 
   ngOnInit(): void {
-<<<<<<< HEAD
 
-
-
-
-    this.http.get(`http://localhost:8000/api/keyStatistics/FB`).subscribe(res => {
+    this.requests.getCompanyData().subscribe(res => {
       this.data = res;
       if(this.data) return;
       this.name = this.data.name;
@@ -106,39 +90,6 @@ export class BestModeComponent implements OnInit {
       this.isPageLoaded = true
     })
 
-=======
-    this.revenueGrowthFixed =(parseInt(this.enterprise))/1000000
-
-    this.PE = this.data.price_to_earnings.splice(-1)[0];
-    this.PS = this.data.price_to_sales.splice(-1)[0];
-    this.operatingMargin =this.oparator ( '+' , this.data.operating_margin);
-    this.netIncomeMargin =this.oparator( '+' ,this.data.net_income_margin);
-    this.totalAssets =this.oparator( '+' ,this.data.total_current_assets);
-    this.totalLibilites =this.oparator( '+' ,this.data.total_current_liabilities);
-    this.roce =this.oparator( '+' ,this.data.roce);
-    this.flowPerShare =this.oparator( '+' ,this.data.fcf_per_share);
-    this.marketCap =this.oparator( '+' ,this.data.market_cap);
-    this.operating_income_per_share =this.oparator( '+' ,this.data.operating_income_per_share);
-    this.pretax_income_per_share =this.oparator( '+' ,this.data.pretax_income_per_share);
-    this.dividends_quarterly =this.oparator( '+' ,this.data.dividends_quarterly);
-    this.deptToEquity =this.oparator( '+' ,this.data.debt_to_equity);
-    this.deptToEquityFixed = (parseInt(this.deptToEquity))/100
-    this.revenueRatio = (parseInt(this.pretax_income_per_share) - parseInt(this.operating_income_per_share))
-    this.dividendsFixed = ((parseInt(this.dividends_quarterly) / 100))+'%'
-    this.total = (parseInt(this.totalAssets) /parseInt (this.totalLibilites)).toFixed(1)
-    this.revenueGrowth =(this.data.revenue_growth).splice(-2)
-    this.calculater = (((this.revenueGrowth[1] - this.revenueGrowth[0])/this.revenueGrowth[0])*100).toFixed(0)+'%'
-    this.roeMedian =((this.data.roe_median)*100).toFixed(0) +'%'
-    this.roceFixed =(parseInt(this.roce).toFixed(0)+'%')
-    console.log(this.roceFixed)
-    this.flowPerShareFixed =(parseInt(this.flowPerShare).toFixed(0)+'%')
-    this.marketCapFixed = ((parseInt(this.marketCap))/1000000).toFixed(0) +'$'
-    this.industry = this.data.industry
-    this.currency = this.data.currency
-    // console.log(this.data.ebitda_per_share)
-    // this.revenue_per_share = this.data.revenue_per_share.splice(-1)[0];
-    // this.ebitda_per_share = this.data.ebitda_per_share.splice(-1)[0];
->>>>>>> 97d7ddce479aaa78f62ab8be767d54dc17f15f9d
   }
 
 
