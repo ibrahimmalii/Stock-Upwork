@@ -15,7 +15,8 @@ const routes: Routes = [
     loadChildren: () => import('./components/exchanges/exchanges.module').then(m => m.ExchangesModule)
   }, {
     path: 'pricing',
-    loadChildren: () => import('./components/pricing/pricing.module').then(m => m.PricingModule),canActivate:[AuthGuard]
+    loadChildren: () => import('./components/pricing/pricing.module').then(m => m.PricingModule)
+    // ,canActivate:[AuthGuard]
   }, {
     path: 'filter-company',
     loadChildren: () => import('./components/filter-companies/filter-companies.module').then(m => m.FilterCompaniesModule)

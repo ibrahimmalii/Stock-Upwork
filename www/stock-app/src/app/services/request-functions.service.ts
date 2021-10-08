@@ -12,10 +12,10 @@ export class RequestFunctionsService {
   local: any;
   // Data = new BehaviourSubject<any>();
 
-  Data = new BehaviorSubject<any>(null);
+  Data = new Subject<any>();
+
   setCompanyData(info: any) {
     this.Data.next(info);
-    console.log(info);
   }
 
 
@@ -26,12 +26,6 @@ export class RequestFunctionsService {
     });
   }
 
-  // getCurrentData() {
-  //   console.log('from get curr');
-  //   let localData = localStorage.responseData;
-  //   let parsedData = JSON.parse(localData);
-  //   return this.setCompanyData(parsedData)
-  // }
 
 
 
@@ -148,20 +142,12 @@ export class RequestFunctionsService {
 
           //Store Company In Our DataBase And Return Data From There
           this.http.post('http://localhost:8000/api/keyStatistics', this.requestService.data).subscribe(res => {
-            // localStorage.responseData =JSON.stringify(res);
-            // let data = localStorage.responseData
-            // let parsedData = JSON.parse(data);
-            // this.setCompanyData(parsedData);
             this.Data.next(res);
           }, console.error);
 
         }, console.error);
 
       } else {
-        // localStorage.responseData =JSON.stringify(res);
-        // let data = localStorage.responseData
-        // let parsedData = JSON.parse(data);
-        // this.setCompanyData(parsedData);
         this.Data.next(res);
       }
 
