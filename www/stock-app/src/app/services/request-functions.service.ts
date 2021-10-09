@@ -10,20 +10,24 @@ import { RequestService } from './request.service';
 export class RequestFunctionsService {
 
   local: any;
-  // Data = new BehaviourSubject<any>();
+  Data = new BehaviorSubject<any>(null);
 
-  Data = new Subject<any>();
+  // Data = new Subject<any>();
 
   setCompanyData(info: any) {
     this.Data.next(info);
   }
 
-
-  constructor(private requestService: RequestService, private http: HttpClient) {
+  setFirstValueOfSubject(){
     this.http.get(`http://localhost:8000/api/keyStatistics/FB`).subscribe(res => {
       let data = res;
-      this.Data.next(data);
+      this.setCompanyData(res);
     });
+  }
+
+
+  constructor(private requestService: RequestService, private http: HttpClient) {
+
   }
 
 

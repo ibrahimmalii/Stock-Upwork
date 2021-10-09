@@ -47,7 +47,7 @@ export class KeyStaticsOneComponent implements OnInit {
 
     this.requests.getCompanyData().subscribe(res => {
       this.data = res;
-      // if(!this.data) return;
+      if(!this.data) return;
       this.PE = this.data.price_to_earnings.splice(-1)[0];
       this.PB = this.data.price_to_book.splice(-1)[0];
       this.PS = this.data.price_to_sales.splice(-1)[0];

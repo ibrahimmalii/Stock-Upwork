@@ -1,7 +1,7 @@
 <div class='row'>
   <div class="col-2">
     <ul>
-      <li class="bg-dark text-warning">STOCK TICKER <br> <img src="/assets/images/1.png" width="80px" height="30px">
+      <li class="bg-dark text-warning" style="height:60px">STOCK TICKER <br> <img src="/assets/images/1.png" width="80px" height="30px">
       </li>
       <li>Current Stock Price</li>
       <li>Cost Basis</li>
@@ -22,9 +22,9 @@
       <li>Cost of goods sold</li>
       <li>Gross profit</li>
       <li>Total operating expense</li>
-      <li><input type='text' value="ROIC-return on invested capital"></li>
-      <li><input type='text' value='ROCE-return on capital employee'></li>
-      <li><input type='text' value='ROTE-return on Tangible CApital'></li>
+      <li><input type='text' class="w-100" value="ROIC-return on invested capital"></li>
+      <li><input type='text' class="w-100" value='ROCE-return on capital employee'></li>
+      <li><input type='text' class="w-100" value='ROTE-return on Tangible CApital'></li>
       <li class="bg-info">Five R indicator</li>
       <li>Dividends per share(YR)</li>
       <li style="background-color: rgb(228, 201, 201);">Dividend Yield 4%</li>
@@ -39,22 +39,22 @@
       <li>Revenue per share ratio</li>
       <li style="background-color: rgb(85, 248, 85);">EDITDA Per Share Ratio</li>
       <li>Operating income per share</li>
-      <li><input type="text" value="Operating income per share ratio"></li>
+      <li><input class="w-100" type="text" value="Operating income per share ratio"></li>
       <li>Pretax income per share</li>
-      <li><input type='text' value="Pretax income per share ratio"></li>
+      <li><input class="w-100" type='text' value="Pretax income per share ratio"></li>
       <li>Free cash flow per share</li>
       <li>Shares outstanding</li>
       <li>Avaliable float shares</li>
-      <li><input type="text" value ='Beta Ratio 5 YR (Risk Volatility)'></li>
+      <li><input class="w-100" type="text" value ='Beta Ratio 5 YR (Risk Volatility)'></li>
       <li>Total Assets Growth</li>
       <li>Total Equity Growth</li>
-      <li><input type='text' value='Cash From Operations Growth'></li>
-      <li class="text-warning"><input type='text' value=' CAGR-COMPOUNDED ANNUAL'></li>
+      <li><input class="w-100" type='text' value='Cash From Operations Growth'></li>
+      <li class="text-warning"><input class="w-100" type='text' value='CAGR-COMPOUNDED ANNUAL'></li>
       <li style="background-color: rgb(228, 201, 201);">Revenue 10-Period CAGR</li>
       <li>Diluted EPS 10-Period CAGR</li>
       <li>Total Assets 10-Period CAGR</li>
       <li>Total Equity 10-Period CAGR</li>
-      <li><input type='text' value='Free CAsh Flow 10-Period CAGR'></li>
+      <li><input class="w-100" type='text' value='Free CAsh Flow 10-Period CAGR'></li>
       <li class="bg-primary">My Picks & Patreon Notes</li>
       <li>STOCKS COVERED</li>
       <li>AMC Stock</li>
@@ -72,42 +72,42 @@
     <div class=""><input type='text' id="0" class="text-light bg-info text-center w-100"
         (keyup.enter)="getData($event, inputOne.value)" #inputOne style="height:60px"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[0] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[0]; let i = index" ><input [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}"></li>
+      <li *ngFor="let item of ArrayOfData[0]; let i = index" [ngClass]="{'bg-black dark-item': i == 11}"><input disabled [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}">{{i}}</li>
     </ul>
   </div>
   <div class="col">
     <div class="bg-dark"><input type='text' id="1" (keyup.enter)="getData($event, inputTwo.value)" #inputTwo
         class="text-light bg-info text-center w-100" style="height:60px"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[1] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[1]; let i = index"><input [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}"></li>
+      <li *ngFor="let item of ArrayOfData[1]; let i = index" [ngClass]="{'bg-black dark-item': i == 11}"><input disabled [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}"></li>
     </ul>
   </div>
   <div class="col">
     <div class=""><input type='text' id="2" class="text-light bg-info text-center w-100"
         (keyup.enter)="getData($event, inputThree.value)" #inputThree style="height:60px"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[2] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[2]; let i = index"><input [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}"></li>
+      <li *ngFor="let item of ArrayOfData[2]; let i = index" [ngClass]="{'bg-black dark-item': i == 11}"><input disabled [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}"></li>
     </ul>
   </div>
   <div class="col">
     <div class=""><input type='text' id="3" class="text-light bg-info text-center w-100"
         (keyup.enter)="getData($event, inputFour.value)" #inputFour style="height:60px"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[3] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[3]; let i = index"><input [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}"></li>
+      <li *ngFor="let item of ArrayOfData[3]; let i = index" [ngClass]="{'bg-black dark-item': i == 11}"><input disabled [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}"></li>
     </ul>
   </div>
   <div class="col">
     <div class=""><input type='text' id="4" class="text-light bg-info text-center w-100"
         (keyup.enter)="getData($event, inputFive.value)" #inputFive style="height:60px"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[4] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[4]; let i = index"><input [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}"></li>
+      <li *ngFor="let item of ArrayOfData[4]; let i = index" [ngClass]="{'bg-black dark-item': i == 11}"><input [ngClass]="{'bg-black dark-item': i == 11}" disabled  value="{{item}}"></li>
     </ul>
   </div>
   <div class="col">
     <div class=""><input type='text' id="5" class="text-light bg-info text-center w-100"
         (keyup.enter)="getData($event, inputSix.value)" #inputSix style="height:60px"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[5] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[5]; let i = index"><input type="text" class="text-center w-100" value="{{item}}"></li>
+      <li *ngFor="let item of ArrayOfData[5]; let i = index" [ngClass]="{'bg-black dark-item': i == 11}"><input [ngClass]="{'bg-black dark-item': i == 11}" type="text" value="{{item}}"></li>
     </ul>
   </div>
   <!-- <div class="col">

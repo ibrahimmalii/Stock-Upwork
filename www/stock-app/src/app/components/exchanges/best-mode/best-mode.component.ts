@@ -12,7 +12,8 @@ export class BestModeComponent implements OnInit {
 
   }
 
-  @Input() data: any;
+  // @Input() data: any;
+  data : any;
   PE: any;
   PS: any;
   maps: any;
@@ -49,7 +50,7 @@ export class BestModeComponent implements OnInit {
   name : any
   symbol : any
   isPageLoaded : boolean = false;
-  
+
 
   oparator(op: any, arr: any) {
     return eval(arr.join(op)).toFixed(2) + '%'
@@ -59,7 +60,8 @@ export class BestModeComponent implements OnInit {
 
     this.requests.getCompanyData().subscribe(res => {
       this.data = res;
-      if(this.data) return;
+      if(!this.data) return;
+      console.log(this.data);
       this.name = this.data.name;
       this.symbol = this.data.symbol;
       this.PE = this.data.price_to_earnings.splice(-1)[0];

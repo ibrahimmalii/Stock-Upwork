@@ -38,7 +38,7 @@ export class KeyStaticsComponent implements OnInit {
 
     this.requests.getCompanyData().subscribe(res => {
       this.data = res;
-      // if(!this.data) return;
+      if(!this.data) return;
       this.revenue = this.splicedArray(this.data.revenue);
       this.revenue_growth = this.splicedArray(this.data.revenue_growth);
       this.gross_profit = this.splicedArray(this.data.gross_profit);
@@ -56,8 +56,5 @@ export class KeyStaticsComponent implements OnInit {
     });
   };
 
-  ngOnChanges(){
-    console.log('from changes');
-  }
 
 }

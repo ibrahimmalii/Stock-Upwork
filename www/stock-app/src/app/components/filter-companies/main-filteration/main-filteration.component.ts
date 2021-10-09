@@ -25,24 +25,17 @@ export class MainFilterationComponent implements OnInit {
   name : any;
 
   ngOnInit(): void {
+
+    this.requests.setFirstValueOfSubject();
+
     this.http.get(`http://localhost:8000/api/keyStatistics/all`).subscribe(res => {
       this.responseData = res;
       this.names = this.responseData.names;
+      // this.names = this.names.splice(0,5);
       this.symbols = this.responseData.symbols;
+      // this.symbols = this.symbols.splice(0, 5)
       console.log(res);
 
-      // this.searchData = res;
-      // this.names = this.searchData.names;
-      // this.symbols = this.searchData.symbols;
-
-      // for(let i:any = 0 ; i < this.names.length ; i++){
-
-      //   let obj = {this.symbols[i] : this.names[i]};
-      //   this.associatedArr.push(obj);
-      //   console.log(this.associatedArr);
-      // };
-      // console.log(this.associatedArr.length);
-      // console.log(res);
       this.isPageLoaded = true;
     })
   }
