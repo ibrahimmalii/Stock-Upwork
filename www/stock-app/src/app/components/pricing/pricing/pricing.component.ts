@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Validators } from '@angular/forms';
+import { Validators, FormBuilder } from '@angular/forms';
 import { RequestService } from 'src/app/services/request.service';
 import { RequestFunctionsService } from './../../../services/request-functions.service';
 
@@ -50,7 +50,9 @@ export class PricingComponent implements OnInit {
   total_assets_cagr_10: any;
   total_equity_cagr_10: any;
   free_cash_flow_10_period: any;
-  dlkfj: any
+  dlkfj: any;
+  properties : any;
+  isPropertiesLoaded : boolean = false;
 
   isResponseBack: boolean = false;
 
@@ -68,7 +70,19 @@ export class PricingComponent implements OnInit {
 
   ngOnInit(): void {
 
+    //Get All Property
+    this.http.get('http://localhost:8000/api/properties').subscribe(response=>{
+      this.properties = response;
+      this.isPropertiesLoaded = true;
+    })
 
+  }
+
+  updateProperty(e : any, title : string, comment : string){
+    const id = e.target.id;
+    this.http.post(`http://localhost:8000/api/properties/${id}`, {title, comment}).subscribe(res=>{
+      location.reload();
+    })
   }
 
 

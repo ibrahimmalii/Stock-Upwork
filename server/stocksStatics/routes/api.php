@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Client\Response;
 use App\Models\Test;
 use App\Http\Controllers\KeyStatisticsController;
+use App\Http\Controllers\StockPropertieController;
 use Illuminate\Support\Facades\Http;
 
 
@@ -47,3 +48,11 @@ Route::post('/keyStatistics', [KeyStatisticsController::class , 'create']);
 Route::get('/keyStatistics', [KeyStatisticsController::class , 'index']);
 Route::get('/keyStatistics/all', [KeyStatisticsController::class , 'getAllNames']);
 Route::get('/keyStatistics/{key}', [KeyStatisticsController::class , 'show']);
+
+
+
+// Crud For Properties
+Route::get('/properties', [StockPropertieController::class , 'index']);
+Route::post('/properties', [StockPropertieController::class , 'create']);
+Route::post('/properties/{prop}', [StockPropertieController::class , 'update']);
+
