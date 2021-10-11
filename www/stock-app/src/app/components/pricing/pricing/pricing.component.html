@@ -9,7 +9,7 @@
               class="pull-right fa fa-info-circle" data-bs-toggle="modal" [attr.data-bs-target]="'#prop'+ index"></i></abbr></li>
 
         <!-- Modal To Edit Property -->
-        <div class="modal fade modal-dialog modal-lg" id="prop{{index}}" tabindex="-1" aria-labelledby="property" aria-hidden="true">
+        <div *ngIf="isAdmin" class="modal fade modal-dialog modal-lg" id="prop{{index}}" tabindex="-1" aria-labelledby="property" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -97,15 +97,15 @@
   </div>
   <div class="col">
     <div class=""><input type='text' id="0" class="text-light bg-info text-center w-100"
-        (keyup.enter)="getData($event, inputOne.value)" #inputOne style="height:60px"></div>
+        (keyup.enter)="getData($event, inputOne.value)" #inputOne style="height:60px; border-right: 1px solid black;"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[0] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
       <li *ngFor="let item of ArrayOfData[0]; let i = index" [ngClass]="{'bg-black dark-item': i == 11}"><input disabled
-          [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}"></li>
+          [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}">{{i}}</li>
     </ul>
   </div>
   <div class="col">
     <div class="bg-dark"><input type='text' id="1" (keyup.enter)="getData($event, inputTwo.value)" #inputTwo
-        class="text-light bg-info text-center w-100" style="height:60px"></div>
+        class="text-light bg-info text-center w-100" style="height:60px; border-right: 1px solid black;"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[1] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
       <li *ngFor="let item of ArrayOfData[1]; let i = index" [ngClass]="{'bg-black dark-item': i == 11}"><input disabled
           [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}"></li>
@@ -113,7 +113,7 @@
   </div>
   <div class="col">
     <div class=""><input type='text' id="2" class="text-light bg-info text-center w-100"
-        (keyup.enter)="getData($event, inputThree.value)" #inputThree style="height:60px"></div>
+        (keyup.enter)="getData($event, inputThree.value)" #inputThree style="height:60px; border-right: 1px solid black;"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[2] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
       <li *ngFor="let item of ArrayOfData[2]; let i = index" [ngClass]="{'bg-black dark-item': i == 11}"><input disabled
           [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}"></li>
@@ -121,7 +121,7 @@
   </div>
   <div class="col">
     <div class=""><input type='text' id="3" class="text-light bg-info text-center w-100"
-        (keyup.enter)="getData($event, inputFour.value)" #inputFour style="height:60px"></div>
+        (keyup.enter)="getData($event, inputFour.value)" #inputFour style="height:60px; border-right: 1px solid black;"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[3] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
       <li *ngFor="let item of ArrayOfData[3]; let i = index" [ngClass]="{'bg-black dark-item': i == 11}"><input disabled
           [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}"></li>
@@ -129,7 +129,7 @@
   </div>
   <div class="col">
     <div class=""><input type='text' id="4" class="text-light bg-info text-center w-100"
-        (keyup.enter)="getData($event, inputFive.value)" #inputFive style="height:60px"></div>
+        (keyup.enter)="getData($event, inputFive.value)" #inputFive style="height:60px; border-right: 1px solid black;"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[4] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
       <li *ngFor="let item of ArrayOfData[4]; let i = index" [ngClass]="{'bg-black dark-item': i == 11}"><input
           [ngClass]="{'bg-black dark-item': i == 11}" disabled value="{{item}}"></li>
@@ -143,27 +143,8 @@
           [ngClass]="{'bg-black dark-item': i == 11}" type="text" value="{{item}}"></li>
     </ul>
   </div>
-  <!-- <div class="col">
-    <div class=""><input type='text' id="6" class="text-light bg-info text-center w-100"
-        (keyup.enter)="getData($event, inputSeven.value)" #inputSeven style="height:60px"></div>
-    <ul class="text-center fw-bold" [ngClass]="allStatus[6] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[6]; let i = index"><input value="{{item}}"></li>
-    </ul>
-  </div> -->
-  <!-- <div class="col">
-    <div class=""><input type='text' id="7" class="text-light bg-info text-center w-100"
-        (keyup.enter)="getData($event, inputEight.value)" #inputEight style="height:60px"></div>
-    <ul class="text-center fw-bold" [ngClass]="allStatus[7] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[7]; let i = index"><input value="{{item}}"></li>
-    </ul>
-  </div> -->
-  <!-- <div class="col">
-    <div class=""><input type='text' id="8" class="text-light bg-info text-center w-100"
-        (keyup.enter)="getData($event, inputNine.value)" #inputNine style="height:54px"></div>
-    <ul class="text-center fw-bold" [ngClass]="allStatus[8] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[8]; let i = index"><input value="{{item}}"></li>
-    </ul>
-  </div> -->
+
+<!-- Start Of Draw Footer -->
 </div>
 <div class="footer" *ngIf="isPropertiesLoaded">
   <div class="bg-primary text-warning">Patreon Notes</div>
@@ -177,8 +158,8 @@
     Informational & Entertainment Purposes Only , You Should Not Construe Any Such INformation Or Other Material Ad
     Legal
     ,Tax, investment</div>
-  <div class='bg-dark text-center'><img src="./../../../../assets/images/1.png" width="80px" height="30px">
+  <div class='bg-dark text-center'><img src="/assets/images/1.png" width="80px" height="30px">
     <span class=' text-light m-5'>Free Tools at www.Jerry.Romine.com</span>
-    <img src="./../../../../assets/images/1.png" width="80px" height="30px">
+    <img src="/assets/images/1.png" width="80px" height="30px">
   </div>
 </div>

@@ -6,20 +6,21 @@ import { AuthGuard } from './guards/auth.guard';
 
 
 const routes: Routes = [
-  { path: 'contact', component: ContactComponent },
   {
     path: 'auth',
     loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule)
   }, {
     path: 'exchanges',
     loadChildren: () => import('./components/exchanges/exchanges.module').then(m => m.ExchangesModule)
+    ,canActivate:[AuthGuard]
   }, {
     path: 'pricing',
     loadChildren: () => import('./components/pricing/pricing.module').then(m => m.PricingModule)
-    // ,canActivate:[AuthGuard]
+    ,canActivate:[AuthGuard]
   }, {
     path: 'filter-company',
     loadChildren: () => import('./components/filter-companies/filter-companies.module').then(m => m.FilterCompaniesModule)
+    ,canActivate:[AuthGuard]
   },
   {path : '', component : LoginComponent}
 ];

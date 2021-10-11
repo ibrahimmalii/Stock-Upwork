@@ -10,19 +10,18 @@ import { RequestService } from './request.service';
 export class RequestFunctionsService {
 
   local: any;
-  Data = new BehaviorSubject<any>(null);
+  // Data = new BehaviorSubject<any>(null);
 
-  // Data = new Subject<any>();
+  Data = new Subject<any>();
 
   setCompanyData(info: any) {
     this.Data.next(info);
   }
 
   setFirstValueOfSubject(){
-    this.http.get(`http://localhost:8000/api/keyStatistics/FB`).subscribe(res => {
-      let data = res;
-      this.setCompanyData(res);
-    });
+    // this.http.get(`http://localhost:8000/api/keyStatistics/FB`).subscribe(res => {
+    //   this.setCompanyData(res);
+    // });
   }
 
 
@@ -147,12 +146,14 @@ export class RequestFunctionsService {
           //Store Company In Our DataBase And Return Data From There
           this.http.post('http://localhost:8000/api/keyStatistics', this.requestService.data).subscribe(res => {
             this.Data.next(res);
+            console.log(res);
           }, console.error);
 
         }, console.error);
 
       } else {
         this.Data.next(res);
+        console.log(res);
       }
 
     }, console.error);

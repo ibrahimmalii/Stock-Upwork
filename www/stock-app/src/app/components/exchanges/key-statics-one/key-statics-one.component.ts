@@ -41,12 +41,9 @@ export class KeyStaticsOneComponent implements OnInit {
 
   ngOnInit(): void {
 
-
-
-
-
-    this.requests.getCompanyData().subscribe(res => {
-      this.data = res;
+    // this.requests.getCompanyData().subscribe(res => {
+    this.data = '';
+    this.data = JSON.parse(localStorage.responseData);
       if(!this.data) return;
       this.PE = this.data.price_to_earnings.splice(-1)[0];
       this.PB = this.data.price_to_book.splice(-1)[0];
@@ -70,9 +67,7 @@ export class KeyStaticsOneComponent implements OnInit {
       this.debt_to_equity_median = this.data.debt_to_equity_median;
       this.debt_to_assets_median = this.data.debt_to_assets_median;
       this.isPageLoaded = true;
-    })
-
-
+    // })
 
   }
 

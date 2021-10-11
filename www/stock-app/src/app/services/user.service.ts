@@ -1,21 +1,52 @@
 import { Injectable } from '@angular/core';
+import { Subject, BehaviorSubject } from 'rxjs';
+import { ApiService } from './api.service';
+import { environment } from './../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor() { }
+  loginUrl = 'http://localhost:8000/api/login';
+  registerUrl = 'http://localhost:8000/api/register';
 
-  login(){
-
+  loggedStatus =new BehaviorSubject<boolean>(false);
+  constructor(private apiService : ApiService) {
+    this.setLoggedStatus(this.isLogged());
   }
 
-  register(){
+  setLoggedStatus(status : boolean){
+    this.loggedStatus.next(status);
+  };
 
+  getLoggedStatus(){
+    return this.loggedStatus.asObservable();
+  }
+
+  login(body:any){
+    return this.apiService.post(this.loginUrl, body);
+  }
+
+  register(body:any){
+    return this.apiService.post(this.registerUrl, body);
   }
 
   isLogged():boolean{
     return localStorage.token ? true : false;
+  }
+
+  logout(){
+    localStorage.clear();
+    this.setLoggedStatus(false);
+  }
+
+  isAdmin(){
+    const user = JSON.parse(localStorage.user);
+    return user.role === '2' ? true : false;
+  }
+
+  getToken(){
+    return `Bearer ${localStorage.token}`;
   }
 }
