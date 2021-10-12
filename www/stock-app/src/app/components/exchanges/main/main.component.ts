@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { RequestFunctionsService } from 'src/app/services/request-functions.service';
 import { UserService } from 'src/app/services/user.service';
 import { ApiService } from './../../../services/api.service';
 

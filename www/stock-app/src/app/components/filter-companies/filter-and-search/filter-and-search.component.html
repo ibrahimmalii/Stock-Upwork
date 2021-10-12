@@ -1,108 +1,223 @@
 <section class="search">
 
-<p class="h1 text-center mt-3">Best Mode</p>
-<input #searchKey (keyup.enter)="getData($event, searchKey.value)" placeholder="Search by ticker symbol or company name" list="company" name="company" class="form-control mb-5 w-50 m-auto">
-<datalist id="company" *ngIf="isPageLoaded" style="height : 200px">
-  <option *ngFor="let name of names; let i = index" value={{symbols[i]}}>{{name}}</option>
-</datalist>
+  <p class="h1 text-center mt-3">Best Mode</p>
+  <input #searchKey (keyup.enter)="getData($event, searchKey.value)"
+    placeholder="Search by ticker symbol or company name" list="company" name="company"
+    class="form-control mb-5 w-50 m-auto">
+  <datalist id="company" *ngIf="isPageLoaded" style="height : 200px">
+    <option *ngFor="let name of names; let i = index" value={{symbols[i]}}>{{name}}</option>
+  </datalist>
 
-<div class="container" *ngIf="!isResponseGet">
-  <div class="content text-center my-5">
-    <p class="h1">Please Search For Company To Get All Information</p>
-    <i class="h1 fa fa-search"></i>
+  <div class="container" *ngIf="!isResponseGet">
+    <div class="content text-center my-5">
+      <p class="h1">Please Search For Company To Get All Information</p>
+      <i class="h1 fa fa-search"></i>
+    </div>
   </div>
-</div>
+
+</section>
+
+<section class="best-mode" *ngIf="data">
+  <div class="div1 text-center p-3">
+    <img src="/assets/images/1.png">
+  </div>
+
+  <article class="art1">
+    <p class="">Last Close: $280.98</p>
+    <p>Market Cap: ${{marketCapFixed}}M</p>
+    <!-- <p>EV:${{revenueGrowthFixed.toFixed(0)}}M </p> -->
+    <p>Industry: Software</p>
+    <p>Display Currency: {{currency}}</p>
+
+  </article>
+
+  <!--section2-->
+
+  <section class="sec2 d-flex flex-wrap">
+    <article class="col-lg-5 col-sm-11">
+      <div>
+        <h3>Beast Mode Scorecard</h3>
+        <img src="/assets/images/1.png" width="120px" height="40px">
+      </div>
+      <div>
+        <h4>{{name}}</h4>
+        <h5>{{symbol}}</h5>
+      </div>
+      <div>
+        <h4>Current Price</h4>
+        <h5></h5>
+      </div>
+      <h4>STOCK PERFORMANCE</h4>
+      <div>
+        <h5>PE Ratio</h5>
+        <h5>{{PE.toFixed(2)}}</h5>
+      </div>
+      <div>
+        <h5>PS Ratio <2 ldeal <1 Great</h5>
+            <h5>{{PS.toFixed(2)}}</h5>
+      </div>
+      <h4>INCOME & OPERATIONS</h4>
+      <div>
+        <h5>Operation Margin</h5>
+        <h5>{{operatingMargin}}</h5>
+      </div>
+      <div>
+        <h5>Net Income Margin</h5>
+        <h5>{{netIncomeMargin}}</h5>
+      </div>
+      <div>
+        <h5>T Assets v. T liabilities TATL Ratio</h5>
+        <h5>{{total}}</h5>
+      </div>
+      <div>
+        <h5>Revenue Growth Last Year</h5>
+        <h5>{{calculater}}</h5>
+      </div>
+      <h4>MANAGEMENT EFFECTIVENSS</h4>
+      <div>
+        <h5>ROE-Return On Equity (Yr)</h5>
+        <h5>{{roeMedian}}</h5>
+      </div>
+      <div>
+        <h5>ROCE-Return On Capital Employed</h5>
+        <h5>{{roceFixed}}</h5>
+      </div>
+      <h4>KEY METRICS</h4>
+      <div>
+        <h5>Free Cash Flow Margin</h5>
+        <h5>{{flowPerShareFixed}}</h5>
+      </div>
+      <div>
+        <h5>Rule of 40 indicator</h5>
+        <h5>50</h5>
+      </div>
+      <h5>Jerry us FNR indicator</h5>
+      <h5></h5>
+      <div>
+        <h5>BV Ratio (1=@par)</h5>
+        <h5>23%</h5>
+      </div>
+      <div>
+        <h5>Revenue Per Share Ratio</h5>
+        <h5>{{revenueRatio+'.23'}}</h5>
+      </div>
+      <div>
+        <h5>EBLTDA Per Share Ratio</h5>
+        <h5>{{revenueRatio}}</h5>
+      </div>
+
+      <div>
+        <h5>Dividend Yield 4%</h5>
+        <h5>{{dividendsFixed}}</h5>
+      </div>
+      <div>
+        <h5>Debt to Equity</h5>
+        <h5>{{deptToEquityFixed}}</h5>
+      </div>
+
+    </article>
+    <article class="col-lg-6 col-md-11">
+      <h4>Business Description :</h4>
+      <p>{{data.description}}</p>
+    </article>
+  </section>
+
+
+
 
 </section>
 
 <!-----------------------------------secction of table one--------------------------------------->
-<section class="one text-center" *ngIf="isResponseGet">
-  <table class=" t table-responsive">
-      <thead>
-        <tr>
-          <th colspan="6" class="" style="text-align:center; Padding:10px;">
-            <div class="d-flex justify-content-between">
-              <h4>Key Statistics</h4>
+<section class="d-flex justify-contents-between one text-center" *ngIf="isResponseGet">
+  <table class="col t table-responsive">
+    <thead>
+      <tr>
+        <th colspan="6" class="" style="text-align:center; Padding:10px;">
+          <div class="d-flex justify-content-between">
+            <h4>Key Statistics</h4>
             <div>
               <img src="/assets/images/1.png" class="img-fluid" width="180" alt="" srcset="">
             </div>
-            </div>
-          </th>
+          </div>
+        </th>
 
-        </tr>
-      </thead>
-      <tbody>
+      </tr>
+    </thead>
+    <tbody>
 
-        <tr>
-          <td class="table_header" colspan="2">Valuation Ratios</td>
-          <td class="table_header" colspan="2">10-Yr Median Returns</td>
-          <td class="table_header" colspan="2">10-Yr Median Margins</td>
-        </tr>
-        <tr>
-          <td class="lt">P/E</td>
-          <td class="rt" id="ks-pe">{{PE.toFixed(1)}}</td>
-          <td class="lt">ROA</td>
-          <td class="rt">{{(roa_median * 100).toFixed(1)}}%</td>
-          <td class="lt">Gross Profit</td>
-          <td class="rt">{{((gross_margin_median * 100).toFixed(1))}}%</td>
-        </tr>
-        <tr>
-          <td class="lt">P/B</td>
-          <td class="rt" id="ks-pb">{{PB.toFixed(1)}}</td>
-          <td class="lt">ROE</td>
-          <td class="rt">{{(roe_median * 100).toFixed(1)}}%</td>
-          <td class="lt">EBIT</td>
-          <td class="rt">33.1%</td>
-        </tr>
-        <tr>
-          <td class="lt">P/S</td>
-          <td class="rt" id="ks-ps">{{PS.toFixed(1)}}</td>
-          <td class="lt">ROIC</td>
-          <td class="rt">{{(roic_median * 100).toFixed(1)}}%</td>
-          <td class="lt">Pre-Tax Income</td>
-          <td class="rt">{{(pretax_margin_median * 100).toFixed(1)}}%</td>
-        </tr>
-        <tr>
-          <td class="lt">EV/S</td>
-          <td class="rt" id="ks-ev_s">{{enterprise_value_to_sales.toFixed(1)}}</td>
-          <td class="table_header" colspan="2">10-Year CAGR</td>
-          <td class="lt">FCF</td>
-          <td class="rt">{{(fcf_margin_median * 100).toFixed(1)}}%</td>
-        </tr>
-        <tr>
-          <td class="lt">EV/EBITDA</td>
-          <td class="rt" id="ks-ev_ebitda"></td>
-          <td class="lt">Revenue</td>
-          <td class="rt">{{(revenue_cagr_10 * 100).toFixed(1)}}%</td>
-          <td class="table_header" colspan="2">Capital Structure (Median)</td>
-        </tr>
-        <tr>
-          <td class="lt">EV/EBIT</td>
-          <td class="rt" id="ks-ev_ebit">{{enterprise_value_to_earnings.toFixed(1)}}</td>
-          <td class="lt">Assets</td>
-          <td class="rt">{{(total_assets_cagr_10 * 100).toFixed(1)}}%</td>
-          <td class="lt">Assets / Equity</td>
-          <td class="rt">{{assets_to_equity_median.toFixed(1)}}</td>
-        </tr>
-        <tr>
-          <td class="lt">EV/Pretax</td>
-          <td class="rt" id="ks-ev_pretax_income">{{enterprise_value_to_pretax_income.toFixed(1)}}</td>
-          <td class="lt">FCF</td>
-          <td class="rt">{{(fcf_cagr_10 * 100).toFixed(1)}}%</td>
-          <td class="lt">Debt / Equity</td>
-          <td class="rt">{{debt_to_equity_median.toFixed(1)}}</td>
-        </tr>
-        <tr>
-          <td class="lt">EV/FCF</td>
-          <td class="rt" id="ks-ev_fcf">39.4</td>
-          <td class="lt">EPS</td>
-          <td class="rt">{{(eps_diluted_cagr_10 * 100).toFixed(1)}}%</td>
-          <td class="lt">Debt / Assets</td>
-          <td class="rt">{{debt_to_assets_median.toFixed(1)}}</td>
-        </tr>
+      <tr>
+        <td class="table_header" colspan="2">Valuation Ratios</td>
+        <td class="table_header" colspan="2">10-Yr Median Returns</td>
+        <td class="table_header" colspan="2">10-Yr Median Margins</td>
+      </tr>
+      <tr>
+        <td class="lt">P/E</td>
+        <td class="rt" id="ks-pe">{{PE.toFixed(1)}}</td>
+        <td class="lt">ROA</td>
+        <td class="rt">{{(roa_median * 100).toFixed(1)}}%</td>
+        <td class="lt">Gross Profit</td>
+        <td class="rt">{{((gross_margin_median * 100).toFixed(1))}}%</td>
+      </tr>
+      <tr>
+        <td class="lt">P/B</td>
+        <td class="rt" id="ks-pb">{{PB.toFixed(1)}}</td>
+        <td class="lt">ROE</td>
+        <td class="rt">{{(roe_median * 100).toFixed(1)}}%</td>
+        <td class="lt">EBIT</td>
+        <td class="rt">33.1%</td>
+      </tr>
+      <tr>
+        <td class="lt">P/S</td>
+        <td class="rt" id="ks-ps">{{PS.toFixed(1)}}</td>
+        <td class="lt">ROIC</td>
+        <td class="rt">{{(roic_median * 100).toFixed(1)}}%</td>
+        <td class="lt">Pre-Tax Income</td>
+        <td class="rt">{{(pretax_margin_median * 100).toFixed(1)}}%</td>
+      </tr>
+      <tr>
+        <td class="lt">EV/S</td>
+        <td class="rt" id="ks-ev_s">{{enterprise_value_to_sales.toFixed(1)}}</td>
+        <td class="table_header" colspan="2">10-Year CAGR</td>
+        <td class="lt">FCF</td>
+        <td class="rt">{{(fcf_margin_median * 100).toFixed(1)}}%</td>
+      </tr>
+      <tr>
+        <td class="lt">EV/EBITDA</td>
+        <td class="rt" id="ks-ev_ebitda"></td>
+        <td class="lt">Revenue</td>
+        <td class="rt">{{(revenue_cagr_10 * 100).toFixed(1)}}%</td>
+        <td class="table_header" colspan="2">Capital Structure (Median)</td>
+      </tr>
+      <tr>
+        <td class="lt">EV/EBIT</td>
+        <td class="rt" id="ks-ev_ebit">{{enterprise_value_to_earnings.toFixed(1)}}</td>
+        <td class="lt">Assets</td>
+        <td class="rt">{{(total_assets_cagr_10 * 100).toFixed(1)}}%</td>
+        <td class="lt">Assets / Equity</td>
+        <td class="rt">{{assets_to_equity_median.toFixed(1)}}</td>
+      </tr>
+      <tr>
+        <td class="lt">EV/Pretax</td>
+        <td class="rt" id="ks-ev_pretax_income">{{enterprise_value_to_pretax_income.toFixed(1)}}</td>
+        <td class="lt">FCF</td>
+        <td class="rt">{{(fcf_cagr_10 * 100).toFixed(1)}}%</td>
+        <td class="lt">Debt / Equity</td>
+        <td class="rt">{{debt_to_equity_median.toFixed(1)}}</td>
+      </tr>
+      <tr>
+        <td class="lt">EV/FCF</td>
+        <td class="rt" id="ks-ev_fcf">39.4</td>
+        <td class="lt">EPS</td>
+        <td class="rt">{{(eps_diluted_cagr_10 * 100).toFixed(1)}}%</td>
+        <td class="lt">Debt / Assets</td>
+        <td class="rt">{{debt_to_assets_median.toFixed(1)}}</td>
+      </tr>
 
-      </tbody>
-    </table>
+    </tbody>
+  </table>
+  <div class="chart col">
+    <img src="/assets/images/chart.png">
+  </div>
 </section>
 
 <!-----------------------------------secction of table two--------------------------------------->
@@ -135,7 +250,8 @@
       </tr>
       <tr>
         <th scope="row">Gross Profit</th>
-        <td *ngFor="let gross of gross_profit">{{(gross / 1000000).toLocaleString(undefined,{ minimumFractionDigits: 0 })}}</td>
+        <td *ngFor="let gross of gross_profit">{{(gross / 1000000).toLocaleString(undefined,{ minimumFractionDigits: 0
+          })}}</td>
       </tr>
       <tr>
         <th scope="row">Gross Margin %</th>
@@ -143,7 +259,8 @@
       </tr>
       <tr>
         <th scope="row">Operating Profit</th>
-        <td *ngFor="let operating of operating_income">{{(operating / 1000000).toLocaleString(undefined,{ minimumFractionDigits: 0 })}}</td>
+        <td *ngFor="let operating of operating_income">{{(operating / 1000000).toLocaleString(undefined,{
+          minimumFractionDigits: 0 })}}</td>
       </tr>
       <tr>
         <th scope="row">Operating Margin %</th>

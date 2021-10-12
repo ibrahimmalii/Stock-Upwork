@@ -24,6 +24,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.userService.isLogged() && this.router.navigateByUrl('/pricing');
+
 
     // Validate Login Form
     this.form = this.formBuilder.group({
