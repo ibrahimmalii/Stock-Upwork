@@ -10,108 +10,136 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class FilterAndSearchComponent implements OnInit {
 
-  constructor(private userService : UserService,private apiService : ApiService, private requestService : RequestService) { }
+  constructor(private userService: UserService, private apiService: ApiService, private requestService: RequestService) { }
 
-  isPageLoaded: boolean = false;
-  isResponseGet: boolean = false;
-  responseData: any;
-  financials: any;
-  data: any;
-  apiRequest: any;
-  names : any;
-  symbols: any;
-  searchData : any;
-  associatedArr : any;
-  symbol : any;
-  name : any;
+    isPageLoaded: boolean = false;
+    isResponseGet: boolean = false;
+    responseData: any;
+    financials: any;
+    data: any;
+    apiRequest: any;
+    names: any;
+    symbols: any;
+    searchData: any;
+    associatedArr: any;
+    symbol: any;
+    name: any;
 
-// Best Mode
-PE: any;
-PS: any;
-maps: any;
-collect: any;
-fixed: any;
-dataQuart: any;
-operatingMargin: any
-netIncomeMargin: any
-totalLibilites: any
-totalAssets: any
-total: any
-revenueGrowth: any
-calculater: any
-roeMedian: any
-roce: any
-roceFixed: any
-flowPerShare: any
-flowPerShareFixed: any
-price: any
-marketCap: any
-marketCapFixed: any
-industry: any
-currency: any
-revenue_per_share: any;
-ebitda_per_share: any;
-operating_income_per_share: any
-pretax_income_per_share: any
-revenueRatio: any
-dividends_quarterly: any
-dividendsFixed: any
-deptToEquity: any
-deptToEquityFixed: any
-total_revenue: any
+    // Best Mode
+    PE: any;
+    PS: any;
+    maps: any;
+    collect: any;
+    fixed: any;
+    dataQuart: any;
+    operatingMargin: any
+    netIncomeMargin: any
+    totalLibilites: any
+    totalAssets: any
+    total: any
+    revenueGrowth: any
+    calculater: any
+    roeMedian: any
+    roce: any
+    roceFixed: any
+    flowPerShare: any
+    flowPerShareFixed: any
+    price: any
+    marketCap: any
+    marketCapFixed: any
+    industry: any
+    currency: any
+    revenue_per_share: any;
+    ebitda_per_share: any;
+    operating_income_per_share: any
+    pretax_income_per_share: any
+    revenueRatio: any
+    dividends_quarterly: any
+    dividendsFixed: any
+    deptToEquity: any
+    deptToEquityFixed: any
+    total_revenue: any
 
 
-oparator(op: any, arr: any) {
-  let result = eval(arr.join(op));
-  let fixedResult = result.toFixed(2) + '%';
-  return fixedResult;
-}
+    oparator(op: any, arr: any) {
+      let result = eval(arr.join(op));
+      let fixedResult = result.toFixed(2) + '%';
+      return fixedResult;
+    }
 
-// One
-  PB: any;
-  enterprise_value_to_sales: any;
-  enterprise_value_to_pretax_income: any;
-  enterprise_value_to_fcf: any;
-  roa_median: any;
-  roe_median: any;
-  roic_median: any;
-  revenue_cagr_10: any;
-  total_assets_cagr_10: any;
-  fcf_cagr_10: any;
-  eps_diluted_cagr_10: any;
-  gross_margin_median: any;
-  pretax_margin_median: any;
-  fcf_margin_median: any;
-  debt_to_assets_median: any;
-  debt_to_equity_median: any;
-  assets_to_equity_median: any;
-  enterprise_value_to_earnings: any;
+    // One
+    PB: any;
+    enterprise_value_to_sales: any;
+    enterprise_value_to_pretax_income: any;
+    enterprise_value_to_fcf: any;
+    roa_median: any;
+    roe_median: any;
+    roic_median: any;
+    revenue_cagr_10: any;
+    total_assets_cagr_10: any;
+    fcf_cagr_10: any;
+    eps_diluted_cagr_10: any;
+    gross_margin_median: any;
+    pretax_margin_median: any;
+    fcf_margin_median: any;
+    debt_to_assets_median: any;
+    debt_to_equity_median: any;
+    assets_to_equity_median: any;
+    enterprise_value_to_earnings: any;
 
-  // Two
-  revenue: any;
-  revenue_growth: any;
-  gross_profit: any;
-  gross_margin: any;
-  operating_income: any;
-  operating_margin: any;
-  eps_diluted_growth: any;
-  dividends_annual: any;
-  roa: any;
-  roe: any;
-  roic: any;
-  eps_diluted: any;
-  dividends_per_share_growth: any;
+    // Two
+    revenue: any;
+    revenue_growth: any;
+    gross_profit: any;
+    gross_margin: any;
+    operating_income: any;
+    operating_margin: any;
+    eps_diluted_growth: any;
+    dividends_annual: any;
+    roa: any;
+    roe: any;
+    roic: any;
+    eps_diluted: any;
+    dividends_per_share_growth: any;
 
   ngOnInit(): void {
 
-    this.apiService.get(`http://localhost:8000/api/keyStatistics/all`,
-    {headers : {'Authorization' : this.userService.getToken()}}
-    ).subscribe(res => {
-      this.responseData = res;
-      this.names = this.responseData.names;
-      this.symbols = this.responseData.symbols;
+    // Get And Store Symbols
+    // this.apiService.get('https://public-api.quickfs.net/v1/companies/US?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07').subscribe(response => {
+    //     console.log(response);
+    //     localStorage.symbols = JSON.stringify(response);
+    // },console.error);
+
+    // const symbols = JSON.parse(localStorage.symbols);
+    // console.log(symbols.data);
+    // this.apiService.post('http://localhost:8000/api/symbols', {"title":"symbols", "keys" : symbols.data}).subscribe(response=>{
+    //   console.log(response);
+    // })
+
+    this.apiService.get('http://localhost:8000/api/symbols').subscribe(response=>{
+      this.symbols = response;
+      this.symbols = this.symbols.keys;
+      console.log(this.symbols);
+      localStorage.symbols = JSON.stringify(this.symbols);
       this.isPageLoaded = true;
     })
+
+
+    // Test symbols
+    // this.apiService.get(`https://public-api.quickfs.net/v1/data/all-data/PHIG:US?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07`).subscribe(response=>{
+    //   console.log(response);
+    // })
+
+
+
+    // this.apiService.get(`http://localhost:8000/api/keyStatistics/all`
+    // ,{ headers: { 'Authorization': this.userService.getToken() } }
+    // ).subscribe(res => {
+    //   this.responseData = res;
+    //   this.names = this.responseData.names;
+    //   this.symbols = this.responseData.symbols;
+    //   this.isPageLoaded = true;
+    // })
   }
 
   splicedArray(arr: any) {
@@ -122,13 +150,13 @@ oparator(op: any, arr: any) {
 
   callDataBase(searchKey: string) {
     return this.apiService.get(`http://localhost:8000/api/keyStatistics/${searchKey.toUpperCase()}`,
-    {headers : {'Authorization' : this.userService.getToken()}}
+      { headers: { 'Authorization': this.userService.getToken() } }
     )
   }
 
   callApiAfterDataBase(searchKey: string) {
     return this.apiService.get(`https://public-api.quickfs.net/v1/data/all-data/${searchKey.toUpperCase()}?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07`,
-    {headers : {'Authorization' : this.userService.getToken()}}
+      { headers: { 'Authorization': this.userService.getToken() } }
     )
   }
 
@@ -225,11 +253,11 @@ oparator(op: any, arr: any) {
 
     //Store Company In Our DataBase And Return Data From There
     return this.apiService.post('http://localhost:8000/api/keyStatistics', this.requestService.data,
-    {headers : {'Authorization' : this.userService.getToken()}}
+      { headers: { 'Authorization': this.userService.getToken() } }
     )
   }
 
-  returnDataFromDataBase(res : any){
+  returnDataFromDataBase(res: any) {
     this.data = res;
 
     // Best Mode Requrirements
@@ -262,7 +290,7 @@ oparator(op: any, arr: any) {
     this.currency = this.data.currency
 
     // One Requirements
-    if(!this.data) return;
+    if (!this.data) return;
     this.PE = this.data.price_to_earnings.splice(-1)[0];
     this.PB = this.data.price_to_book.splice(-1)[0];
     this.PS = this.data.price_to_sales.splice(-1)[0];
@@ -286,7 +314,7 @@ oparator(op: any, arr: any) {
     this.debt_to_assets_median = this.data.debt_to_assets_median;
 
     // Two Requirement
-    if(!this.data) return;
+    if (!this.data) return;
     this.revenue = this.splicedArray(this.data.revenue);
     this.revenue_growth = this.splicedArray(this.data.revenue_growth);
     this.gross_profit = this.splicedArray(this.data.gross_profit);
@@ -306,7 +334,7 @@ oparator(op: any, arr: any) {
 
 
 
-  getData(e : any ,searchKey: string) {
+  getData(e: any, searchKey: string) {
 
     let id = Number(e.target.id);
 
@@ -329,9 +357,9 @@ oparator(op: any, arr: any) {
           this.storeDataFromApiToDataBase(this.data).subscribe(res => {
             this.returnDataFromDataBase(res);
             localStorage.latestSearchKey = searchKey;
-          },console.error);
+          }, console.error);
 
-        },console.error);
+        }, console.error);
 
       } else {
         this.returnDataFromDataBase(res);
@@ -343,3 +371,6 @@ oparator(op: any, arr: any) {
 
 
 }
+
+
+

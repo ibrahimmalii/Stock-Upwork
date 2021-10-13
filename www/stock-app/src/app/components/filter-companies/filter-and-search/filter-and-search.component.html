@@ -5,7 +5,7 @@
     placeholder="Search by ticker symbol or company name" list="company" name="company"
     class="form-control mb-5 w-50 m-auto">
   <datalist id="company" *ngIf="isPageLoaded" style="height : 200px">
-    <option *ngFor="let name of names; let i = index" value={{symbols[i]}}>{{name}}</option>
+    <option class="form-control" *ngFor="let name of symbols.splice(0, 1000); let i = index" value={{symbols[i]}}></option>
   </datalist>
 
   <div class="container" *ngIf="!isResponseGet">
