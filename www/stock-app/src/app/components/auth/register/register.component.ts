@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserService } from './../../../services/user.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private http: HttpClient, private formBuilder: FormBuilder, private router : Router) { }
+  constructor(private http: HttpClient, private formBuilder: FormBuilder, private router : Router, private userService : UserService) { }
 
   form: FormGroup = new FormGroup({});
   isLogged: Boolean = false;
@@ -73,11 +74,12 @@ export class RegisterComponent implements OnInit {
       this.form.controls.email.value == this.email
     ) {
 
-      this.http.post('http://localhost:8000/api/register', this.form.value).subscribe(res=>{
+      this.userService.register(this.form.value).subscribe(res=>{
         this.regesterData = res;
         if(this.regesterData.data != null){
           localStorage.token = this.regesterData.data.access_token;
           localStorage.user = JSON.stringify(this.regesterData.data.user);
+          this.userService.setLoggedStatus(true);
           this.router.navigateByUrl('/exchanges');
           this.isLoginSuccess = true;
           this.isLoginError = false;

@@ -1,20 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { ExchangesModule } from '../exchanges/exchanges.module';
-import { MainFilterationComponent } from './main-filteration/main-filteration.component';
+import { FilterAndSearchComponent } from './filter-and-search/filter-and-search.component';
 
 const routes : Routes =[
-  {path : 'filter', component : MainFilterationComponent},
-  {path : '', component : MainFilterationComponent},
+  {path : 'filter', component : FilterAndSearchComponent},
+  {path : '', component : FilterAndSearchComponent},
 ]
 
 @NgModule({
   declarations: [
-    MainFilterationComponent
+    FilterAndSearchComponent
   ],
   imports: [
-    CommonModule,RouterModule.forChild(routes),ExchangesModule
+  CommonModule,RouterModule.forChild(routes)
   ]
 })
 export class FilterCompaniesModule { }

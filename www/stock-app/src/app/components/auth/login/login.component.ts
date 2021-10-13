@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private userService : UserService) { }
 
   form: FormGroup = new FormGroup({});
   isLogged: Boolean = false;
@@ -37,11 +38,12 @@ export class LoginComponent implements OnInit {
 
     if (this.form.valid) {
       console.log(this.form.value);
-      this.http.post('http://localhost:8000/api/login', this.form.value).subscribe(res => {
+      this.userService.login(this.form.value).subscribe(res => {
         this.logginData = res;
         if (this.logginData.data != null) {
           localStorage.token = this.logginData.data.access_token;
           localStorage.user = JSON.stringify(this.logginData.data.user);
+          this.userService.setLoggedStatus(true);
           this.router.navigateByUrl('/exchanges');
           this.isLoginSuccess = true;
           this.isLoginError = false;

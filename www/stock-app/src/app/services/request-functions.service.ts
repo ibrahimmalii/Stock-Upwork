@@ -10,7 +10,7 @@ import { RequestService } from './request.service';
 export class RequestFunctionsService {
 
   local: any;
-  // Data = new BehaviourSubject<any>();
+  // Data = new BehaviorSubject<any>(null);
 
   Data = new Subject<any>();
 
@@ -18,12 +18,15 @@ export class RequestFunctionsService {
     this.Data.next(info);
   }
 
+  setFirstValueOfSubject(){
+    // this.http.get(`http://localhost:8000/api/keyStatistics/FB`).subscribe(res => {
+    //   this.setCompanyData(res);
+    // });
+  }
+
 
   constructor(private requestService: RequestService, private http: HttpClient) {
-    this.http.get(`http://localhost:8000/api/keyStatistics/FB`).subscribe(res => {
-      let data = res;
-      this.Data.next(data);
-    });
+
   }
 
 
@@ -143,12 +146,14 @@ export class RequestFunctionsService {
           //Store Company In Our DataBase And Return Data From There
           this.http.post('http://localhost:8000/api/keyStatistics', this.requestService.data).subscribe(res => {
             this.Data.next(res);
+            console.log(res);
           }, console.error);
 
         }, console.error);
 
       } else {
         this.Data.next(res);
+        console.log(res);
       }
 
     }, console.error);

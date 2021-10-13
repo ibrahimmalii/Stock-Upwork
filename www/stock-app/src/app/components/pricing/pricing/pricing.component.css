@@ -15,9 +15,6 @@ ul {
 
 li{
   border: 1px solid rgb(111, 250, 208);
-  padding: 2px;
-
-
 }
 
 
@@ -28,5 +25,9 @@ input{
 .dark-item{
   background-color:black;
   border: 1px solid black;
+}
+
+.model{
+  position: absolute;
 }
 

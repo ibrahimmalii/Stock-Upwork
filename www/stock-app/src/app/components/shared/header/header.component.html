@@ -25,8 +25,11 @@
                 </li>
             </ul>
             <!-- Button -->
-            <a class="navbar-btn btn btn-sm btn-primary  d-lg-inline-block ml-5" routerLink='/auth/login' >
+            <a *ngIf="!isUserLogged" class="navbar-btn btn btn-sm btn-primary  d-lg-inline-block ml-5" routerLink='/auth/login' >
                 Login
+            </a>
+            <a *ngIf="isUserLogged" (click)="logout()" class="navbar-btn btn btn-sm btn-primary  d-lg-inline-block ml-5">
+                Logout
             </a>
         </div>
     </div>

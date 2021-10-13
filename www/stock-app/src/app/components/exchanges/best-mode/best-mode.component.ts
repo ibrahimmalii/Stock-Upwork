@@ -12,7 +12,8 @@ export class BestModeComponent implements OnInit {
 
   }
 
-  @Input() data: any;
+  // @Input() data: any;
+  data : any;
   PE: any;
   PS: any;
   maps: any;
@@ -49,22 +50,25 @@ export class BestModeComponent implements OnInit {
   name : any
   symbol : any
   isPageLoaded : boolean = false;
-  
+
 
   oparator(op: any, arr: any) {
-    return eval(arr.join(op)).toFixed(2) + '%'
+    let result = eval(arr.join(op));
+    let fixedResult = result.toFixed(2) + '%';
+    return fixedResult;
   }
 
   ngOnInit(): void {
 
-    this.requests.getCompanyData().subscribe(res => {
-      this.data = res;
-      if(this.data) return;
+
+    this.data = '';
+      this.data = JSON.parse(localStorage.responseData);
+      if(!this.data) return;
       this.name = this.data.name;
       this.symbol = this.data.symbol;
       this.PE = this.data.price_to_earnings.splice(-1)[0];
       this.PS = this.data.price_to_sales.splice(-1)[0];
-      this.operatingMargin = this.oparator('+', this.data.operating_margin);
+      // this.operatingMargin = this.oparator('+', this.data.operating_margin);
       this.netIncomeMargin = this.oparator('+', this.data.net_income_margin);
       this.totalAssets = this.oparator('+', this.data.total_current_assets);
       this.totalLibilites = this.oparator('+', this.data.total_current_liabilities);
@@ -88,7 +92,7 @@ export class BestModeComponent implements OnInit {
       this.industry = this.data.industry
       this.currency = this.data.currency
       this.isPageLoaded = true
-    })
+    // })
 
   }
 
