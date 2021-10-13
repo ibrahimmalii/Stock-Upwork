@@ -100,6 +100,9 @@ export class PricingComponent implements OnInit {
 
 
   callDataBase(searchKey: string) {
+    if(searchKey.includes(':')){
+      searchKey = searchKey.substring(0, searchKey.lastIndexOf(':'));
+    };
     return this.apiService.get(`http://localhost:8000/api/keyStatistics/${searchKey.toUpperCase()}`,
     {headers : {'Authorization' : this.userService.getToken()}}
     );

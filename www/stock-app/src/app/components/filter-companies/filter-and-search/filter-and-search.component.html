@@ -5,8 +5,13 @@
     placeholder="Search by ticker symbol or company name" list="company" name="company"
     class="form-control mb-5 w-50 m-auto">
   <datalist id="company" *ngIf="isPageLoaded" style="height : 200px">
-    <option class="form-control" *ngFor="let name of symbols.splice(0, 1000); let i = index" value={{symbols[i]}}></option>
+    <option class="form-control" *ngFor="let symbol of symbols; let i = index" value={{symbol}}></option>
   </datalist>
+
+  <!-- <input class="form-control" #searchKey (keyup)="searchInSymbols(searchKey.value)" type="text" name="">
+  <div class="search-results" *ngFor="let symbol of searchResult">
+    <small>{{symbol}}</small>
+  </div> -->
 
   <div class="container" *ngIf="!isResponseGet">
     <div class="content text-center my-5">

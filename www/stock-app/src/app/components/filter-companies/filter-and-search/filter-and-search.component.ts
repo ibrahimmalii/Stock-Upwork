@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { RequestService } from 'src/app/services/request.service';
 import { UserService } from 'src/app/services/user.service';
@@ -12,6 +12,11 @@ export class FilterAndSearchComponent implements OnInit {
 
   constructor(private userService: UserService, private apiService: ApiService, private requestService: RequestService) { }
 
+    symbols: any;
+    searchResult : any;
+
+
+
     isPageLoaded: boolean = false;
     isResponseGet: boolean = false;
     responseData: any;
@@ -19,7 +24,6 @@ export class FilterAndSearchComponent implements OnInit {
     data: any;
     apiRequest: any;
     names: any;
-    symbols: any;
     searchData: any;
     associatedArr: any;
     symbol: any;
@@ -61,11 +65,6 @@ export class FilterAndSearchComponent implements OnInit {
     total_revenue: any
 
 
-    oparator(op: any, arr: any) {
-      let result = eval(arr.join(op));
-      let fixedResult = result.toFixed(2) + '%';
-      return fixedResult;
-    }
 
     // One
     PB: any;
@@ -102,6 +101,36 @@ export class FilterAndSearchComponent implements OnInit {
     eps_diluted: any;
     dividends_per_share_growth: any;
 
+
+    oparator(op: any, arr: any) {
+      let result = eval(arr.join(op));
+      let fixedResult = result.toFixed(2) + '%';
+      return fixedResult;
+    }
+
+    searchInSymbols(searchKey : string){
+      this.renderSearch(this.symbols, searchKey);
+    }
+
+    //=============================== Search for users =========================//
+    renderSearch(arr : any , searchText : string){
+      this.searchResult =  arr.filter((symbol:any)=>{
+        return symbol.toLowerCase().includes(searchText.toLowerCase());
+      });
+
+      // usersCounter.innerHTML = `<span>Users : ${searchResult.length}</span>`;
+      // users.innerHTML = '';
+      if(this.searchResult.length != 0){
+        return this.searchResult;
+        // searchResult.forEach((element:any) => {
+        //   console.log(element);
+        // });
+
+      } else {
+        console.log(searchText);
+      }
+    }
+
   ngOnInit(): void {
 
     // Get And Store Symbols
@@ -116,13 +145,23 @@ export class FilterAndSearchComponent implements OnInit {
     //   console.log(response);
     // })
 
-    this.apiService.get('http://localhost:8000/api/symbols').subscribe(response=>{
-      this.symbols = response;
-      this.symbols = this.symbols.keys;
-      console.log(this.symbols);
-      localStorage.symbols = JSON.stringify(this.symbols);
+    if(localStorage.symbols){
+      this.symbols = JSON.parse(localStorage.symbols);
+      console.log(this.symbols)
+
+
+
       this.isPageLoaded = true;
-    })
+    }else{
+      this.apiService.get('http://localhost:8000/api/symbols').subscribe(response=>{
+        this.symbols = response;
+        this.symbols = this.symbols.keys;
+        console.log(this.symbols);
+        localStorage.symbols = JSON.stringify(this.symbols);
+        this.isPageLoaded = true;
+      })
+    }
+
 
 
     // Test symbols
@@ -149,12 +188,16 @@ export class FilterAndSearchComponent implements OnInit {
   //=====================> Request Service To Get Data. =========================//
 
   callDataBase(searchKey: string) {
+    if(searchKey.includes(':')){
+      searchKey = searchKey.substring(0, searchKey.lastIndexOf(':'));
+    };
     return this.apiService.get(`http://localhost:8000/api/keyStatistics/${searchKey.toUpperCase()}`,
       { headers: { 'Authorization': this.userService.getToken() } }
     )
   }
 
   callApiAfterDataBase(searchKey: string) {
+
     return this.apiService.get(`https://public-api.quickfs.net/v1/data/all-data/${searchKey.toUpperCase()}?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07`,
       { headers: { 'Authorization': this.userService.getToken() } }
     )
