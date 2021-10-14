@@ -12,11 +12,14 @@ export class HeaderComponent implements OnInit {
   constructor(private userService : UserService, private router : Router) { }
 
   isUserLogged : boolean = false;
+  isAdmin : boolean = false;
   ngOnInit(): void {
     this.userService.getLoggedStatus().subscribe(response=>{
       console.log(response)
       return this.isUserLogged = response;
-    })
+    });
+
+    this.isAdmin = this.userService.isAdmin();
   }
 
   logout(){

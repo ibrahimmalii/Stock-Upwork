@@ -3,6 +3,10 @@ import { ApiService } from 'src/app/services/api.service';
 import { RequestService } from 'src/app/services/request.service';
 import { UserService } from 'src/app/services/user.service';
 
+
+
+
+
 @Component({
   selector: 'app-filter-and-search',
   templateUrl: './filter-and-search.component.html',
@@ -11,12 +15,17 @@ import { UserService } from 'src/app/services/user.service';
 export class FilterAndSearchComponent implements OnInit {
 
   constructor(private userService: UserService, private apiService: ApiService, private requestService: RequestService) { }
-
+  products=[];
     symbols: any;
     someSymbols : any;
     searchResult : any;
     firstLoading : boolean = false;
     loaderStarted : boolean = false;
+
+    public articles: any[] = [];
+    public view: any[] = [];
+
+
 
 
 
@@ -111,30 +120,11 @@ export class FilterAndSearchComponent implements OnInit {
       return fixedResult;
     }
 
-    searchInSymbols(searchKey : string){
-      this.renderSearch(this.symbols, searchKey);
-    }
-
-    //=============================== Search for users =========================//
-    renderSearch(arr : any , searchText : string){
-      this.searchResult =  arr.filter((symbol:any)=>{
-        return symbol.toLowerCase().includes(searchText.toLowerCase());
-      });
-
-      // usersCounter.innerHTML = `<span>Users : ${searchResult.length}</span>`;
-      // users.innerHTML = '';
-      if(this.searchResult.length != 0){
-        return this.searchResult;
-        // searchResult.forEach((element:any) => {
-        //   console.log(element);
-        // });
-
-      } else {
-        console.log(searchText);
-      }
-    }
 
   ngOnInit(): void {
+    // About kendo lilst
+
+
 
     // Get And Store Symbols
     // this.apiService.get('https://public-api.quickfs.net/v1/companies/US?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07').subscribe(response => {
@@ -214,13 +204,13 @@ export class FilterAndSearchComponent implements OnInit {
     // Get Symbols To Show It
     if(localStorage.symbols){
       this.symbols = JSON.parse(localStorage.symbols);
-      this.someSymbols = this.symbols.splice(0, 5000);
+      this.someSymbols = this.symbols.splice(0, 3000);
       this.isPageLoaded = true;
     }else{
       this.apiService.get('http://localhost:8000/api/symbols').subscribe(response=>{
         this.symbols = response;
         this.symbols = this.symbols.keys;
-        this.someSymbols = this.symbols.splice(0, 5000);
+        this.someSymbols = this.symbols.splice(0, 3000);
         localStorage.symbols = JSON.stringify(this.symbols);
         this.isPageLoaded = true;
       })
@@ -244,6 +234,8 @@ export class FilterAndSearchComponent implements OnInit {
     //   this.isPageLoaded = true;
     // })
   }
+
+
 
   splicedArray(arr: any) {
     return arr.splice(-11);
