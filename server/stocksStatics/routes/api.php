@@ -8,6 +8,7 @@ use Illuminate\Http\Client\Response;
 use App\Models\Test;
 use App\Http\Controllers\KeyStatisticsController;
 use App\Http\Controllers\StockPropertieController;
+use App\Http\Controllers\SymbolController;
 use Illuminate\Support\Facades\Http;
 
 
@@ -44,7 +45,8 @@ Route::get('/test', function(Request $request){
 
 
 // Crud For Key Statistics
-Route::post('/keyStatistics', [KeyStatisticsController::class , 'create'])->middleware('auth:sanctum');
+// Route::post('/keyStatistics', [KeyStatisticsController::class , 'create'])->middleware('auth:sanctum');
+Route::post('/keyStatistics', [KeyStatisticsController::class , 'create']);
 Route::get('/keyStatistics', [KeyStatisticsController::class , 'index'])->middleware('auth:sanctum');
 Route::get('/keyStatistics/all', [KeyStatisticsController::class , 'getAllNames'])->middleware('auth:sanctum');
 Route::get('/keyStatistics/{key}', [KeyStatisticsController::class , 'show'])->middleware('auth:sanctum');
@@ -56,3 +58,15 @@ Route::get('/properties', [StockPropertieController::class , 'index'])->middlewa
 Route::post('/properties', [StockPropertieController::class , 'create'])->middleware(['auth:sanctum' , 'admin']);
 Route::post('/properties/{prop}', [StockPropertieController::class , 'update'])->middleware(['auth:sanctum' , 'admin']);
 
+
+//Crud For Symbols
+// Route::get('/symbols', [SymbolController::class, 'index'])->middleware('auth:sanctum');
+Route::get('/symbols', [SymbolController::class, 'index']);
+// Route::post('/symbols', [SymbolController::class, 'create'])->middleware('auth:sanctum');
+Route::post('/symbols', [SymbolController::class, 'create']);
+
+
+//Crud For Number Of Requests
+Route::get('/num-of-requests', [RequestsController::class, 'index']);
+Route::post('/num-of-requests', [RequestsController::class, 'create']);
+Route::post('/num-of-requests/{id}', [RequestsController::class, 'update']);

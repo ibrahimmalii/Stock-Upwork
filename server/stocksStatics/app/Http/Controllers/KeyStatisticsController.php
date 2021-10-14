@@ -6,6 +6,7 @@ use App\Models\KeyStatistics;
 use Illuminate\Http\Request;
 use Mockery\Undefined;
 use PhpParser\Node\Stmt\Foreach_;
+use App\Models\Requests;
 
 class KeyStatisticsController extends Controller
 {
@@ -94,6 +95,15 @@ class KeyStatisticsController extends Controller
             'eps_diluted_growth' => $request-> eps_diluted_growth,
             'dividends_per_share_growth' => $request-> dividends_per_share_growth
         ]);
+
+        $currentRequest = Requests::where('id', 1)->get();
+        if(!$currentRequest){
+            $currentRequest[0]->number_of_requests += 1;
+        };
+
+        $currentRequest[0]->number_of_requests = $currentRequest[0]->number_of_requests + 1;
+
+        $currentRequest[0]->save();
 
         return $data;
     }
