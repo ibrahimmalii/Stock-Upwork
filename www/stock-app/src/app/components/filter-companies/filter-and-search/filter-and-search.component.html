@@ -1,16 +1,25 @@
 <section class="search">
 
   <p class="h1 text-center mt-3">Best Mode</p>
-  <input #searchKey (keyup.enter)="getData($event, searchKey.value)"
-    placeholder="Search by ticker symbol or company name" list="company" name="company"
-    class="form-control mb-5 w-50 m-auto">
-  <datalist id="company" *ngIf="isPageLoaded" style="height : 200px">
-    <option class="form-control" *ngFor="let symbol of symbols; let i = index" value={{symbol}}></option>
-  </datalist>
 
-  <!-- <input class="form-control" #searchKey (keyup)="searchInSymbols(searchKey.value)" type="text" name="">
-  <div class="search-results" *ngFor="let symbol of searchResult">
-    <small>{{symbol}}</small>
+  <div *ngIf="isPageLoaded" >
+    <input #searchKey (keyup.enter)="getData($event, searchKey.value)"
+    placeholder="Search by ticker symbol or company name" list="smallcompany" name="company"
+    class="form-control mb-5 w-50 m-auto">
+    <datalist id="smallcompany" style="height : 200px">
+      <option class="form-control" *ngFor="let symbol of someSymbols; let i = index" value={{symbol}}></option>
+    </datalist>
+  </div>
+
+  <!-- <div *ngIf="firstLoading">
+    <div [hidden]="!isPageLoaded">
+      <input #searchKey (keyup.enter)="getData($event, searchKey.value)"
+      placeholder="Search by ticker symbol or company name" list="company" name="company"
+      class="form-control mb-5 w-50 m-auto">
+      <datalist id="company" style="height : 200px">
+        <option class="form-control" *ngFor="let symbol of symbols; let i = index" value={{symbol}}></option>
+      </datalist>
+    </div>
   </div> -->
 
   <div class="container" *ngIf="!isResponseGet">
@@ -20,9 +29,13 @@
     </div>
   </div>
 
+  <div class="loader container text-center" *ngIf="loaderStarted">
+    <img src="/assets/images/ajax-loader.gif">
+  </div>
+
 </section>
 
-<section class="best-mode" *ngIf="data">
+<section class="best-mode" *ngIf="isResponseGet">
   <div class="div1 text-center p-3">
     <img src="/assets/images/1.png">
   </div>
@@ -38,7 +51,7 @@
 
   <!--section2-->
 
-  <section class="sec2 d-flex flex-wrap">
+  <section class="sec2 d-flex flex-wrap" *ngIf="isResponseGet">
     <article class="col-lg-5 col-sm-11">
       <div>
         <h3>Beast Mode Scorecard</h3>

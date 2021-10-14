@@ -13,7 +13,10 @@ export class FilterAndSearchComponent implements OnInit {
   constructor(private userService: UserService, private apiService: ApiService, private requestService: RequestService) { }
 
     symbols: any;
+    someSymbols : any;
     searchResult : any;
+    firstLoading : boolean = false;
+    loaderStarted : boolean = false;
 
 
 
@@ -136,27 +139,88 @@ export class FilterAndSearchComponent implements OnInit {
     // Get And Store Symbols
     // this.apiService.get('https://public-api.quickfs.net/v1/companies/US?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07').subscribe(response => {
     //     console.log(response);
-    //     localStorage.symbols = JSON.stringify(response);
+    //     localStorage.symbolOne = JSON.stringify(response);
     // },console.error);
 
-    // const symbols = JSON.parse(localStorage.symbols);
-    // console.log(symbols.data);
-    // this.apiService.post('http://localhost:8000/api/symbols', {"title":"symbols", "keys" : symbols.data}).subscribe(response=>{
+    // this.apiService.get('https://public-api.quickfs.net/v1/companies/NZ?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07').subscribe(response => {
+    //     console.log(response);
+    //     localStorage.symbolTwo = JSON.stringify(response);
+    // },console.error);
+
+    // this.apiService.get('https://public-api.quickfs.net/v1/companies/MM?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07').subscribe(response => {
+    //     console.log(response);
+    //     localStorage.symbolThree = JSON.stringify(response);
+    // },console.error);
+
+    // this.apiService.get('https://public-api.quickfs.net/v1/companies/LN?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07').subscribe(response => {
+    //     console.log(response);
+    //     localStorage.symbolFour = JSON.stringify(response);
+    // },console.error);
+
+    // this.apiService.get('https://public-api.quickfs.net/v1/companies/CA?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07').subscribe(response => {
+    //     console.log(response);
+    //     localStorage.symbolFive = JSON.stringify(response);
+    // },console.error);
+
+    // this.apiService.get('https://public-api.quickfs.net/v1/companies/AU?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07').subscribe(response => {
+    //     console.log(response);
+    //     localStorage.symbolSix = JSON.stringify(response);
+    // },console.error);
+
+    // let one = JSON.parse(localStorage.symbolOne);
+    // one = one.data;
+    // console.log(one);
+    // let two = JSON.parse(localStorage.symbolTwo);
+    // two = two.data;
+    // console.log(two);
+    // let three = JSON.parse(localStorage.symbolThree);
+    // three = three.data;
+    // console.log(three);
+    // let four = JSON.parse(localStorage.symbolFour);
+    // four = four.data;
+    // console.log(four);
+    // let five = JSON.parse(localStorage.symbolFive);
+    // five = five.data;
+    // console.log(five);
+    // let six = JSON.parse(localStorage.symbolSix);
+    // six = six.data;
+    // console.log(six);
+
+    // const TotalSymbols = Array(...one, ...two, ...three, ...four, ...five, ...six);
+    // console.log(TotalSymbols);
+
+    // this.apiService.post('http://localhost:8000/api/symbols', {"title":"symbols", "keys" : TotalSymbols}).subscribe(response=>{
     //   console.log(response);
     // })
 
+    //=========================== End Of Get And Store Symbols =======================//
+
+
+    // Set A function to load page
+    // setTimeout(() => {
+    //   this.isPageLoaded = true
+    // }, 30000);
+
+
+    // setTimeout(() => {
+    //   this.firstLoading = true
+    // }, 3000);
+
+
+
+
+
+
+    // Get Symbols To Show It
     if(localStorage.symbols){
       this.symbols = JSON.parse(localStorage.symbols);
-      console.log(this.symbols)
-
-
-
+      this.someSymbols = this.symbols.splice(0, 5000);
       this.isPageLoaded = true;
     }else{
       this.apiService.get('http://localhost:8000/api/symbols').subscribe(response=>{
         this.symbols = response;
         this.symbols = this.symbols.keys;
-        console.log(this.symbols);
+        this.someSymbols = this.symbols.splice(0, 5000);
         localStorage.symbols = JSON.stringify(this.symbols);
         this.isPageLoaded = true;
       })
@@ -372,14 +436,16 @@ export class FilterAndSearchComponent implements OnInit {
     this.roe = this.splicedArray(this.data.roe);
     this.roic = this.splicedArray(this.data.roic);
     this.isResponseGet = true;
+    this.loaderStarted = false;
     localStorage.responseData = JSON.stringify(res);
   }
 
 
 
   getData(e: any, searchKey: string) {
-
+    this.loaderStarted = true;
     let id = Number(e.target.id);
+    e.target.value = '';
 
     //first CAll
     this.callDataBase(searchKey).subscribe(res => {
@@ -388,7 +454,6 @@ export class FilterAndSearchComponent implements OnInit {
         //Second Call
         this.callApiAfterDataBase(searchKey).subscribe(res => {
           this.data = res;
-          console.log(this.data);
 
           if (this.data.errors) {
             alert('Company Not Found');

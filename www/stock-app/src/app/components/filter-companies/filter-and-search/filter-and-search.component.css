@@ -86,6 +86,11 @@ body{
 
 }
 
+.loader > img{
+  width: 100px;
+  height : 100px
+}
+
 /* .t[_ngcontent-stl-c57]{
   margin-left: 31%;
 } */
