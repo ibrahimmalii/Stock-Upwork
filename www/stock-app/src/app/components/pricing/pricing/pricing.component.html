@@ -1,3 +1,8 @@
+<div class="row">
+  <div class="col text-center bg-dark text-light">
+    <p class="h3 my-4">Search to compare between companies using symbol or company name <i class="fa fa-search"></i></p>
+  </div>
+</div>
 <div class='row'>
   <div class="col-2">
     <ul>
@@ -49,9 +54,9 @@
       <li>Cost of goods sold</li>
       <li>Gross profit</li>
       <li>Total operating expense</li>
-      <li><input type='text' class="w-100" value="ROIC-return on invested capital"></li>
-      <li><input type='text' class="w-100" value='ROCE-return on capital employee'></li>
-      <li><input type='text' class="w-100" value='ROTE-return on Tangible CApital'></li>
+      <li><input type='text' input placeholder="Search With Symbol" class="w-100" value="ROIC-return on invested capital"></li>
+      <li><input type='text' input placeholder="Search With Symbol" class="w-100" value='ROCE-return on capital employee'></li>
+      <li><input type='text' input placeholder="Search With Symbol" class="w-100" value='ROTE-return on Tangible CApital'></li>
       <li class="bg-info">Five R indicator</li>
       <li>Dividends per share(YR)</li>
       <li style="background-color: rgb(228, 201, 201);">Dividend Yield 4%</li>
@@ -96,15 +101,15 @@
     </ul>
   </div>
   <div class="col">
-    <div class=""><input type='text' id="0" class="text-light bg-info text-center w-100"
+    <div class=""><input type='text' input placeholder="Search With Symbol" id="0" class="text-light bg-info text-center w-100"
         (keyup.enter)="getData($event, inputOne.value)" #inputOne style="height:60px; border-right: 1px solid black;"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[0] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
       <li *ngFor="let item of ArrayOfData[0]; let i = index" [ngClass]="{'bg-black dark-item': i == 11}"><input disabled
-          [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}">{{i}}</li>
+          [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}"></li>
     </ul>
   </div>
   <div class="col">
-    <div class="bg-dark"><input type='text' id="1" (keyup.enter)="getData($event, inputTwo.value)" #inputTwo
+    <div class="bg-dark"><input type='text' input placeholder="Search With Symbol" id="1" (keyup.enter)="getData($event, inputTwo.value)" #inputTwo
         class="text-light bg-info text-center w-100" style="height:60px; border-right: 1px solid black;"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[1] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
       <li *ngFor="let item of ArrayOfData[1]; let i = index" [ngClass]="{'bg-black dark-item': i == 11}"><input disabled
@@ -112,7 +117,7 @@
     </ul>
   </div>
   <div class="col">
-    <div class=""><input type='text' id="2" class="text-light bg-info text-center w-100"
+    <div class=""><input type='text' input placeholder="Search With Symbol" id="2" class="text-light bg-info text-center w-100"
         (keyup.enter)="getData($event, inputThree.value)" #inputThree style="height:60px; border-right: 1px solid black;"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[2] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
       <li *ngFor="let item of ArrayOfData[2]; let i = index" [ngClass]="{'bg-black dark-item': i == 11}"><input disabled
@@ -120,7 +125,7 @@
     </ul>
   </div>
   <div class="col">
-    <div class=""><input type='text' id="3" class="text-light bg-info text-center w-100"
+    <div class=""><input type='text' input placeholder="Search With Symbol" id="3" class="text-light bg-info text-center w-100"
         (keyup.enter)="getData($event, inputFour.value)" #inputFour style="height:60px; border-right: 1px solid black;"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[3] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
       <li *ngFor="let item of ArrayOfData[3]; let i = index" [ngClass]="{'bg-black dark-item': i == 11}"><input disabled
@@ -128,7 +133,7 @@
     </ul>
   </div>
   <div class="col">
-    <div class=""><input type='text' id="4" class="text-light bg-info text-center w-100"
+    <div class=""><input type='text' input placeholder="Search With Symbol" id="4" class="text-light bg-info text-center w-100"
         (keyup.enter)="getData($event, inputFive.value)" #inputFive style="height:60px; border-right: 1px solid black;"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[4] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
       <li *ngFor="let item of ArrayOfData[4]; let i = index" [ngClass]="{'bg-black dark-item': i == 11}"><input
@@ -136,7 +141,7 @@
     </ul>
   </div>
   <div class="col">
-    <div class=""><input type='text' id="5" class="text-light bg-info text-center w-100"
+    <div class=""><input type='text' input placeholder="Search With Symbol" id="5" class="text-light bg-info text-center w-100"
         (keyup.enter)="getData($event, inputSix.value)" #inputSix style="height:60px"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[5] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
       <li *ngFor="let item of ArrayOfData[5]; let i = index" [ngClass]="{'bg-black dark-item': i == 11}"><input

@@ -1,0 +1,17 @@
+button{
+  width:100px;
+}
+
+input{
+  outline:none;
+  border:none;
+}
+
+
+.card-body{
+  border-bottom: 1px solid black;
+}
+
+img{
+  width : 40px;
+}

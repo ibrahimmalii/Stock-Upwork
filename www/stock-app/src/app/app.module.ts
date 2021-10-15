@@ -8,15 +8,18 @@ import { AppComponent } from './app.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { SharedModule } from './components/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AdmineComponent } from './components/admine/admine.component';
+import { ListViewModule } from '@progress/kendo-angular-listview';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdminComponent } from './components/admin/admin.component';
+
+
 // import { FilterCompaniesComponent } from './components/filter-companies/filter-companies.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContactComponent,
-    AdmineComponent,
-    // FilterCompaniesComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -24,7 +27,9 @@ import { AdmineComponent } from './components/admine/admine.component';
     RouterModule,
     SharedModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ListViewModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

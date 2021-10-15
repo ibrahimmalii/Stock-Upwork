@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\StockPropertie;
+use App\Models\StockProperty;
 
 class StockPropertieController extends Controller
 {
     public function index(){
-        $properties = StockPropertie::all();
+        $properties = StockProperty::all();
 
         return $properties;
     }
@@ -16,7 +16,7 @@ class StockPropertieController extends Controller
     public function create(Request $request){
         // dd($request);
         // Angular
-        $data = StockPropertie::create([
+        $data = StockProperty::create([
             'title' => $request->title,
             'comment' =>$request->comment
         ]);
@@ -27,12 +27,12 @@ class StockPropertieController extends Controller
 
     public function update(Request $request ,$id){
 
-        $updatedProperty = StockPropertie::find($id)->update([
+        $updatedProperty = StockProperty::find($id)->update([
             'title' => $request->title,
             'comment' =>$request->comment
         ]);
 
-        $property = StockPropertie::find($id);
+        $property = StockProperty::find($id);
 
 
         return $property;

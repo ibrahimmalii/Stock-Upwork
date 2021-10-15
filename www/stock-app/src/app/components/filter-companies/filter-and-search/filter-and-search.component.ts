@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { RequestService } from 'src/app/services/request.service';
 import { UserService } from 'src/app/services/user.service';
+
+
+
+
 
 @Component({
   selector: 'app-filter-and-search',
@@ -10,70 +14,228 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class FilterAndSearchComponent implements OnInit {
 
-  constructor(private userService : UserService,private apiService : ApiService, private requestService : RequestService) { }
+  constructor(private userService: UserService, private apiService: ApiService, private requestService: RequestService) { }
+  products=[];
+    symbols: any;
+    someSymbols : any;
+    searchResult : any;
+    firstLoading : boolean = false;
+    loaderStarted : boolean = false;
 
-  isPageLoaded: boolean = false;
-  isResponseGet: boolean = false;
-  responseData: any;
-  financials: any;
-  data: any;
-  apiRequest: any;
-  names : any;
-  symbols: any;
-  searchData : any;
-  associatedArr : any;
-  symbol : any;
-  name : any;
+    public articles: any[] = [];
+    public view: any[] = [];
 
-// One
-  PE: any;
-  PB: any;
-  PS: any;
-  enterprise_value_to_sales: any;
-  ebitda_per_share: any;
-  enterprise_value_to_pretax_income: any;
-  enterprise_value_to_fcf: any;
-  roa_median: any;
-  roe_median: any;
-  roic_median: any;
-  revenue_cagr_10: any;
-  total_assets_cagr_10: any;
-  fcf_cagr_10: any;
-  eps_diluted_cagr_10: any;
-  gross_margin_median: any;
-  pretax_margin_median: any;
-  fcf_margin_median: any;
-  debt_to_assets_median: any;
-  debt_to_equity_median: any;
-  assets_to_equity_median: any;
-  enterprise_value_to_earnings: any;
 
-  // Two
-  revenue: any;
-  revenue_growth: any;
-  gross_profit: any;
-  gross_margin: any;
-  operating_income: any;
-  operating_margin: any;
-  eps_diluted_growth: any;
-  dividends_annual: any;
-  roa: any;
-  roe: any;
-  roic: any;
-  eps_diluted: any;
-  dividends_per_share_growth: any;
+
+
+
+    isPageLoaded: boolean = false;
+    isResponseGet: boolean = false;
+    responseData: any;
+    financials: any;
+    data: any;
+    apiRequest: any;
+    names: any;
+    searchData: any;
+    associatedArr: any;
+    symbol: any;
+    name: any;
+
+    // Best Mode
+    PE: any;
+    PS: any;
+    maps: any;
+    collect: any;
+    fixed: any;
+    dataQuart: any;
+    operatingMargin: any
+    netIncomeMargin: any
+    totalLibilites: any
+    totalAssets: any
+    total: any
+    revenueGrowth: any
+    calculater: any
+    roeMedian: any
+    roce: any
+    roceFixed: any
+    flowPerShare: any
+    flowPerShareFixed: any
+    price: any
+    marketCap: any
+    marketCapFixed: any
+    industry: any
+    currency: any
+    revenue_per_share: any;
+    ebitda_per_share: any;
+    operating_income_per_share: any
+    pretax_income_per_share: any
+    revenueRatio: any
+    dividends_quarterly: any
+    dividendsFixed: any
+    deptToEquity: any
+    deptToEquityFixed: any
+    total_revenue: any
+
+
+
+    // One
+    PB: any;
+    enterprise_value_to_sales: any;
+    enterprise_value_to_pretax_income: any;
+    enterprise_value_to_fcf: any;
+    roa_median: any;
+    roe_median: any;
+    roic_median: any;
+    revenue_cagr_10: any;
+    total_assets_cagr_10: any;
+    fcf_cagr_10: any;
+    eps_diluted_cagr_10: any;
+    gross_margin_median: any;
+    pretax_margin_median: any;
+    fcf_margin_median: any;
+    debt_to_assets_median: any;
+    debt_to_equity_median: any;
+    assets_to_equity_median: any;
+    enterprise_value_to_earnings: any;
+
+    // Two
+    revenue: any;
+    revenue_growth: any;
+    gross_profit: any;
+    gross_margin: any;
+    operating_income: any;
+    operating_margin: any;
+    eps_diluted_growth: any;
+    dividends_annual: any;
+    roa: any;
+    roe: any;
+    roic: any;
+    eps_diluted: any;
+    dividends_per_share_growth: any;
+
+
+    oparator(op: any, arr: any) {
+      let result = eval(arr.join(op));
+      let fixedResult = result.toFixed(2) + '%';
+      return fixedResult;
+    }
+
 
   ngOnInit(): void {
+    // About kendo lilst
 
-    this.apiService.get(`http://localhost:8000/api/keyStatistics/all`,
-    {headers : {'Authorization' : this.userService.getToken()}}
-    ).subscribe(res => {
-      this.responseData = res;
-      this.names = this.responseData.names;
-      this.symbols = this.responseData.symbols;
+
+
+    // Get And Store Symbols
+    // this.apiService.get('https://public-api.quickfs.net/v1/companies/US?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07').subscribe(response => {
+    //     console.log(response);
+    //     localStorage.symbolOne = JSON.stringify(response);
+    // },console.error);
+
+    // this.apiService.get('https://public-api.quickfs.net/v1/companies/NZ?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07').subscribe(response => {
+    //     console.log(response);
+    //     localStorage.symbolTwo = JSON.stringify(response);
+    // },console.error);
+
+    // this.apiService.get('https://public-api.quickfs.net/v1/companies/MM?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07').subscribe(response => {
+    //     console.log(response);
+    //     localStorage.symbolThree = JSON.stringify(response);
+    // },console.error);
+
+    // this.apiService.get('https://public-api.quickfs.net/v1/companies/LN?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07').subscribe(response => {
+    //     console.log(response);
+    //     localStorage.symbolFour = JSON.stringify(response);
+    // },console.error);
+
+    // this.apiService.get('https://public-api.quickfs.net/v1/companies/CA?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07').subscribe(response => {
+    //     console.log(response);
+    //     localStorage.symbolFive = JSON.stringify(response);
+    // },console.error);
+
+    // this.apiService.get('https://public-api.quickfs.net/v1/companies/AU?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07').subscribe(response => {
+    //     console.log(response);
+    //     localStorage.symbolSix = JSON.stringify(response);
+    // },console.error);
+
+    // let one = JSON.parse(localStorage.symbolOne);
+    // one = one.data;
+    // console.log(one);
+    // let two = JSON.parse(localStorage.symbolTwo);
+    // two = two.data;
+    // console.log(two);
+    // let three = JSON.parse(localStorage.symbolThree);
+    // three = three.data;
+    // console.log(three);
+    // let four = JSON.parse(localStorage.symbolFour);
+    // four = four.data;
+    // console.log(four);
+    // let five = JSON.parse(localStorage.symbolFive);
+    // five = five.data;
+    // console.log(five);
+    // let six = JSON.parse(localStorage.symbolSix);
+    // six = six.data;
+    // console.log(six);
+
+    // const TotalSymbols = Array(...one, ...two, ...three, ...four, ...five, ...six);
+    // console.log(TotalSymbols);
+
+    // this.apiService.post('http://localhost:8000/api/symbols', {"title":"symbols", "keys" : TotalSymbols}).subscribe(response=>{
+    //   console.log(response);
+    // })
+
+    //=========================== End Of Get And Store Symbols =======================//
+
+
+    // Set A function to load page
+    // setTimeout(() => {
+    //   this.isPageLoaded = true
+    // }, 30000);
+
+
+    // setTimeout(() => {
+    //   this.firstLoading = true
+    // }, 3000);
+
+
+
+
+
+
+    // Get Symbols To Show It
+    if(localStorage.symbols){
+      this.symbols = JSON.parse(localStorage.symbols);
+      this.someSymbols = this.symbols.splice(0, 3000);
       this.isPageLoaded = true;
-    })
+    }else{
+      this.apiService.get('http://localhost:8000/api/symbols').subscribe(response=>{
+        this.symbols = response;
+        this.symbols = this.symbols.keys;
+        this.someSymbols = this.symbols.splice(0, 3000);
+        localStorage.symbols = JSON.stringify(this.symbols);
+        this.isPageLoaded = true;
+      })
+    }
+
+
+
+    // Test symbols
+    // this.apiService.get(`https://public-api.quickfs.net/v1/data/all-data/PHIG:US?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07`).subscribe(response=>{
+    //   console.log(response);
+    // })
+
+
+
+    // this.apiService.get(`http://localhost:8000/api/keyStatistics/all`
+    // ,{ headers: { 'Authorization': this.userService.getToken() } }
+    // ).subscribe(res => {
+    //   this.responseData = res;
+    //   this.names = this.responseData.names;
+    //   this.symbols = this.responseData.symbols;
+    //   this.isPageLoaded = true;
+    // })
   }
+
+
 
   splicedArray(arr: any) {
     return arr.splice(-11);
@@ -82,14 +244,18 @@ export class FilterAndSearchComponent implements OnInit {
   //=====================> Request Service To Get Data. =========================//
 
   callDataBase(searchKey: string) {
+    if(searchKey.includes(':')){
+      searchKey = searchKey.substring(0, searchKey.lastIndexOf(':'));
+    };
     return this.apiService.get(`http://localhost:8000/api/keyStatistics/${searchKey.toUpperCase()}`,
-    {headers : {'Authorization' : this.userService.getToken()}}
+      { headers: { 'Authorization': this.userService.getToken() } }
     )
   }
 
   callApiAfterDataBase(searchKey: string) {
+
     return this.apiService.get(`https://public-api.quickfs.net/v1/data/all-data/${searchKey.toUpperCase()}?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07`,
-    {headers : {'Authorization' : this.userService.getToken()}}
+      { headers: { 'Authorization': this.userService.getToken() } }
     )
   }
 
@@ -186,15 +352,44 @@ export class FilterAndSearchComponent implements OnInit {
 
     //Store Company In Our DataBase And Return Data From There
     return this.apiService.post('http://localhost:8000/api/keyStatistics', this.requestService.data,
-    {headers : {'Authorization' : this.userService.getToken()}}
+      { headers: { 'Authorization': this.userService.getToken() } }
     )
   }
 
-  returnDataFromDataBase(res : any){
+  returnDataFromDataBase(res: any) {
     this.data = res;
 
+    // Best Mode Requrirements
+    this.name = this.data.name;
+    this.symbol = this.data.symbol;
+    this.PE = this.data.price_to_earnings.splice(-1)[0];
+    this.PS = this.data.price_to_sales.splice(-1)[0];
+    // this.operatingMargin = this.oparator('+', this.data.operating_margin);
+    this.netIncomeMargin = this.oparator('+', this.data.net_income_margin);
+    this.totalAssets = this.oparator('+', this.data.total_current_assets);
+    this.totalLibilites = this.oparator('+', this.data.total_current_liabilities);
+    this.roce = this.oparator('+', this.data.roce);
+    this.flowPerShare = this.oparator('+', this.data.fcf_per_share);
+    this.marketCap = this.oparator('+', this.data.market_cap);
+    this.operating_income_per_share = this.oparator('+', this.data.operating_income_per_share);
+    this.pretax_income_per_share = this.oparator('+', this.data.pretax_income_per_share);
+    this.dividends_quarterly = this.oparator('+', this.data.dividends_quarterly);
+    this.deptToEquity = this.oparator('+', this.data.debt_to_equity);
+    this.deptToEquityFixed = (parseInt(this.deptToEquity)) / 100
+    this.revenueRatio = (parseInt(this.pretax_income_per_share) - parseInt(this.operating_income_per_share))
+    this.dividendsFixed = ((parseInt(this.dividends_quarterly) / 100)) + '%'
+    this.total = (parseInt(this.totalAssets) / parseInt(this.totalLibilites)).toFixed(1)
+    this.revenueGrowth = (this.data.revenue_growth).splice(-2)
+    this.calculater = (((this.revenueGrowth[1] - this.revenueGrowth[0]) / this.revenueGrowth[0]) * 100).toFixed(0) + '%'
+    this.roeMedian = ((this.data.roe_median) * 100).toFixed(0) + '%'
+    this.roceFixed = (parseInt(this.roce).toFixed(0) + '%')
+    this.flowPerShareFixed = (parseInt(this.flowPerShare).toFixed(0) + '%')
+    this.marketCapFixed = ((parseInt(this.marketCap)) / 1000000).toFixed(0) + '$'
+    this.industry = this.data.industry
+    this.currency = this.data.currency
+
     // One Requirements
-    if(!this.data) return;
+    if (!this.data) return;
     this.PE = this.data.price_to_earnings.splice(-1)[0];
     this.PB = this.data.price_to_book.splice(-1)[0];
     this.PS = this.data.price_to_sales.splice(-1)[0];
@@ -218,7 +413,7 @@ export class FilterAndSearchComponent implements OnInit {
     this.debt_to_assets_median = this.data.debt_to_assets_median;
 
     // Two Requirement
-    if(!this.data) return;
+    if (!this.data) return;
     this.revenue = this.splicedArray(this.data.revenue);
     this.revenue_growth = this.splicedArray(this.data.revenue_growth);
     this.gross_profit = this.splicedArray(this.data.gross_profit);
@@ -233,14 +428,16 @@ export class FilterAndSearchComponent implements OnInit {
     this.roe = this.splicedArray(this.data.roe);
     this.roic = this.splicedArray(this.data.roic);
     this.isResponseGet = true;
+    this.loaderStarted = false;
     localStorage.responseData = JSON.stringify(res);
   }
 
 
 
-  getData(e : any ,searchKey: string) {
-
+  getData(e: any, searchKey: string) {
+    this.loaderStarted = true;
     let id = Number(e.target.id);
+    e.target.value = '';
 
     //first CAll
     this.callDataBase(searchKey).subscribe(res => {
@@ -249,7 +446,6 @@ export class FilterAndSearchComponent implements OnInit {
         //Second Call
         this.callApiAfterDataBase(searchKey).subscribe(res => {
           this.data = res;
-          console.log(this.data);
 
           if (this.data.errors) {
             alert('Company Not Found');
@@ -261,9 +457,9 @@ export class FilterAndSearchComponent implements OnInit {
           this.storeDataFromApiToDataBase(this.data).subscribe(res => {
             this.returnDataFromDataBase(res);
             localStorage.latestSearchKey = searchKey;
-          },console.error);
+          }, console.error);
 
-        },console.error);
+        }, console.error);
 
       } else {
         this.returnDataFromDataBase(res);
@@ -275,3 +471,6 @@ export class FilterAndSearchComponent implements OnInit {
 
 
 }
+
+
+

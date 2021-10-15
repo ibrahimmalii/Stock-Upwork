@@ -6,6 +6,8 @@ use App\Models\KeyStatistics;
 use Illuminate\Http\Request;
 use Mockery\Undefined;
 use PhpParser\Node\Stmt\Foreach_;
+use App\Models\Requests;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class KeyStatisticsController extends Controller
 {
@@ -95,7 +97,119 @@ class KeyStatisticsController extends Controller
             'dividends_per_share_growth' => $request-> dividends_per_share_growth
         ]);
 
+        $currentRequest = Requests::where('id', 1)->get();
+        if(!$currentRequest){
+            $currentRequest[0]->number_of_requests += 1;
+        };
+
+        $currentRequest[0]->number_of_requests = $currentRequest[0]->number_of_requests + 1;
+
+        $currentRequest[0]->save();
+
         return $data;
+    }
+    public function update(Request $request, $id){
+
+        $company = KeyStatistics::find($id);
+
+        if(!$company){
+            return $this->NotFoundError();
+        };
+
+
+
+        $company->name =$request->name;
+        $company->description = $request->description;
+        $company->country =$request->country;
+        $company->symbol= $request->symbol;
+        $company->exchange = $request->exchange;
+        $company->industry = $request->industry;
+        $company->sector =$request->sector;
+        $company->qfs_symbol= $request->qfs_symbol;
+        $company->market_cap = $request->market_cap;
+        $company->enterprise_value = $request->enterprise_value;
+        $company->total_revenue = $request->total_revenue;
+        $company->cogs = $request->cogs;
+        $company->gross_profit = $request->gross_profit;
+        $company->total_opex = $request->total_opex;
+        $company->operating_margin = $request->operating_margin;
+        $company->operating_income = $request->operating_income;
+        $company->pretax_income = $request->pretax_income;
+        $company->net_income = $request->net_income;
+        $company->net_income_margin = $request->net_income_margin;
+        $company->total_current_assets = $request->total_current_assets;
+        $company->total_current_liabilities = $request->total_current_liabilities;
+        $company->total_assets = $request->total_assets;
+        $company->total_liabilities = $request->total_liabilities;
+        $company->revenue_growth = $request->revenue_growth;
+        $company->fcf_margin = $request->fcf_margin;
+        $company->roe = $request->roe;
+        $company->roa = $request->roa;
+        $company->roic = $request->roic;
+        $company->roce = $request->roce;
+        $company->rotce = $request->rotce;
+        $company->dividends_per_share_cagr_10 = $request->dividends_per_share_cagr_10;
+        $company->payout_ratio = $request->payout_ratio;
+        $company->debt_to_equity = $request->debt_to_equity;
+        $company->debt_to_assets = $request->debt_to_assets;
+        $company->equity_to_assets = $request->equity_to_assets;
+        $company->assets_to_equity = $request->assets_to_equity;
+        $company->revenue_per_share = $request->revenue_per_share;
+        $company->ebitda_per_share = $request->ebitda_per_share;
+        $company->operating_income_per_share = $request->operating_income_per_share;
+        $company->pretax_income_per_share = $request->pretax_income_per_share;
+        $company->fcf_per_share = $request->fcf_per_share;
+        $company->book_value_per_share = $request->book_value_per_share;
+        $company->shares_eop_growth = $request->shares_eop_growth;
+        $company->net_income_growth = $request->net_income_growth;
+        $company->gross_profit_growth = $request->gross_profit_growth;
+        $company->fcf_growth = $request->fcf_growth;
+        $company->ebitda_growth = $request->ebitda_growth;
+        $company->operating_income_growth = $request->operating_income_growth;
+        $company->total_assets_growth = $request->total_assets_growth;
+        $company->total_equity_growth = $request->total_equity_growth;
+        $company->cfo_growth = $request->cfo_growth;
+        $company->revenue_cagr_10 = $request->revenue_cagr_10;
+        $company->eps_diluted_cagr_10 = $request->eps_diluted_cagr_10;
+        $company->total_assets_cagr_10 = $request->total_assets_cagr_10;
+        $company->total_equity_cagr_10 = $request->total_equity_cagr_10;
+        $company->fcf_cagr_10 = $request->fcf_cagr_10;
+        $company->price_to_earnings = $request->price_to_earnings;
+        $company->price_to_sales = $request->price_to_sales;
+        $company->dividends_quarterly = $request->dividends_quarterly;
+        $company->dividends_annual = $request->dividends_annual;
+        $company->roe_median = $request->roe_median;
+        $company->price_to_book = $request->price_to_book;
+        $company->enterprise_value_to_earnings = $request-> enterprise_value_to_earnings;
+        $company->enterprise_value_to_sales = $request->enterprise_value_to_sales;
+        $company->enterprise_value_to_pretax_income = $request->enterprise_value_to_pretax_income ;
+        $company->enterprise_value_to_fcf = $request-> enterprise_value_to_fcf;
+        $company->roa_median = $request-> roa_median;
+        $company->roic_median = $request-> roic_median;
+        $company->gross_margin_median = $request-> gross_margin_median;
+        $company->pretax_margin_median = $request-> pretax_margin_median;
+        $company->fcf_margin_median = $request-> fcf_margin_median;
+        $company->assets_to_equity_median = $request-> assets_to_equity_median;
+        $company->debt_to_equity_median = $request-> debt_to_equity_median;
+        $company->debt_to_assets_median = $request-> debt_to_assets_median;
+        $company->revenue = $request-> revenue;
+        $company->gross_margin = $request-> gross_margin;
+        $company->eps_diluted = $request-> eps_diluted;
+        $company->eps_diluted_growth = $request-> eps_diluted_growth;
+        $company->dividends_per_share_growth = $request-> dividends_per_share_growt;
+
+        $company->save();
+
+        $currentRequest = Requests::where('id', 1)->get();
+        if(!$currentRequest){
+            $currentRequest[0]->number_of_requests += 1;
+        };
+
+        $currentRequest[0]->number_of_requests = $currentRequest[0]->number_of_requests + 1;
+
+        $currentRequest[0]->save();
+
+        return $company;
     }
 
     public function index(){
@@ -117,6 +231,13 @@ class KeyStatisticsController extends Controller
         $data = $company[0];
         return $data;
 
+    }
+
+    public function delete($symbol){
+        $company = KeyStatistics::where('symbol', $symbol)->delete();
+
+
+        return $company;
     }
 
     public function getAllNames(){
