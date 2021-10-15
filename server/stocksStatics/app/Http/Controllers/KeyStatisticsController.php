@@ -23,9 +23,13 @@ class KeyStatisticsController extends Controller
             'industry'=> $request->industry,
             'sector' =>$request->sector,
             'qfs_symbol'=> $request->qfs_symbol,
+            'price' => $request->price,
+            'volume' => $request->volume,
             'market_cap' => $request->market_cap,
+            'pe_ratio' => $request->pe_ratio,
+            'ps_ratio' => $request->ps_ratio,
+            'pb_ratio' => $request->pb_ratio,
             'enterprise_value'=> $request->enterprise_value,
-            'total_revenue' => $request->total_revenue,
             'cogs' => $request->cogs,
             'gross_profit' => $request->gross_profit,
             'total_opex' => $request->total_opex,
@@ -71,12 +75,9 @@ class KeyStatisticsController extends Controller
             'total_assets_cagr_10' => $request->total_assets_cagr_10,
             'total_equity_cagr_10' => $request->total_equity_cagr_10,
             'fcf_cagr_10' => $request->fcf_cagr_10,
-            'price_to_earnings' => $request->price_to_earnings,
-            'price_to_sales' => $request->price_to_sales,
             'dividends_quarterly' => $request->dividends_quarterly,
             'dividends_annual' => $request->dividends_annual,
             'roe_median' => $request->roe_median,
-
             'price_to_book' => $request->price_to_book,
             'enterprise_value_to_earnings' => $request-> enterprise_value_to_earnings,
             'enterprise_value_to_sales' => $request->enterprise_value_to_sales,
@@ -108,6 +109,8 @@ class KeyStatisticsController extends Controller
 
         return $data;
     }
+
+
     public function update(Request $request, $id){
 
         $company = KeyStatistics::find($id);
@@ -126,9 +129,12 @@ class KeyStatisticsController extends Controller
         $company->industry = $request->industry;
         $company->sector =$request->sector;
         $company->qfs_symbol= $request->qfs_symbol;
+        $company->price = $request->price;
+        $company->pe_ratio = $request->pe_ratio;
+        $company->ps_ratio = $request->ps_ratio;
+        $company->pb_ratio = $request->pb_ratio;
         $company->market_cap = $request->market_cap;
         $company->enterprise_value = $request->enterprise_value;
-        $company->total_revenue = $request->total_revenue;
         $company->cogs = $request->cogs;
         $company->gross_profit = $request->gross_profit;
         $company->total_opex = $request->total_opex;
@@ -211,6 +217,7 @@ class KeyStatisticsController extends Controller
 
         return $company;
     }
+
 
     public function index(){
         $data = KeyStatistics::get();

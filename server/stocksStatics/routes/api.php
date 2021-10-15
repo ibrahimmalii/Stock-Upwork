@@ -47,8 +47,8 @@ Route::get('/test', function(Request $request){
 // Crud For Key Statistics
 // Route::post('/keyStatistics', [KeyStatisticsController::class , 'create'])->middleware('auth:sanctum');
 Route::post('/keyStatistics', [KeyStatisticsController::class , 'create']);
-Route::post('/keyStatistics/update/{symbol}', [KeyStatisticsController::class , 'update'])->middleware('auth:sanctum');
-Route::post('/keyStatistics/delete/{symbol}', [KeyStatisticsController::class , 'delete'])->middleware('auth:sanctum');
+Route::post('/keyStatistics/update/{symbol}', [KeyStatisticsController::class , 'update'])->middleware(['auth:sanctum' , 'admin']);
+Route::post('/keyStatistics/delete/{symbol}', [KeyStatisticsController::class , 'delete'])->middleware(['auth:sanctum' , 'admin']);
 Route::get('/keyStatistics', [KeyStatisticsController::class , 'index'])->middleware('auth:sanctum');
 Route::get('/keyStatistics/all', [KeyStatisticsController::class , 'getAllNames'])->middleware('auth:sanctum');
 Route::get('/keyStatistics/{key}', [KeyStatisticsController::class , 'show'])->middleware('auth:sanctum');
@@ -57,7 +57,8 @@ Route::get('/keyStatistics/{key}', [KeyStatisticsController::class , 'show'])->m
 
 // Crud For Properties
 Route::get('/properties', [StockPropertieController::class , 'index'])->middleware('auth:sanctum');
-Route::post('/properties', [StockPropertieController::class , 'create'])->middleware(['auth:sanctum' , 'admin']);
+// Route::post('/properties', [StockPropertieController::class , 'create'])->middleware(['auth:sanctum' , 'admin']);
+Route::post('/properties', [StockPropertieController::class , 'create']);
 Route::post('/properties/{prop}', [StockPropertieController::class , 'update'])->middleware(['auth:sanctum' , 'admin']);
 
 
