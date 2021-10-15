@@ -31,3 +31,7 @@ input{
   position: absolute;
 }
 
+.loader > img{
+  width: 30px;
+}
+

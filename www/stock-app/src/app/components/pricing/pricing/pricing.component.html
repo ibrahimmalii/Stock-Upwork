@@ -1,6 +1,9 @@
 <div class="row">
-  <div class="col text-center bg-dark text-light">
+  <div class="col text-center bg-dark text-light" *ngIf="!loaderStarted">
     <p class="h3 my-4">Search to compare between companies using symbol or company name <i class="fa fa-search"></i></p>
+  </div>
+  <div class="loader container text-center my-4" *ngIf="loaderStarted">
+    <span class="fw-bold mx-3">Loading... </span> <img src="/assets/images/ajax-loader.gif">
   </div>
 </div>
 <div class='row'>
@@ -10,7 +13,7 @@
           width="80px" height="30px">
       </li>
       <div class="content" *ngFor="let prop of properties; let index = index">
-        <li [ngClass]="{'bg-black dark-item text-light': index == 11}"><input [ngClass]="{'bg-black dark-item text-light': index == 11}" disabled class="w-75" value="{{prop.title}}"><abbr title="{{prop.comment}}"><i
+        <li [ngClass]="{'bg-black dark-item text-light': index == 11 || index == 26 || index == 30}"><input [ngClass]="{'bg-black dark-item text-light': index == 11 || index == 26 || index == 30}" disabled class="w-75" value="{{prop.title}}"><abbr title="{{prop.comment}}"><i
               class="pull-right fa fa-info-circle" data-bs-toggle="modal" [attr.data-bs-target]="'#prop'+ index"></i></abbr></li>
 
         <!-- Modal To Edit Property -->
@@ -104,48 +107,48 @@
     <div class=""><input type='text' input placeholder="Search With Symbol" id="0" class="text-light bg-info text-center w-100"
         (keyup.enter)="getData($event, inputOne.value)" #inputOne style="height:60px; border-right: 1px solid black;"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[0] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[0]; let i = index" [ngClass]="{'bg-black dark-item': i == 11}"><input disabled
-          [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}"></li>
+      <li *ngFor="let item of ArrayOfData[0]; let index = index" [ngClass]="{'bg-black dark-item': index == 11 || index == 26 || index == 30}"><input disabled
+          [ngClass]="{'bg-black dark-item': index == 11 || index == 26 || index == 30}" value="{{item}}"></li>
     </ul>
   </div>
   <div class="col">
     <div class="bg-dark"><input type='text' input placeholder="Search With Symbol" id="1" (keyup.enter)="getData($event, inputTwo.value)" #inputTwo
         class="text-light bg-info text-center w-100" style="height:60px; border-right: 1px solid black;"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[1] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[1]; let i = index" [ngClass]="{'bg-black dark-item': i == 11}"><input disabled
-          [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}"></li>
+      <li *ngFor="let item of ArrayOfData[1]; let index = index" [ngClass]="{'bg-black dark-item': index == 11 || index == 26 || index == 30}"><input disabled
+          [ngClass]="{'bg-black dark-item': index == 11 || index == 26 || index == 30}" value="{{item}}"></li>
     </ul>
   </div>
   <div class="col">
     <div class=""><input type='text' input placeholder="Search With Symbol" id="2" class="text-light bg-info text-center w-100"
         (keyup.enter)="getData($event, inputThree.value)" #inputThree style="height:60px; border-right: 1px solid black;"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[2] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[2]; let i = index" [ngClass]="{'bg-black dark-item': i == 11}"><input disabled
-          [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}"></li>
+      <li *ngFor="let item of ArrayOfData[2]; let index = index" [ngClass]="{'bg-black dark-item': index == 11 || index == 26 || index == 30}"><input disabled
+          [ngClass]="{'bg-black dark-item': index == 11 || index == 26 || index == 30}" value="{{item}}"></li>
     </ul>
   </div>
   <div class="col">
     <div class=""><input type='text' input placeholder="Search With Symbol" id="3" class="text-light bg-info text-center w-100"
         (keyup.enter)="getData($event, inputFour.value)" #inputFour style="height:60px; border-right: 1px solid black;"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[3] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[3]; let i = index" [ngClass]="{'bg-black dark-item': i == 11}"><input disabled
-          [ngClass]="{'bg-black dark-item': i == 11}" value="{{item}}"></li>
+      <li *ngFor="let item of ArrayOfData[3]; let index = index" [ngClass]="{'bg-black dark-item': index == 11 || index == 26 || index == 30}"><input disabled
+          [ngClass]="{'bg-black dark-item': index == 11 || index == 26 || index == 30}" value="{{item}}"></li>
     </ul>
   </div>
   <div class="col">
     <div class=""><input type='text' input placeholder="Search With Symbol" id="4" class="text-light bg-info text-center w-100"
         (keyup.enter)="getData($event, inputFive.value)" #inputFive style="height:60px; border-right: 1px solid black;"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[4] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[4]; let i = index" [ngClass]="{'bg-black dark-item': i == 11}"><input
-          [ngClass]="{'bg-black dark-item': i == 11}" disabled value="{{item}}"></li>
+      <li *ngFor="let item of ArrayOfData[4]; let index = index" [ngClass]="{'bg-black dark-item': index == 11 || index == 26 || index == 30}"><input
+          [ngClass]="{'bg-black dark-item': index == 11 || index == 26 || index == 30}" disabled value="{{item}}"></li>
     </ul>
   </div>
   <div class="col">
     <div class=""><input type='text' input placeholder="Search With Symbol" id="5" class="text-light bg-info text-center w-100"
         (keyup.enter)="getData($event, inputSix.value)" #inputSix style="height:60px"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[5] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[5]; let i = index" [ngClass]="{'bg-black dark-item': i == 11}"><input
-          [ngClass]="{'bg-black dark-item': i == 11}" type="text" value="{{item}}"></li>
+      <li *ngFor="let item of ArrayOfData[5]; let index = index" [ngClass]="{'bg-black dark-item': index == 11 || index == 26 || index == 30}"><input
+          [ngClass]="{'bg-black dark-item': index == 11 || index == 26 || index == 30}" type="text" value="{{item}}"></li>
     </ul>
   </div>
 

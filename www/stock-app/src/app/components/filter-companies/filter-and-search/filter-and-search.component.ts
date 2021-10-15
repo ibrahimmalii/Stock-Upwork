@@ -257,7 +257,6 @@ export class FilterAndSearchComponent implements OnInit {
   }
 
   callApiAfterDataBase(searchKey: string) {
-
     return this.apiService.get(`https://public-api.quickfs.net/v1/data/all-data/${searchKey.toUpperCase()}?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07`)
   }
 

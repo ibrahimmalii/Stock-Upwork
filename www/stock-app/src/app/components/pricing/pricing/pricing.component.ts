@@ -12,6 +12,7 @@ import { ApiService } from './../../../services/api.service';
   styleUrls: ['./pricing.component.css']
 })
 export class PricingComponent implements OnInit {
+  loaderStarted: boolean = false;
   numbers: any;
   apiRequest: any;
   dataCompanyOne: any;
@@ -80,6 +81,7 @@ export class PricingComponent implements OnInit {
     {headers : {'Authorization' : this.userService.getToken()}}
     ).subscribe(response=>{
       this.properties = response;
+      this.properties = this.properties.splice(0,52);
       this.isPropertiesLoaded = true;
     })
 
@@ -90,9 +92,8 @@ export class PricingComponent implements OnInit {
     this.apiService.post(`http://localhost:8000/api/properties/${id}`, {title, comment},
     {headers : {'Authorization' : this.userService.getToken()}}
     ).subscribe(res=>{
-      console.log(res);
-      const msg = res;
-      msg ? alert('Method Not Allowed') : location.reload();
+      const response : any = res;
+      response.msg ? alert('Method Not Allowed') : location.reload();
     })
   }
 
@@ -109,18 +110,29 @@ export class PricingComponent implements OnInit {
   }
 
   callApiAfterDataBase(searchKey: string) {
-    return this.apiService.get(`http://public-api.quickfs.net/v1/data/all-data/${searchKey}?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07`,
-    {headers : {'Authorization' : this.userService.getToken()}}
-    )
+    return this.apiService.get(`http://public-api.quickfs.net/v1/data/all-data/${searchKey}?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07`)
+  }
+
+  getPriceDataFromItsApi(data : any){
+    return this.apiService.get('https://public-api.quickfs.net/v1/market-data/last-close/US?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07')
   }
 
   storeDataFromApiToDataBase(data: any) {
 
     this.data = data;
+    // console.log(this.data);
 
     // If Company Exist
     // Start Of Send Requests
     this.apiRequest = this.requestService.data;
+
+    this.apiRequest.price = this.data.price;
+    this.apiRequest.volume = this.data.volume;
+    this.apiRequest.market_cap = this.data.market_cap;
+    this.apiRequest.pe_ratio = this.data.pe_ratio;
+    this.apiRequest.ps_ratio = this.data.ps_ratio;
+    this.apiRequest.pb_ratio = this.data.pb_ratio;
+
 
     this.apiRequest.name = this.data.data.metadata.name;
     this.apiRequest.description = this.data.data.metadata.description;
@@ -130,14 +142,7 @@ export class PricingComponent implements OnInit {
     this.apiRequest.industry = this.data.data.metadata.industry;
     this.apiRequest.sector = this.data.data.metadata.sector;
     this.apiRequest.qfs_symbol = this.data.data.metadata.qfs_symbol;
-    this.apiRequest.market_cap = this.data.data.financials.quarterly.market_cap;
     this.apiRequest.enterprise_value = this.data.data.financials.quarterly.enterprise_value;
-    this.apiRequest.volume = '';
-    this.apiRequest.average_daily_volume = '';
-    this.apiRequest.volume_inc_dec = '';
-    this.apiRequest.price_to_earnings = this.data.data.financials.annual.price_to_earnings;
-    this.apiRequest.price_to_sales = this.data.data.financials.annual.price_to_sales;
-    this.apiRequest.total_revenue = [];
     this.apiRequest.cogs = this.data.data.financials.ttm.cogs;
     this.apiRequest.gross_profit = this.data.data.financials.annual.gross_profit;
     this.apiRequest.total_opex = this.data.data.financials.quarterly.total_opex;
@@ -205,34 +210,38 @@ export class PricingComponent implements OnInit {
     this.apiRequest.eps_diluted_growth = this.data.data.financials.annual.eps_diluted_growth;
     this.apiRequest.dividends_per_share_growth = this.data.data.financials.annual.dividends_per_share_growth;
 
-    //Store Company In Our DataBase And Return Data From There
-    return this.apiService.post('http://localhost:8000/api/keyStatistics', this.requestService.data,
-    {headers : {'Authorization' : this.userService.getToken()}}
+
+      // Store Company In Our DataBase And Return Data From There
+    console.log(this.requestService);
+    return this.apiService.post('http://localhost:8000/api/keyStatistics', this.requestService.data
+      // { headers: { 'Authorization': this.userService.getToken() } }
     )
+
   }
+
 
   returnDataFromDataBase(res : any, id : any){
     console.log(res);
     this.arraysData[id] = res;
     this.allStatus[id] = true;
 
-    this.ArrayOfData[id][0] = 'test';
-    this.ArrayOfData[id][1] = 'cost';
+    this.ArrayOfData[id][0] = this.arraysData[id].price;
+    this.ArrayOfData[id][1] = this.arraysData[id].price;
     this.ArrayOfData[id][2] = this.arraysData[id].industry
     this.ArrayOfData[id][3] = this.arraysData[id].sector
     this.ArrayOfData[id][4] = this.arraysData[id].exchange
-    this.ArrayOfData[id][5] = this.arraysData[id].market_cap.splice(-1) + '$';
-    this.ArrayOfData[id][5] = (parseInt(this.ArrayOfData[id][5]) / 1000000).toFixed(0)
+    this.ArrayOfData[id][5] = this.arraysData[id].market_cap + '$';
     this.ArrayOfData[id][6] = this.arraysData[id].enterprise_value.splice(-1)
     this.ArrayOfData[id][6] = (parseInt(this.ArrayOfData[id][6]) / 1000000).toFixed(0)
-    this.ArrayOfData[id][7] = 'volume';
-    this.ArrayOfData[id][8] = 'average daily volume';
-    this.ArrayOfData[id][9] = 'Volume inc /dec';
-    this.ArrayOfData[id][10] = 'space';
-    this.ArrayOfData[id][12] = this.arraysData[id].price_to_earnings.splice(-1);
-    this.ArrayOfData[id][13] = this.arraysData[id].price_to_sales.splice(-1);
+    this.ArrayOfData[id][7] = this.arraysData[id].volume;
+    this.ArrayOfData[id][8] = (this.ArrayOfData[id][7] / 7);
+    this.ArrayOfData[id][9] = (this.arraysData[id].volume - this.ArrayOfData[id][8])/ this.ArrayOfData[id][8];
+    this.ArrayOfData[id][10] = 'Share Float';
+    this.ArrayOfData[id][12] = this.arraysData[id].pe_ratio;
+    this.ArrayOfData[id][13] = this.arraysData[id].ps_ratio;
     this.ArrayOfData[id][14] = 'Are The Compay Making Money?';
-    this.ArrayOfData[id][15] = 'Total Revenue';
+    this.ArrayOfData[id][15] = this.arraysData[id].revenue.reduce((a:any, b:any) =>{return a + b},0);
+    this.ArrayOfData[id][15] = this.ArrayOfData[id][15].toLocaleString();
     this.ArrayOfData[id][16] = parseInt(this.arraysData[id].cogs) / 1000000;
     this.ArrayOfData[id][17] = parseInt(this.arraysData[id].gross_profit.splice(-1)) / 1000000;
     this.ArrayOfData[id][18] = parseInt(this.arraysData[id].total_opex.splice(-1));
@@ -244,21 +253,26 @@ export class PricingComponent implements OnInit {
     this.ArrayOfData[id][20] = (parseFloat(this.ArrayOfData[id][20][1]) - parseFloat(this.ArrayOfData[id][20][0])) / parseFloat(this.ArrayOfData[id][20][1])
     this.ArrayOfData[id][20] = (this.ArrayOfData[id][20] * 100).toFixed(2) + '%'
     this.ArrayOfData[id][21] = this.oparator('+', this.arraysData[id].roe);
-    this.ArrayOfData[id][21] = this.oparator('+', this.arraysData[id].rotce);
-    this.ArrayOfData[id][22] = this.arraysData[id].dividends_quarterly.splice(-1);
-    this.ArrayOfData[id][23] = (this.arraysData[id].dividende_quarterly / this.arraysData[id].current_stock_price);
+    this.ArrayOfData[id][22] = this.arraysData[id].rotce.splice(-1);
+    // this.ArrayOfData[id][22] = this.arraysData[id].dividends_quarterly.splice(-1);
+    this.ArrayOfData[id][23] = (this.arraysData[id].dividende_quarterly / Number(this.arraysData[id].price));
+    this.ArrayOfData[id][24] = this.arraysData[id].dividends_quarterly.splice(-1);
     this.ArrayOfData[id][25] = this.arraysData[id].payout_ratio.splice(-1);
     this.ArrayOfData[id][27] = this.arraysData[id].debt_to_equity.splice(-1);
     this.ArrayOfData[id][28] = this.arraysData[id].debt_to_assets.splice(-1);
     this.ArrayOfData[id][29] = this.arraysData[id].assets_to_equity.splice(-1);
     this.ArrayOfData[id][31] = this.arraysData[id].revenue_per_share.splice(-1);
     this.ArrayOfData[id][32] = this.arraysData[id].ebitda_per_share.splice(-1);
-    this.ArrayOfData[id][33] = this.arraysData[id].revenue_per_share / this.arraysData[id].current_stock_price;
-    this.ArrayOfData[id][34] = this.arraysData[id].ebitda_per_share / this.arraysData[id].current_stock_price;
+    this.ArrayOfData[id][33] = (this.ArrayOfData[id][31] / this.arraysData[id].price);
+    this.ArrayOfData[id][33] = (this.ArrayOfData[id][33] * 100).toFixed(1) +'%'
+    this.ArrayOfData[id][34] = (this.ArrayOfData[id][32] / this.arraysData[id].price);
+    this.ArrayOfData[id][34] = (this.ArrayOfData[id][34] * 100).toFixed() +'%'
     this.ArrayOfData[id][35] = this.arraysData[id].operating_income.splice(-1);
-    this.ArrayOfData[id][36] = (this.arraysData[id].operating_income / this.arraysData[id].current_stock_price)
-    this.ArrayOfData[id][37] = this.arraysData[id].pretax_income_per_shar;
-    this.ArrayOfData[id][38] = (this.arraysData[id].pretax_income_per_share / this.arraysData[id].current_stock_price);
+    this.ArrayOfData[id][36] = (this.ArrayOfData[id][35] / this.arraysData[id].price);
+    this.ArrayOfData[id][36] = (this.ArrayOfData[id][36] * 100).toFixed() +'%'
+    this.ArrayOfData[id][37] = this.arraysData[id].pretax_income_per_share.splice(-1);
+    this.ArrayOfData[id][38] = (this.ArrayOfData[id][37] / Number(this.arraysData[id].price));
+    this.ArrayOfData[id][38] = (this.ArrayOfData[id][38] * 100).toFixed() +'%'
     this.ArrayOfData[id][39] = this.arraysData[id].fcf_per_share.splice(-1);
     this.ArrayOfData[id][40] = 'shares outstanding';
     this.ArrayOfData[id][41] = 'avaliable share';
@@ -272,6 +286,7 @@ export class PricingComponent implements OnInit {
     this.ArrayOfData[id][49] = this.arraysData[id].total_assets_cagr_10.splice(-1);
     this.ArrayOfData[id][50] = this.arraysData[id].total_equity_cagr_10.splice(-1);
     this.ArrayOfData[id][51] = this.arraysData[id].fcf_cagr_10.splice(-1);
+    this.loaderStarted = false;
     this.isResponseBack = true;
   }
 
@@ -279,7 +294,7 @@ export class PricingComponent implements OnInit {
   arraysData: any = [Object(), Object(), Object(), Object(), Object(), Object(), Object()];
 
   getData(e: any, searchKey: string) {
-
+    this.loaderStarted = true;
     let id = Number(e.target.id);
 
     //first CAll
@@ -289,17 +304,46 @@ export class PricingComponent implements OnInit {
         //Second Call
         this.callApiAfterDataBase(searchKey).subscribe(res => {
           this.arraysData[id] = res;
+          this.arraysData[id].qfs_symbol = this.arraysData[id].data.metadata.qfs_symbol;
 
           if (this.arraysData[id].errors) {
             alert('Company Not Found');
             e.target.value = '';
+            this.loaderStarted = false;
             return;
           };
 
+          // Third Call
+          this.getPriceDataFromItsApi(this.data).subscribe(response=>{
+
+            this.apiRequest = response;
+
+            const targetItem = this.apiRequest.data.find((item:any) => {
+              const searchValue = item.qfs_symbol_v2;
+              if(searchValue == this.arraysData[id].qfs_symbol){
+                return item;
+              };
+            });
+
+            this.arraysData[id].price = targetItem.price.toString();
+            this.arraysData[id].volume = targetItem.volume.toString();
+            this.arraysData[id].market_cap = targetItem.mkt_cap;
+            this.arraysData[id].pe_ratio = targetItem.pe;
+            this.arraysData[id].ps_ratio = targetItem.ps;
+            this.arraysData[id].pb_ratio = targetItem.pb;
+
+            //Fourth CAll
+            this.storeDataFromApiToDataBase(this.arraysData[id]).subscribe(res => {
+              this.returnDataFromDataBase(res, id);
+              localStorage.latestSearchKey = searchKey;
+            }, console.error);
+
+          })
+
           //Third CAll
-          this.storeDataFromApiToDataBase(this.arraysData[id]).subscribe(res => {
-            this.returnDataFromDataBase(res, id);
-          },console.error);
+          // this.storeDataFromApiToDataBase(this.arraysData[id]).subscribe(res => {
+          //   this.returnDataFromDataBase(res, id);
+          // },console.error);
 
         }, console.error);
 
