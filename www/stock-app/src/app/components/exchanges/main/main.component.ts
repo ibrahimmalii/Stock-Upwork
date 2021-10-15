@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
+import { ApiService } from './../../../services/api.service';
 
 @Component({
   selector: 'app-main',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  constructor(private apiService : ApiService, private userService : UserService) { }
+
+  isPageLoaded : boolean = false;
 
   ngOnInit(): void {
+
+    const latestSearchKey = localStorage.latestSearchKey;
+    this.getCurrentSearchedCompany(latestSearchKey);
+
   }
 
+  // this.requests.setFirstValueOfSubject();
+  getCurrentSearchedCompany(latestSearchKey : string = 'FB'){
+    this.apiService.get(`http://localhost:8000/api/keyStatistics/${latestSearchKey}`,
+    {headers : {'Authorization' : this.userService.getToken()}}
+    ).subscribe(res => {
+      localStorage.responseData = JSON.stringify(res);
+      this.isPageLoaded = true;
+    },console.error);
+  }
 }

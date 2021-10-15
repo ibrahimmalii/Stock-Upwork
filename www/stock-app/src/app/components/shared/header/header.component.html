@@ -1,1 +1,39 @@
-<h1> This is navbar </h1>
+
+<nav class="navbar navbar-expand-lg  ">
+    <div class="container">
+        <!-- Brand -->
+        <a class="navbar-brand" href="index.php">
+            <img alt="Image placeholder" src="/assets/images/1.png" width='150px' height="40px" id="navbar-logo">
+        </a>
+        <!-- Toggler -->
+        <button class="navbar-toggler text-info" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon bg-info rounded"></span>
+          </button>
+        <!-- Collapse -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav  offset-md-8">
+                <li class="nav-item " *ngIf="isAdmin">
+                    <a class="nav-link" routerLink="/admin">Admin</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" routerLink="/pricing">Pricing</a>
+                </li>
+
+                <!-- <li class="nav-item">
+                    <a class="nav-link" routerLink="/exchanges">Exchanges</a>
+                </li> -->
+
+                <li class="nav-item ">
+                    <a class="nav-link " routerLink="/filter-company/filter">Filter Company</a>
+                </li>
+            </ul>
+            <!-- Button -->
+            <a *ngIf="!isUserLogged" class="navbar-btn btn btn-sm btn-primary  d-lg-inline-block ml-5" routerLink='/auth/login' >
+                Login
+            </a>
+            <a *ngIf="isUserLogged" (click)="logout()" class="navbar-btn btn btn-sm btn-primary  d-lg-inline-block ml-5">
+                Logout
+            </a>
+        </div>
+    </div>
+</nav>

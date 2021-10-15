@@ -7,18 +7,29 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { SharedModule } from './components/shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ListViewModule } from '@progress/kendo-angular-listview';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdminComponent } from './components/admin/admin.component';
+
+
+// import { FilterCompaniesComponent } from './components/filter-companies/filter-companies.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContactComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    ListViewModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

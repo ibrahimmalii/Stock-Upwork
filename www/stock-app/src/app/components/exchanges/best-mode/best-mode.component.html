@@ -1,1 +1,106 @@
-<p>best-mode works!</p>
+<div class="div1 text-center p-3">
+    <img src="/assets/images/1.png">
+</div>
+
+<article class="art1" >
+    <p class="">Last Close: $280.98</p>
+    <p>Market Cap: ${{marketCapFixed}}M</p>
+    <!-- <p>EV:${{revenueGrowthFixed.toFixed(0)}}M </p> -->
+    <p>Industry: Software</p>
+    <p>Display Currency: {{currency}}</p>
+
+</article>
+
+<!--section2-->
+
+<section class="sec2 d-flex flex-wrap" *ngIf="data">
+    <article class="col-lg-5 col-sm-11">
+        <div>
+            <h3>Beast Mode Scorecard</h3>
+            <img src="/assets/images/1.png" width="120px" height="40px">
+        </div>
+        <div>
+          <h4>{{name}}</h4>
+          <h5>{{symbol}}</h5>
+        </div>
+        <div>
+          <h4>Current Price</h4>
+          <h5></h5>
+        </div>
+        <h4>STOCK PERFORMANCE</h4>
+        <div>
+            <h5>PE Ratio</h5>
+            <h5>{{PE.toFixed(2)}}</h5>
+        </div>
+        <div>
+            <h5>PS Ratio  <2 ldeal <1 Great</h5>
+            <h5>{{PS.toFixed(2)}}</h5>
+        </div>
+        <h4>INCOME & OPERATIONS</h4>
+        <div>
+            <h5>Operation Margin</h5>
+            <h5>{{operatingMargin}}</h5>
+        </div>
+        <div>
+            <h5>Net Income Margin</h5>
+            <h5>{{netIncomeMargin}}</h5>
+        </div>
+        <div>
+          <h5>T Assets v. T liabilities TATL Ratio</h5>
+          <h5>{{total}}</h5>
+        </div>
+        <div>
+          <h5>Revenue Growth Last Year</h5>
+          <h5>{{calculater}}</h5>
+        </div>
+        <h4>MANAGEMENT EFFECTIVENSS</h4>
+        <div>
+            <h5>ROE-Return On Equity (Yr)</h5>
+            <h5>{{roeMedian}}</h5>
+        </div>
+        <div>
+            <h5>ROCE-Return On Capital Employed</h5>
+            <h5>{{roceFixed}}</h5>
+        </div>
+        <h4>KEY METRICS</h4>
+        <div>
+            <h5>Free Cash Flow Margin</h5>
+            <h5>{{flowPerShareFixed}}</h5>
+        </div>
+        <div>
+            <h5>Rule of 40 indicator</h5>
+            <h5>50</h5>
+        </div>
+        <h5>Jerry us FNR indicator</h5>
+        <h5></h5>
+        <div>
+            <h5>BV Ratio (1=@par)</h5>
+            <h5>23%</h5>
+        </div>
+        <div>
+            <h5>Revenue Per Share Ratio</h5>
+            <h5>{{revenueRatio+'.23'}}</h5>
+        </div>
+        <div>
+            <h5>EBLTDA Per Share Ratio</h5>
+            <h5>{{revenueRatio}}</h5>
+        </div>
+
+        <div>
+            <h5>Dividend Yield 4%</h5>
+            <h5>{{dividendsFixed}}</h5>
+        </div>
+        <div>
+          <h5>Debt to Equity</h5>
+          <h5>{{deptToEquityFixed}}</h5>
+        </div>
+
+    </article>
+    <article class="col-lg-6 col-md-11">
+        <h4>Business Description :</h4>
+        <p>{{data.description}}</p>
+    </article>
+</section>
+
+
+

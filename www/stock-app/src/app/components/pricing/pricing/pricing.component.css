@@ -1,0 +1,37 @@
+*{
+  margin: 0%;
+  padding: 0%;
+}
+
+.success{
+  display: block;
+}
+.danger{
+  display: none;
+}
+ul {
+  list-style-type: none;
+}
+
+li{
+  border: 1px solid rgb(111, 250, 208);
+}
+
+
+input{
+  outline: none;
+  border: none;
+}
+.dark-item{
+  background-color:black;
+  border: 1px solid black;
+}
+
+.model{
+  position: absolute;
+}
+
+.loader > img{
+  width: 30px;
+}
+
