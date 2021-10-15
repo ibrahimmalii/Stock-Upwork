@@ -20,7 +20,14 @@
     <p *ngIf="companies" class="h2 text-danger">Number Of Companies ({{companies.length}})</p>
     <!-- <input #searchKey type="text" (click)="renderSearch(company, searchKey.value)"> -->
   </div>
-  <div class="card my-4">
+
+  <div class="card my-4" *ngIf="!isPageLoaded">
+    <div class="card-body d-flex justify-content-between">
+      <p class="h1 text-danger">Loading Companies...</p>
+    </div>
+  </div>
+
+  <div class="card my-4" *ngIf="isPageLoaded">
     <div class="card-body d-flex justify-content-between" *ngFor="let company of companies; let i = index">
       <div class="text">
         <p class='h3'>Symbol => <input type="text" #symbol value="{{company.qfs_symbol}}" disabled></p>
@@ -38,8 +45,8 @@
       </div>
     </div>
   </div>
-  <div class="card my-4">
-    <div class="card-body d-flex justify-content-between" *ngIf="!companies || companies.length == 0">
+  <div class="card my-4" *ngIf="isPageLoaded">
+    <div class="card-body d-flex justify-content-between" *ngIf="companies.length == 0">
       <p class="h1">No Companies Founded...</p>
     </div>
   </div>

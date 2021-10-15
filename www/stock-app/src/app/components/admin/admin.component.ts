@@ -65,6 +65,7 @@ export class AdminComponent implements OnInit {
 
   isResponseBack: boolean = false;
   isAdmin: boolean = false;
+  // isPageLoaded : boolean = false;
 
   ngOnInit(): void {
     this.apiService.get('http://localhost:8000/api/keyStatistics', { headers: { 'Authorization': this.userService.getToken() } }).subscribe(response => {
@@ -231,6 +232,8 @@ deleteCompany(symbol : string, id : number){
       this.isUnSuccess = true;
       this.loaderStart = false;
     });
+  }else{
+    this.loaderStart = false;
   }
 
 }
