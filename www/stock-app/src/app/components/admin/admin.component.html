@@ -39,7 +39,7 @@
     </div>
   </div>
   <div class="card my-4">
-    <div class="card-body d-flex justify-content-between" *ngIf="!companies">
+    <div class="card-body d-flex justify-content-between" *ngIf="!companies || companies.length == 0">
       <p class="h1">No Companies Founded...</p>
     </div>
   </div>

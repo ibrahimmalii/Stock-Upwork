@@ -23,6 +23,7 @@ export class AdminComponent implements OnInit {
   dataCompanyOne: any;
   industry: any;
   data: any;
+  priceApi : any;
   sector: any;
   exchange: any;
   marketCap: any;
@@ -169,19 +170,42 @@ export class AdminComponent implements OnInit {
       this.apiRequest.eps_diluted_growth = this.data.data.financials.annual.eps_diluted_growth;
       this.apiRequest.dividends_per_share_growth = this.data.data.financials.annual.dividends_per_share_growth;
 
-      //Store Company In Our DataBase And Return Data From There
-      this.apiService.post(`http://localhost:8000/api/keyStatistics/update/${id}`, this.requestService.data,
-        { headers: { 'Authorization': this.userService.getToken() } }
-      ).subscribe(response=>{
-        console.log(response);
-        this.isSuccess = true;
-        this.isUnSuccess = false;
-        this.loaderStart = false;
-      },error=>{
-        this.isSuccess = false;
-        this.isUnSuccess = true;
-        this.loaderStart = false;
-      })
+      // Make a request to get latest data we need as a price
+      this.apiService.get('https://public-api.quickfs.net/v1/market-data/last-close/US?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07')
+        .subscribe(response=>{
+
+          this.priceApi = response;
+
+            const targetItem = this.priceApi.data.find((item:any) => {
+              const searchValue = item.qfs_symbol_v2;
+              if(searchValue == this.apiRequest.qfs_symbol){
+                return item;
+              };
+            });
+
+          this.apiRequest.price = targetItem.price.toString();
+          this.apiRequest.volume = targetItem.volume.toString();
+          this.apiRequest.market_cap = targetItem.mkt_cap;
+          this.apiRequest.pe_ratio = targetItem.pe;
+          this.apiRequest.ps_ratio = targetItem.ps;
+          this.apiRequest.pb_ratio = targetItem.pb;
+
+          //Store Company In Our DataBase And Return Data From There
+          this.apiService.post(`http://localhost:8000/api/keyStatistics/update/${id}`, this.requestService.data,
+            { headers: { 'Authorization': this.userService.getToken() } }
+          ).subscribe(response=>{
+            console.log(response);
+            this.isSuccess = true;
+            this.isUnSuccess = false;
+            this.loaderStart = false;
+          },error=>{
+            this.isSuccess = false;
+            this.isUnSuccess = true;
+            this.loaderStart = false;
+          })
+
+        })
+
     }
   )
 }
