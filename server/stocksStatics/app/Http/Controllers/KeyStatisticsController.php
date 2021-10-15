@@ -7,11 +7,23 @@ use Illuminate\Http\Request;
 use Mockery\Undefined;
 use PhpParser\Node\Stmt\Foreach_;
 use App\Models\Requests;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class KeyStatisticsController extends Controller
 {
     public function create(Request $request){
+
+        // dd(request()->bearerToken());// To GET Token From Request
+        // dd(Auth::user()->id);// To Get User Information
+        $user = Auth::user();
+        if(!$user){
+            return $this->NotFoundError();
+        };
+        // $user->number_of_requests = $user->number_of_requests + 1;
+
+        DB::table('users')->where('id', $user->id)->update(['number_of_requests' => $user->number_of_requests + 1]);
 
         // Angular
         $data = KeyStatistics::create([
@@ -107,11 +119,21 @@ class KeyStatisticsController extends Controller
 
         $currentRequest[0]->save();
 
+
+
         return $data;
     }
 
 
     public function update(Request $request, $id){
+
+        $user = Auth::user();
+        if(!$user){
+            return $this->NotFoundError();
+        };
+
+        DB::table('users')->where('id', $user->id)->update(['number_of_requests' => $user->number_of_requests + 1]);
+
 
         $company = KeyStatistics::find($id);
 
@@ -226,6 +248,7 @@ class KeyStatisticsController extends Controller
     }
 
     public function show($symbol){
+
         $data = '';
 
         $company = KeyStatistics::where('symbol', $symbol)->get();
