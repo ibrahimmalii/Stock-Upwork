@@ -61,7 +61,7 @@ export class PricingComponent implements OnInit {
   isAdmin : boolean = false;
 
 
-  allStatus = [false, false, false, false, false, false, false, false, false];
+  allStatus = [false, false, false, false, false, false, false, false, false, false];
 
 
   oparator(op: any, arr: any) {
@@ -70,7 +70,7 @@ export class PricingComponent implements OnInit {
 
 
   constructor(private requestService: RequestService, private apiService: ApiService,private userService : UserService) { }
-  ArrayOfData: any[] = [[], [], [], [], [], [], [], [], []];
+  ArrayOfData: any[] = [[], [], [], [], [], [], [], [], [], []];
 
   ngOnInit(): void {
 
@@ -239,7 +239,7 @@ export class PricingComponent implements OnInit {
     this.ArrayOfData[id][10] = 'Share Float';
     this.ArrayOfData[id][12] = this.arraysData[id].pe_ratio;
     this.ArrayOfData[id][13] = this.arraysData[id].ps_ratio;
-    this.ArrayOfData[id][14] = 'Are The Compay Making Money?';
+    this.ArrayOfData[id][14] = '';
     this.ArrayOfData[id][15] = this.arraysData[id].revenue.reduce((a:any, b:any) =>{return a + b},0);
     this.ArrayOfData[id][15] = this.ArrayOfData[id][15].toLocaleString();
     this.ArrayOfData[id][16] = parseInt(this.arraysData[id].cogs) / 1000000;
