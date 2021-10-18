@@ -361,8 +361,8 @@ export class FilterAndSearchComponent implements OnInit {
 
       // Store Company In Our DataBase And Return Data From There
     console.log(this.requestService);
-    return this.apiService.post('http://localhost:8000/api/keyStatistics', this.requestService.data
-      // { headers: { 'Authorization': this.userService.getToken() } }
+    return this.apiService.post('http://localhost:8000/api/keyStatistics', this.requestService.data,
+      { headers: { 'Authorization': this.userService.getToken() } }
     )
 
   }

@@ -13,11 +13,28 @@
           width="80px" height="30px">
       </li>
       <div class="content" *ngFor="let prop of properties; let index = index">
-        <li [ngClass]="{'bg-black dark-item text-light': index == 11 || index == 26 || index == 30}"><input [ngClass]="{'bg-black dark-item text-light': index == 11 || index == 26 || index == 30}" disabled class="w-75" value="{{prop.title}}"><abbr title="{{prop.comment}}"><i
-              class="pull-right fa fa-info-circle" data-bs-toggle="modal" [attr.data-bs-target]="'#prop'+ index"></i></abbr></li>
+        <li [ngClass]="{
+          'd-none' : index==1,
+          'bg-info' : index == 22,
+          'blue' : index ==12 || index==39,
+          'green' : index==13,
+          'lightGreen' : index==27 || index==34,
+          'marginTop' : index== 12 || index == 15 || index==27 || index == 31
+        }">
+          <input [ngClass]="{
+          'bg-black long-item text-warning w-100': index == 11 || index == 14 || index == 26 || index == 30,
+          'bg-info' : index == 22
+      }" disabled class="" value="{{prop.title}}">
+          <abbr title="{{prop.comment}}">
+            <i class="pull-right fa fa-info-circle" [ngClass]="{
+              'd-none' : index == 11 || index == 14 || index == 26 || index == 30
+            }" data-bs-toggle="modal" [attr.data-bs-target]="'#prop'+ index"></i>
+          </abbr>
+        </li>
 
         <!-- Modal To Edit Property -->
-        <div *ngIf="isAdmin" class="modal fade modal-dialog modal-lg" id="prop{{index}}" tabindex="-1" aria-labelledby="property" aria-hidden="true">
+        <div *ngIf="isAdmin" class="modal fade modal-dialog modal-lg" id="prop{{index}}" tabindex="-1"
+          aria-labelledby="property" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -29,9 +46,11 @@
                   <label class="fw-bold mt-2" for="title">Tilte</label>
                   <input readonly #inputTitle class="form-control mb-4" name="title" type="text" value="{{prop.title}}">
                   <label class="fw-bold" for="comment">Comment</label>
-                  <textarea #inputComment class="form-control mb-2" name="comment" type="text" value="{{prop.comment}}"></textarea>
+                  <textarea #inputComment class="form-control mb-2" name="comment" type="text"
+                    value="{{prop.comment}}"></textarea>
                   <button type="button" class="btn btn-secondary my-2" data-bs-dismiss="modal">Close</button>
-                  <button id="{{prop.id}}" type="button" class="btn btn-primary mx-2 my-2" (click)="updateProperty($event,inputTitle.value, inputComment.value)">Save</button>
+                  <button id="{{prop.id}}" type="button" class="btn btn-primary mx-2 my-2"
+                    (click)="updateProperty($event,inputTitle.value, inputComment.value)">Save</button>
                 </form>
               </div>
             </div>
@@ -104,57 +123,145 @@
     </ul>
   </div>
   <div class="col">
-    <div class=""><input type='text' input placeholder="Search With Symbol" id="0" class="text-light bg-info text-center w-100"
-        (keyup.enter)="getData($event, inputOne.value)" #inputOne style="height:60px; border-right: 1px solid black;"></div>
+    <div class=""><input type='text' input placeholder="Search With Symbol" id="0"
+        class="text-light bg-info text-center w-100" (keyup.enter)="getData($event, inputOne.value)" #inputOne
+        style="height:60px; border-right: 1px solid black;"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[0] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[0]; let index = index" [ngClass]="{'bg-black dark-item': index == 11 || index == 26 || index == 30}"><input disabled
-          [ngClass]="{'bg-black dark-item': index == 11 || index == 26 || index == 30}" value="{{item}}"></li>
+      <li *ngFor="let item of ArrayOfData[0]; let index = index" [ngClass]="{
+          'd-none' : index==1,
+          'bg-info' : index == 22,
+          'blue' : index ==12 || index==39,
+          'green' : index==13,
+          'lightGreen' : index==27 || index==34
+        }">
+        <input disabled [ngClass]="{
+          'maxValue' : index==17 && item == maxGrossProfitGrowthArr || index==39 && item == maxFreeCashFlowGrowthArr || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
+          'minValue' : index==17 && item == minGrossProfitGrowthArr || index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr
+        }" value="{{item}}">
+      </li>
     </ul>
   </div>
   <div class="col">
-    <div class="bg-dark"><input type='text' input placeholder="Search With Symbol" id="1" (keyup.enter)="getData($event, inputTwo.value)" #inputTwo
-        class="text-light bg-info text-center w-100" style="height:60px; border-right: 1px solid black;"></div>
+    <div class="bg-dark"><input type='text' input placeholder="Search With Symbol" id="1"
+        (keyup.enter)="getData($event, inputTwo.value)" #inputTwo class="text-light bg-info text-center w-100"
+        style="height:60px; border-right: 1px solid black;"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[1] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[1]; let index = index" [ngClass]="{'bg-black dark-item': index == 11 || index == 26 || index == 30}"><input disabled
-          [ngClass]="{'bg-black dark-item': index == 11 || index == 26 || index == 30}" value="{{item}}"></li>
+      <li *ngFor="let item of ArrayOfData[1]; let index = index" [ngClass]="{
+        'd-none' : index==1,
+        'bg-info' : index == 22,
+        'blue' : index ==12 || index==39,
+        'green' : index==13,
+        'lightGreen' : index==27 || index==34
+      }">
+        <input disabled [ngClass]="{
+        'maxValue' : index==17 && item == maxGrossProfitGrowthArr || index==39 && item == maxFreeCashFlowGrowthArr || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
+        'minValue' : index==17 && item == minGrossProfitGrowthArr || index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr
+      }" value="{{item}}">
+      </li>
     </ul>
   </div>
   <div class="col">
-    <div class=""><input type='text' input placeholder="Search With Symbol" id="2" class="text-light bg-info text-center w-100"
-        (keyup.enter)="getData($event, inputThree.value)" #inputThree style="height:60px; border-right: 1px solid black;"></div>
+    <div class=""><input type='text' input placeholder="Search With Symbol" id="2"
+        class="text-light bg-info text-center w-100" (keyup.enter)="getData($event, inputThree.value)" #inputThree
+        style="height:60px; border-right: 1px solid black;"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[2] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[2]; let index = index" [ngClass]="{'bg-black dark-item': index == 11 || index == 26 || index == 30}"><input disabled
-          [ngClass]="{'bg-black dark-item': index == 11 || index == 26 || index == 30}" value="{{item}}"></li>
+      <li *ngFor="let item of ArrayOfData[2]; let index = index" [ngClass]="{
+        'd-none' : index==1,
+        'bg-info' : index == 22,
+        'blue' : index ==12 || index==39,
+        'green' : index==13,
+        'lightGreen' : index==27 || index==34
+      }">
+        <input disabled [ngClass]="{
+        'maxValue' : index==17 && item == maxGrossProfitGrowthArr || index==39 && item == maxFreeCashFlowGrowthArr || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
+        'minValue' : index==17 && item == minGrossProfitGrowthArr || index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr
+      }" value="{{item}}">
+      </li>
     </ul>
   </div>
   <div class="col">
-    <div class=""><input type='text' input placeholder="Search With Symbol" id="3" class="text-light bg-info text-center w-100"
-        (keyup.enter)="getData($event, inputFour.value)" #inputFour style="height:60px; border-right: 1px solid black;"></div>
+    <div class=""><input type='text' input placeholder="Search With Symbol" id="3"
+        class="text-light bg-info text-center w-100" (keyup.enter)="getData($event, inputFour.value)" #inputFour
+        style="height:60px; border-right: 1px solid black;"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[3] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[3]; let index = index" [ngClass]="{'bg-black dark-item': index == 11 || index == 26 || index == 30}"><input disabled
-          [ngClass]="{'bg-black dark-item': index == 11 || index == 26 || index == 30}" value="{{item}}"></li>
+      <li *ngFor="let item of ArrayOfData[3]; let index = index" [ngClass]="{
+        'd-none' : index==1,
+        'bg-info' : index == 22,
+        'blue' : index ==12 || index==39,
+        'green' : index==13,
+        'lightGreen' : index==27 || index==34
+      }">
+        <input disabled [ngClass]="{
+        'maxValue' : index==17 && item == maxGrossProfitGrowthArr || index==39 && item == maxFreeCashFlowGrowthArr || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
+        'minValue' : index==17 && item == minGrossProfitGrowthArr || index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr
+      }" value="{{item}}">
+      </li>
     </ul>
   </div>
   <div class="col">
-    <div class=""><input type='text' input placeholder="Search With Symbol" id="4" class="text-light bg-info text-center w-100"
-        (keyup.enter)="getData($event, inputFive.value)" #inputFive style="height:60px; border-right: 1px solid black;"></div>
+    <div class=""><input type='text' input placeholder="Search With Symbol" id="4"
+        class="text-light bg-info text-center w-100" (keyup.enter)="getData($event, inputFive.value)" #inputFive
+        style="height:60px; border-right: 1px solid black;"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[4] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[4]; let index = index" [ngClass]="{'bg-black dark-item': index == 11 || index == 26 || index == 30}"><input
-          [ngClass]="{'bg-black dark-item': index == 11 || index == 26 || index == 30}" disabled value="{{item}}"></li>
+      <li *ngFor="let item of ArrayOfData[4]; let index = index" [ngClass]="{
+        'd-none' : index==1,
+        'bg-info' : index == 22,
+        'blue' : index ==12 || index==39,
+        'green' : index==13,
+        'lightGreen' : index==27 || index==34
+      }">
+        <input disabled [ngClass]="{
+        'maxValue' : index==17 && item == maxGrossProfitGrowthArr || index==39 && item == maxFreeCashFlowGrowthArr || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
+        'minValue' : index==17 && item == minGrossProfitGrowthArr || index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr
+      }" value="{{item}}">
+      </li>
     </ul>
   </div>
   <div class="col">
-    <div class=""><input type='text' input placeholder="Search With Symbol" id="5" class="text-light bg-info text-center w-100"
-        (keyup.enter)="getData($event, inputSix.value)" #inputSix style="height:60px"></div>
+    <div class=""><input type='text' input placeholder="Search With Symbol" id="5"
+        class="text-light bg-info text-center w-100" (keyup.enter)="getData($event, inputSix.value)" #inputSix
+        style="height:60px; border-right: 1px solid black;"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[5] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
-      <li *ngFor="let item of ArrayOfData[5]; let index = index" [ngClass]="{'bg-black dark-item': index == 11 || index == 26 || index == 30}"><input
-          [ngClass]="{'bg-black dark-item': index == 11 || index == 26 || index == 30}" type="text" value="{{item}}"></li>
+      <li *ngFor="let item of ArrayOfData[5]; let index = index" [ngClass]="{
+        'd-none' : index==1,
+        'bg-info' : index == 22,
+        'blue' : index ==12 || index==39,
+        'green' : index==13,
+        'lightGreen' : index==27 || index==34
+      }">
+        <input disabled [ngClass]="{
+        'maxValue' : index==17 && item == maxGrossProfitGrowthArr || index==39 && item == maxFreeCashFlowGrowthArr || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
+        'minValue' : index==17 && item == minGrossProfitGrowthArr || index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr
+      }" value="{{item}}">
+      </li>
+    </ul>
+  </div>
+  <div class="col">
+    <div class=""><input type='text' input placeholder="Search With Symbol" id="6"
+        class="text-light bg-info text-center w-100" (keyup.enter)="getData($event, inputSeven.value)" #inputSeven
+        style="height:60px"></div>
+    <ul class="text-center fw-bold" [ngClass]="allStatus[6] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
+      <li *ngFor="let item of ArrayOfData[6]; let index = index" [ngClass]="{
+        'd-none' : index==1,
+        'bg-info' : index == 22,
+        'blue' : index ==12 || index==39,
+        'green' : index==13,
+        'lightGreen' : index==27 || index==34
+      }">
+        <input disabled [ngClass]="{
+        'maxValue' : index==17 && item == maxGrossProfitGrowthArr || index==39 && item == maxFreeCashFlowGrowthArr || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
+        'minValue' : index==17 && item == minGrossProfitGrowthArr || index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr
+      }" value="{{item}}">
+      </li>
     </ul>
   </div>
 
-<!-- Start Of Draw Footer -->
+  <!-- Start Of Draw Footer -->
 </div>
 <div class="footer" *ngIf="isPropertiesLoaded">
+  <div class="bg-info p-4 text-center">
+    <p class="h2">Notes</p>
+  </div>
   <div class="bg-primary text-warning">Patreon Notes</div>
   <div>Note 1 : Be Sure to watch the a campany in youtube </div>
   <div class="bg-primary text-warning">Patreon Notes</div>

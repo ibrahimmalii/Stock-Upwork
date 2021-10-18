@@ -22,10 +22,7 @@ input{
   outline: none;
   border: none;
 }
-.dark-item{
-  background-color:black;
-  border: 1px solid black;
-}
+
 
 .model{
   position: absolute;
@@ -35,3 +32,46 @@ input{
   width: 30px;
 }
 
+.content input{
+  width : 90%;
+}
+
+
+
+
+
+/* Rows and cells styles */
+.long-item{
+  width: 100vw;
+  position: absolute;
+  margin-bottom: 10px;
+}
+
+.marginTop{
+  margin-top: 24px;
+}
+
+.blue{
+  background-color:lightblue;
+}
+
+.green{
+  background-color:  rgb(104 244 175);
+}
+
+.lightGreen{
+  background: lightgreen;
+}
+
+
+.maxValue{
+  text-indent: 18px;
+  color:blue;
+  font-weight: bold;
+}
+
+.minValue{
+  text-indent: 18px;
+  color: red;
+  font-weight: bold;
+}
