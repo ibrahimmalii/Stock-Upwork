@@ -134,7 +134,10 @@
           'green' : index==13,
           'lightGreen' : index==27 || index==34
         }">
-        <input disabled value="{{item}}">
+        <input disabled [ngClass]="{
+          'maxValue' : index==17 && item == maxGrossProfitGrowthArr || index==39 && item == maxFreeCashFlowGrowthArr || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
+          'minValue' : index==17 && item == minGrossProfitGrowthArr || index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr
+        }" value="{{item}}">
       </li>
     </ul>
   </div>
@@ -150,7 +153,10 @@
         'green' : index==13,
         'lightGreen' : index==27 || index==34
       }">
-        <input disabled value="{{item}}">
+        <input disabled [ngClass]="{
+        'maxValue' : index==17 && item == maxGrossProfitGrowthArr || index==39 && item == maxFreeCashFlowGrowthArr || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
+        'minValue' : index==17 && item == minGrossProfitGrowthArr || index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr
+      }" value="{{item}}">
       </li>
     </ul>
   </div>
@@ -166,7 +172,10 @@
         'green' : index==13,
         'lightGreen' : index==27 || index==34
       }">
-        <input disabled value="{{item}}">
+        <input disabled [ngClass]="{
+        'maxValue' : index==17 && item == maxGrossProfitGrowthArr || index==39 && item == maxFreeCashFlowGrowthArr || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
+        'minValue' : index==17 && item == minGrossProfitGrowthArr || index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr
+      }" value="{{item}}">
       </li>
     </ul>
   </div>
@@ -182,7 +191,10 @@
         'green' : index==13,
         'lightGreen' : index==27 || index==34
       }">
-        <input disabled value="{{item}}">
+        <input disabled [ngClass]="{
+        'maxValue' : index==17 && item == maxGrossProfitGrowthArr || index==39 && item == maxFreeCashFlowGrowthArr || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
+        'minValue' : index==17 && item == minGrossProfitGrowthArr || index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr
+      }" value="{{item}}">
       </li>
     </ul>
   </div>
@@ -198,7 +210,10 @@
         'green' : index==13,
         'lightGreen' : index==27 || index==34
       }">
-        <input disabled value="{{item}}">
+        <input disabled [ngClass]="{
+        'maxValue' : index==17 && item == maxGrossProfitGrowthArr || index==39 && item == maxFreeCashFlowGrowthArr || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
+        'minValue' : index==17 && item == minGrossProfitGrowthArr || index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr
+      }" value="{{item}}">
       </li>
     </ul>
   </div>
@@ -213,7 +228,12 @@
         'blue' : index ==12 || index==39,
         'green' : index==13,
         'lightGreen' : index==27 || index==34
-      }"><input type="text" disabled value="{{item}}"></li>
+      }">
+        <input disabled [ngClass]="{
+        'maxValue' : index==17 && item == maxGrossProfitGrowthArr || index==39 && item == maxFreeCashFlowGrowthArr || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
+        'minValue' : index==17 && item == minGrossProfitGrowthArr || index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr
+      }" value="{{item}}">
+      </li>
     </ul>
   </div>
   <div class="col">
@@ -227,7 +247,12 @@
         'blue' : index ==12 || index==39,
         'green' : index==13,
         'lightGreen' : index==27 || index==34
-      }"><input disabled type="text" value="{{item}}"></li>
+      }">
+        <input disabled [ngClass]="{
+        'maxValue' : index==17 && item == maxGrossProfitGrowthArr || index==39 && item == maxFreeCashFlowGrowthArr || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
+        'minValue' : index==17 && item == minGrossProfitGrowthArr || index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr
+      }" value="{{item}}">
+      </li>
     </ul>
   </div>
 

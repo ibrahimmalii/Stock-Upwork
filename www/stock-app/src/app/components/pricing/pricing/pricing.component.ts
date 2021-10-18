@@ -12,6 +12,40 @@ import { ApiService } from './../../../services/api.service';
   styleUrls: ['./pricing.component.css']
 })
 export class PricingComponent implements OnInit {
+  //-========================= Define Arrays To Operations ===========================//
+
+  grossprofitGrowthArr: any = [];
+  maxGrossProfitGrowthArr: any;
+  minGrossProfitGrowthArr: any;
+
+  freeCashFlowGrowthArr: any = [];
+  maxFreeCashFlowGrowthArr: any;
+  minFreeCashFlowGrowthArr: any;
+
+
+  totalAssetsGrowthArr: any = [];
+  maxTotalAssetsGrowthArr: any;
+  minTotalAssetsGrowthArr: any;
+
+  totalEquityGrowthArr: any = [];
+  maxTotalEquityGrowthArr: any;
+  minTotalEquityGrowthArr: any;
+
+  cashFromOperationsGrowthArr: any = [];
+  maxCashFromOperationsGrowthArr: any;
+  minCashFromOperationsGrowthArr: any;
+
+  revenue10PeriodCagrArr: any = [];
+  maxRevenue10PeriodCagrArr: any;
+  minRevenue10PeriodCagrArr: any;
+
+
+
+
+
+
+
+
   loaderStarted: boolean = false;
   numbers: any;
   apiRequest: any;
@@ -54,11 +88,11 @@ export class PricingComponent implements OnInit {
   total_equity_cagr_10: any;
   free_cash_flow_10_period: any;
   dlkfj: any;
-  properties : any;
-  isPropertiesLoaded : boolean = false;
+  properties: any;
+  isPropertiesLoaded: boolean = false;
 
   isResponseBack: boolean = false;
-  isAdmin : boolean = false;
+  isAdmin: boolean = false;
 
 
   allStatus = [false, false, false, false, false, false, false, false, false, false];
@@ -69,30 +103,29 @@ export class PricingComponent implements OnInit {
   }
 
 
-  constructor(private requestService: RequestService, private apiService: ApiService,private userService : UserService) { }
+  constructor(private requestService: RequestService, private apiService: ApiService, private userService: UserService) { }
   ArrayOfData: any[] = [[], [], [], [], [], [], [], [], [], []];
 
   ngOnInit(): void {
-
     this.isAdmin = this.userService.isAdmin();
     console.log(this.userService.getToken());
     //Get All Property
     this.apiService.get('http://localhost:8000/api/properties',
-    {headers : {'Authorization' : this.userService.getToken()}}
-    ).subscribe(response=>{
+      { headers: { 'Authorization': this.userService.getToken() } }
+    ).subscribe(response => {
       this.properties = response;
-      this.properties = this.properties.splice(0,52);
+      this.properties = this.properties.splice(0, 52);
       this.isPropertiesLoaded = true;
     })
 
   }
 
-  updateProperty(e : any, title : string, comment : string){
+  updateProperty(e: any, title: string, comment: string) {
     const id = e.target.id;
-    this.apiService.post(`http://localhost:8000/api/properties/${id}`, {title, comment},
-    {headers : {'Authorization' : this.userService.getToken()}}
-    ).subscribe(res=>{
-      const response : any = res;
+    this.apiService.post(`http://localhost:8000/api/properties/${id}`, { title, comment },
+      { headers: { 'Authorization': this.userService.getToken() } }
+    ).subscribe(res => {
+      const response: any = res;
       response.msg ? alert('Method Not Allowed') : location.reload();
     })
   }
@@ -101,11 +134,11 @@ export class PricingComponent implements OnInit {
 
 
   callDataBase(searchKey: string) {
-    if(searchKey.includes(':')){
+    if (searchKey.includes(':')) {
       searchKey = searchKey.substring(0, searchKey.lastIndexOf(':'));
     };
     return this.apiService.get(`http://localhost:8000/api/keyStatistics/${searchKey.toUpperCase()}`,
-    {headers : {'Authorization' : this.userService.getToken()}}
+      { headers: { 'Authorization': this.userService.getToken() } }
     );
   }
 
@@ -113,7 +146,7 @@ export class PricingComponent implements OnInit {
     return this.apiService.get(`http://public-api.quickfs.net/v1/data/all-data/${searchKey}?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07`)
   }
 
-  getPriceDataFromItsApi(data : any){
+  getPriceDataFromItsApi(data: any) {
     return this.apiService.get('https://public-api.quickfs.net/v1/market-data/last-close/US?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07')
   }
 
@@ -211,16 +244,16 @@ export class PricingComponent implements OnInit {
     this.apiRequest.dividends_per_share_growth = this.data.data.financials.annual.dividends_per_share_growth;
 
 
-      // Store Company In Our DataBase And Return Data From There
+    // Store Company In Our DataBase And Return Data From There
     console.log(this.requestService);
     return this.apiService.post('http://localhost:8000/api/keyStatistics', this.requestService.data,
-      {headers : {'Authorization' : this.userService.getToken()}}
+      { headers: { 'Authorization': this.userService.getToken() } }
     )
 
   }
 
 
-  returnDataFromDataBase(res : any, id : any){
+  returnDataFromDataBase(res: any, id: any) {
     console.log(res);
     this.arraysData[id] = res;
     this.allStatus[id] = true;
@@ -235,17 +268,17 @@ export class PricingComponent implements OnInit {
     this.ArrayOfData[id][6] = (parseInt(this.ArrayOfData[id][6]) / 1000000).toFixed(0)
     this.ArrayOfData[id][7] = this.arraysData[id].volume;
     this.ArrayOfData[id][8] = (this.ArrayOfData[id][7] / 7);
-    this.ArrayOfData[id][9] = (this.arraysData[id].volume - this.ArrayOfData[id][8])/ this.ArrayOfData[id][8];
+    this.ArrayOfData[id][9] = (this.arraysData[id].volume - this.ArrayOfData[id][8]) / this.ArrayOfData[id][8];
     this.ArrayOfData[id][10] = 'Share Float';
     this.ArrayOfData[id][12] = this.arraysData[id].pe_ratio;
     this.ArrayOfData[id][13] = this.arraysData[id].ps_ratio;
     this.ArrayOfData[id][14] = '';
-    this.ArrayOfData[id][15] = this.arraysData[id].revenue.reduce((a:any, b:any) =>{return a + b},0);
+    this.ArrayOfData[id][15] = this.arraysData[id].revenue.reduce((a: any, b: any) => { return a + b }, 0);
     this.ArrayOfData[id][15] = this.ArrayOfData[id][15].toLocaleString();
     this.ArrayOfData[id][16] = parseInt(this.arraysData[id].cogs) / 1000000;
     this.ArrayOfData[id][17] = parseInt(this.arraysData[id].gross_profit.splice(-1)) / 1000000;
     this.ArrayOfData[id][18] = parseInt(this.arraysData[id].total_opex.splice(-1));
-    this.ArrayOfData[id][18] = this.ArrayOfData[id][18]  / 1000000;
+    this.ArrayOfData[id][18] = this.ArrayOfData[id][18] / 1000000;
     this.ArrayOfData[id][19] = (this.arraysData[id].roic.splice(-2));
     this.ArrayOfData[id][19] = (parseFloat(this.ArrayOfData[id][19][1]) - parseFloat(this.ArrayOfData[id][19][0])) / parseFloat(this.ArrayOfData[id][19][1])
     this.ArrayOfData[id][19] = (this.ArrayOfData[id][19] * 100).toFixed(2) + '%'
@@ -264,15 +297,15 @@ export class PricingComponent implements OnInit {
     this.ArrayOfData[id][31] = this.arraysData[id].revenue_per_share.splice(-1);
     this.ArrayOfData[id][32] = this.arraysData[id].ebitda_per_share.splice(-1);
     this.ArrayOfData[id][33] = (this.ArrayOfData[id][31] / this.arraysData[id].price);
-    this.ArrayOfData[id][33] = (this.ArrayOfData[id][33] * 100).toFixed(1) +'%'
+    this.ArrayOfData[id][33] = (this.ArrayOfData[id][33] * 100).toFixed(1) + '%'
     this.ArrayOfData[id][34] = (this.ArrayOfData[id][32] / this.arraysData[id].price);
-    this.ArrayOfData[id][34] = (this.ArrayOfData[id][34] * 100).toFixed() +'%'
+    this.ArrayOfData[id][34] = (this.ArrayOfData[id][34] * 100).toFixed() + '%'
     this.ArrayOfData[id][35] = this.arraysData[id].operating_income.splice(-1);
     this.ArrayOfData[id][36] = (this.ArrayOfData[id][35] / this.arraysData[id].price);
-    this.ArrayOfData[id][36] = (this.ArrayOfData[id][36] * 100).toFixed() +'%'
+    this.ArrayOfData[id][36] = (this.ArrayOfData[id][36] * 100).toFixed() + '%'
     this.ArrayOfData[id][37] = this.arraysData[id].pretax_income_per_share.splice(-1);
     this.ArrayOfData[id][38] = (this.ArrayOfData[id][37] / Number(this.arraysData[id].price));
-    this.ArrayOfData[id][38] = (this.ArrayOfData[id][38] * 100).toFixed() +'%'
+    this.ArrayOfData[id][38] = (this.ArrayOfData[id][38] * 100).toFixed() + '%'
     this.ArrayOfData[id][39] = this.arraysData[id].fcf_per_share.splice(-1);
     this.ArrayOfData[id][40] = 'shares outstanding';
     this.ArrayOfData[id][41] = 'avaliable share';
@@ -286,6 +319,35 @@ export class PricingComponent implements OnInit {
     this.ArrayOfData[id][49] = this.arraysData[id].total_assets_cagr_10.splice(-1);
     this.ArrayOfData[id][50] = this.arraysData[id].total_equity_cagr_10.splice(-1);
     this.ArrayOfData[id][51] = this.arraysData[id].fcf_cagr_10.splice(-1);
+
+
+    // push values to operating it
+    this.grossprofitGrowthArr.push(this.ArrayOfData[id][17])
+    this.maxGrossProfitGrowthArr = this.getMax(this.grossprofitGrowthArr)
+    this.minGrossProfitGrowthArr = this.getMin(this.grossprofitGrowthArr)
+
+    this.freeCashFlowGrowthArr.push(this.ArrayOfData[id][39])
+    this.maxFreeCashFlowGrowthArr = this.getMax(this.freeCashFlowGrowthArr)
+    this.minFreeCashFlowGrowthArr = this.getMin(this.freeCashFlowGrowthArr)
+
+    this.totalAssetsGrowthArr.push(this.ArrayOfData[id][49])
+    this.maxTotalAssetsGrowthArr = this.getMax(this.totalAssetsGrowthArr)
+    this.minTotalAssetsGrowthArr = this.getMin(this.totalAssetsGrowthArr)
+
+    this.totalEquityGrowthArr.push(this.ArrayOfData[id][50])
+    this.maxTotalEquityGrowthArr = this.getMax(this.totalEquityGrowthArr)
+    this.minTotalEquityGrowthArr = this.getMin(this.totalEquityGrowthArr)
+
+    this.cashFromOperationsGrowthArr.push(this.ArrayOfData[id][45])
+    this.maxCashFromOperationsGrowthArr = this.getMax(this.cashFromOperationsGrowthArr)
+    this.minCashFromOperationsGrowthArr = this.getMin(this.cashFromOperationsGrowthArr)
+
+    this.revenue10PeriodCagrArr.push(this.ArrayOfData[id][45])
+    this.maxRevenue10PeriodCagrArr = this.getMax(this.revenue10PeriodCagrArr)
+    this.minRevenue10PeriodCagrArr = this.getMin(this.revenue10PeriodCagrArr)
+
+
+
     this.loaderStarted = false;
     this.isResponseBack = true;
   }
@@ -304,46 +366,65 @@ export class PricingComponent implements OnInit {
         //Second Call
         this.callApiAfterDataBase(searchKey).subscribe(res => {
           this.arraysData[id] = res;
-          this.arraysData[id].qfs_symbol = this.arraysData[id].data.metadata.qfs_symbol;
 
-          if (this.arraysData[id].errors) {
+          try {
+            this.arraysData[id].qfs_symbol = this.arraysData[id].data.metadata.qfs_symbol;
+
+            if (this.arraysData[id].errors) {
+              alert('Company Not Found');
+              e.target.value = '';
+              this.loaderStarted = false;
+              return;
+            };
+
+            // Third Call
+            this.getPriceDataFromItsApi(this.data).subscribe(response => {
+
+              this.apiRequest = response;
+
+              const targetItem = this.apiRequest.data.find((item: any) => {
+                const searchValue = item.qfs_symbol_v2;
+                if (searchValue == this.arraysData[id].qfs_symbol) {
+                  return item;
+                }
+              });
+
+              if (!targetItem) {
+                alert('Company Not Found');
+                e.target.value = '';
+                this.loaderStarted = false;
+                return;
+              }
+
+              this.arraysData[id].price = targetItem.price.toString();
+              this.arraysData[id].volume = targetItem.volume.toString();
+              this.arraysData[id].market_cap = targetItem.mkt_cap;
+              this.arraysData[id].pe_ratio = targetItem.pe;
+              this.arraysData[id].ps_ratio = targetItem.ps;
+              this.arraysData[id].pb_ratio = targetItem.pb;
+
+
+
+
+              //Fourth CAll
+              this.storeDataFromApiToDataBase(this.arraysData[id]).subscribe(res => {
+                this.returnDataFromDataBase(res, id);
+                localStorage.latestSearchKey = searchKey;
+              }, console.error);
+
+            }, error => alert('company not found'))
+
+            //Third CAll
+            // this.storeDataFromApiToDataBase(this.arraysData[id]).subscribe(res => {
+            //   this.returnDataFromDataBase(res, id);
+            // },console.error);
+
+          } catch (err) {
             alert('Company Not Found');
             e.target.value = '';
             this.loaderStarted = false;
             return;
-          };
-
-          // Third Call
-          this.getPriceDataFromItsApi(this.data).subscribe(response=>{
-
-            this.apiRequest = response;
-
-            const targetItem = this.apiRequest.data.find((item:any) => {
-              const searchValue = item.qfs_symbol_v2;
-              if(searchValue == this.arraysData[id].qfs_symbol){
-                return item;
-              };
-            });
-
-            this.arraysData[id].price = targetItem.price.toString();
-            this.arraysData[id].volume = targetItem.volume.toString();
-            this.arraysData[id].market_cap = targetItem.mkt_cap;
-            this.arraysData[id].pe_ratio = targetItem.pe;
-            this.arraysData[id].ps_ratio = targetItem.ps;
-            this.arraysData[id].pb_ratio = targetItem.pb;
-
-            //Fourth CAll
-            this.storeDataFromApiToDataBase(this.arraysData[id]).subscribe(res => {
-              this.returnDataFromDataBase(res, id);
-              localStorage.latestSearchKey = searchKey;
-            }, console.error);
-
-          })
-
-          //Third CAll
-          // this.storeDataFromApiToDataBase(this.arraysData[id]).subscribe(res => {
-          //   this.returnDataFromDataBase(res, id);
-          // },console.error);
+          }
 
         }, console.error);
 
@@ -355,5 +436,17 @@ export class PricingComponent implements OnInit {
   }
 
 
+  //-------------------------------------------------------- Operating ------------------------------//
+  //1- Gross Profit Growth
+  // Get maximum value from array
+
+  // testArr:any = [0,2,4,5,2,5,66]
+  getMax(arr: any) {
+    return Math.max.apply(null, arr)
+  }
+
+  getMin(arr: any) {
+    return Math.min.apply(null, arr)
+  }
 
 }

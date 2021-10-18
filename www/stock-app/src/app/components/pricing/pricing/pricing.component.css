@@ -62,3 +62,16 @@ input{
 .lightGreen{
   background: lightgreen;
 }
+
+
+.maxValue{
+  text-indent: 18px;
+  color:blue;
+  font-weight: bold;
+}
+
+.minValue{
+  text-indent: 18px;
+  color: red;
+  font-weight: bold;
+}
