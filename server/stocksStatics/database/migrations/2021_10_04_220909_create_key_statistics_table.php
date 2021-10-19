@@ -29,6 +29,8 @@ class CreateKeyStatisticsTable extends Migration
             $table->string('volume')->nullable();
             $table->string('average_daily_volume')->nullable();
             $table->string('volume_inc_dec')->nullable();
+            $table->string('shares_basic')->nullable();
+            $table->string('shares_diluted')->nullable();
             $table->string('pe_ratio')->nullable();
             $table->string('ps_ratio')->nullable();
             $table->string('pb_ratio')->nullable();
@@ -79,8 +81,7 @@ class CreateKeyStatisticsTable extends Migration
             $table->json('fcf_cagr_10')->nullable();
             $table->json('price_to_earnings')->nullable();
             $table->json('price_to_sales')->nullable();
-            $table->json('dividends_quarterly')->nullable();
-            $table->json('dividends_annual')->nullable();
+            $table->json('dividends')->nullable();
             $table->json('roe_median')->nullable();
             $table->json('price_to_book')->nullable();
             $table->json('enterprise_value_to_earnings')->nullable();

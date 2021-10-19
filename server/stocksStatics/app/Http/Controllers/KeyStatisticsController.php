@@ -38,6 +38,8 @@ class KeyStatisticsController extends Controller
             'price' => $request->price,
             'volume' => $request->volume,
             'market_cap' => $request->market_cap,
+            'shares_basic' => $request->shares_basic,
+            'shares_diluted' => $request->shares_diluted,
             'pe_ratio' => $request->pe_ratio,
             'ps_ratio' => $request->ps_ratio,
             'pb_ratio' => $request->pb_ratio,
@@ -87,8 +89,7 @@ class KeyStatisticsController extends Controller
             'total_assets_cagr_10' => $request->total_assets_cagr_10,
             'total_equity_cagr_10' => $request->total_equity_cagr_10,
             'fcf_cagr_10' => $request->fcf_cagr_10,
-            'dividends_quarterly' => $request->dividends_quarterly,
-            'dividends_annual' => $request->dividends_annual,
+            'dividends' => $request->dividends,
             'roe_median' => $request->roe_median,
             'price_to_book' => $request->price_to_book,
             'enterprise_value_to_earnings' => $request-> enterprise_value_to_earnings,
@@ -204,8 +205,7 @@ class KeyStatisticsController extends Controller
         $company->fcf_cagr_10 = $request->fcf_cagr_10;
         $company->price_to_earnings = $request->price_to_earnings;
         $company->price_to_sales = $request->price_to_sales;
-        $company->dividends_quarterly = $request->dividends_quarterly;
-        $company->dividends_annual = $request->dividends_annual;
+        $company->dividends = $request->dividends;
         $company->roe_median = $request->roe_median;
         $company->price_to_book = $request->price_to_book;
         $company->enterprise_value_to_earnings = $request-> enterprise_value_to_earnings;
