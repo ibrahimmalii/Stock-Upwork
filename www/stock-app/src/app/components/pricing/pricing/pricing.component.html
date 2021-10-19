@@ -19,15 +19,15 @@
           'blue' : index ==12 || index==39,
           'green' : index==13,
           'lightGreen' : index==27 || index==34,
-          'marginTop' : index== 12 || index == 15 || index==27 || index == 31
+          'marginTop' : index== 12 || index == 15 || index==27 || index == 31 || index == 47
         }">
           <input [ngClass]="{
-          'bg-black long-item text-warning w-100': index == 11 || index == 14 || index == 26 || index == 30,
+          'bg-black long-item text-warning w-100': index == 11 || index == 14 || index == 26 || index == 30 || index == 46,
           'bg-info' : index == 22
       }" disabled class="" value="{{prop.title}}">
           <abbr title="{{prop.comment}}">
             <i class="pull-right fa fa-info-circle" [ngClass]="{
-              'd-none' : index == 11 || index == 14 || index == 26 || index == 30
+              'd-none' : index == 11 || index == 14 || index == 26 || index == 30 || index == 46
             }" data-bs-toggle="modal" [attr.data-bs-target]="'#prop'+ index"></i>
           </abbr>
         </li>
@@ -156,7 +156,7 @@
         <input disabled [ngClass]="{
         'maxValue' : index==17 && item == maxGrossProfitGrowthArr || index==39 && item == maxFreeCashFlowGrowthArr || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
         'minValue' : index==17 && item == minGrossProfitGrowthArr || index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr
-      }" value="{{item}}">
+      }" value="{{index}}">
       </li>
     </ul>
   </div>
