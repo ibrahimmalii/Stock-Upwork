@@ -32,7 +32,7 @@ export class FilterAndSearchComponent implements OnInit {
 
   isPageLoaded: boolean = false;
   isResponseGet: boolean = false;
-  getPriceData : any;
+  getPriceData: any;
   responseData: any;
   financials: any;
   data: any;
@@ -55,7 +55,7 @@ export class FilterAndSearchComponent implements OnInit {
   totalLibilites: any
   totalAssets: any
   total: any
-  revenueGrowthIncrease : any;
+  revenueGrowthIncrease: any;
   revenueGrowth: any
   calculater: any
   roeMedian: any
@@ -78,7 +78,7 @@ export class FilterAndSearchComponent implements OnInit {
   deptToEquity: any
   deptToEquityFixed: any
   total_revenue: any
-
+  // dividends: any
 
 
   // One
@@ -109,7 +109,7 @@ export class FilterAndSearchComponent implements OnInit {
   operating_income: any;
   operating_margin: any;
   eps_diluted_growth: any;
-  dividends_annual: any;
+  dividends: any;
   roa: any;
   roe: any;
   roic: any;
@@ -261,7 +261,7 @@ export class FilterAndSearchComponent implements OnInit {
   }
 
 
-  getPriceDataFromItsApi(data : any){
+  getPriceDataFromItsApi(data: any) {
     return this.apiService.get('https://public-api.quickfs.net/v1/market-data/last-close/US?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07')
   }
 
@@ -337,7 +337,7 @@ export class FilterAndSearchComponent implements OnInit {
     this.apiRequest.total_equity_cagr_10 = this.data.data.financials.annual.total_equity_cagr_10;
     this.apiRequest.fcf_cagr_10 = this.data.data.financials.annual.fcf_cagr_10;
     this.apiRequest.dividends_quarterly = this.data.data.financials.quarterly.dividends;
-    this.apiRequest.dividends_annual = this.data.data.financials.annual.dividends;
+    this.apiRequest.dividends = this.data.data.financials.annual.dividends;
     this.apiRequest.roe_median = this.data.data.financials.annual.roe_median;
     this.apiRequest.price_to_book = this.data.data.financials.quarterly.price_to_book;
     this.apiRequest.enterprise_value_to_earnings = this.data.data.financials.annual.enterprise_value_to_earnings;
@@ -359,7 +359,7 @@ export class FilterAndSearchComponent implements OnInit {
     this.apiRequest.dividends_per_share_growth = this.data.data.financials.annual.dividends_per_share_growth;
 
 
-      // Store Company In Our DataBase And Return Data From There
+    // Store Company In Our DataBase And Return Data From There
     console.log(this.requestService);
     return this.apiService.post('http://localhost:8000/api/keyStatistics', this.requestService.data,
       { headers: { 'Authorization': this.userService.getToken() } }
@@ -435,7 +435,7 @@ export class FilterAndSearchComponent implements OnInit {
     this.operating_margin = this.splicedArray(this.data.operating_margin);
     this.eps_diluted = this.splicedArray(this.data.eps_diluted)
     this.eps_diluted_growth = this.splicedArray(this.data.eps_diluted_growth);
-    this.dividends_annual = this.splicedArray(this.data.dividends_annual);
+    this.dividends = this.splicedArray(this.data.dividends);
     this.dividends_per_share_growth = this.splicedArray(this.data.dividends_per_share_growth)
     this.roa = this.splicedArray(this.data.roa);
     this.roe = this.splicedArray(this.data.roe);
@@ -461,48 +461,76 @@ export class FilterAndSearchComponent implements OnInit {
           this.data = res;
           this.data.qfs_symbol = this.data.data.metadata.qfs_symbol
 
-          if (this.data.errors) {
+          try {
+            if (this.data.errors) {
+              alert('Company Not Found');
+              e.target.value = '';
+              return;
+            };
+
+            // Third Call
+            this.getPriceDataFromItsApi(this.data).subscribe(response => {
+
+              this.apiRequest = response;
+
+              const targetItem = this.apiRequest.data.find((item: any) => {
+                const searchValue = item.qfs_symbol_v2;
+                if (searchValue == this.data.qfs_symbol) {
+                  return item;
+                };
+              });
+
+              this.data.price = targetItem.price.toString();
+              this.data.volume = targetItem.volume.toString();
+              this.data.market_cap = targetItem.mkt_cap;
+              this.data.pe_ratio = targetItem.pe;
+              this.data.ps_ratio = targetItem.ps;
+              this.data.pb_ratio = targetItem.pb;
+
+              //Fourth CAll
+              this.storeDataFromApiToDataBase(this.data).subscribe(res => {
+                this.returnDataFromDataBase(res);
+                localStorage.latestSearchKey = searchKey;
+              }, (error) => {
+                alert('Company Not Found');
+                e.target.value = '';
+                this.loaderStarted = false;
+                return;
+              });
+
+            })
+
+          } catch (e) {
             alert('Company Not Found');
-            e.target.value = '';
+            this.loaderStarted = false;
             return;
-          };
-
-          // Third Call
-          this.getPriceDataFromItsApi(this.data).subscribe(response=>{
-
-            this.apiRequest = response;
-
-            const targetItem = this.apiRequest.data.find((item:any) => {
-              const searchValue = item.qfs_symbol_v2;
-              if(searchValue == this.data.qfs_symbol){
-                return item;
-              };
-            });
-
-            this.data.price = targetItem.price.toString();
-            this.data.volume = targetItem.volume.toString();
-            this.data.market_cap = targetItem.mkt_cap;
-            this.data.pe_ratio = targetItem.pe;
-            this.data.ps_ratio = targetItem.ps;
-            this.data.pb_ratio = targetItem.pb;
-
-            //Fourth CAll
-            this.storeDataFromApiToDataBase(this.data).subscribe(res => {
-              this.returnDataFromDataBase(res);
-              localStorage.latestSearchKey = searchKey;
-            }, console.error);
-
-          })
+          }
 
 
-        }, console.error);
+
+
+
+        }, (error) => {
+          alert('Company Not Found');
+          e.target.value = '';
+          this.loaderStarted = false;
+          return;
+        });
+
 
       } else {
         this.returnDataFromDataBase(res);
         localStorage.latestSearchKey = searchKey;
       }
 
-    }, console.error);
+
+
+    }, (error) => {
+      alert('Company Not Found');
+      e.target.value = '';
+      this.loaderStarted = false;
+      return;
+    });
   }
 
 

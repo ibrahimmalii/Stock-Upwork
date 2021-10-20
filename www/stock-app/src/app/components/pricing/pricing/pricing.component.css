@@ -52,15 +52,17 @@ input{
 }
 
 .blue{
+  font-weight: bold;
   background-color:lightblue;
 }
 
-.green{
+.light-green{
   background-color:  rgb(104 244 175);
 }
 
-.lightGreen{
-  background: lightgreen;
+.green{
+  background: green;
+  font-weight: bold;
 }
 
 
@@ -74,4 +76,12 @@ input{
   text-indent: 18px;
   color: red;
   font-weight: bold;
+}
+
+.bg-brown{
+  background-color:brown;
+}
+
+.higherThanOne{
+  background-color: green;
 }

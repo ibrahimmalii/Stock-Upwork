@@ -14,6 +14,30 @@ import { ApiService } from './../../../services/api.service';
 export class PricingComponent implements OnInit {
   //-========================= Define Arrays To Operations ===========================//
 
+  roicArr: any = []
+  maxRoicArr: any
+
+  roceArr: any = []
+  maxRoceArr: any
+
+  rotceArr: any = []
+  maxRotceArr: any
+
+  fiveRIndicatorArr: any = []
+  maxFiveRIndicatorArr: any
+
+  payoutRatio: any = []
+  maxPayoutRatio: any
+
+  deptToEquity: any = []
+  maxDeptToEquity: any
+
+  revenuePerShareRatio: any = []
+  maxRevenuePerShareRatio: any
+
+  editdaPerShareRatio: any = []
+  maxEditdaPerShareRatio: any
+
   grossprofitGrowthArr: any = [];
   maxGrossProfitGrowthArr: any;
   minGrossProfitGrowthArr: any;
@@ -99,7 +123,7 @@ export class PricingComponent implements OnInit {
 
 
   oparator(op: any, arr: any) {
-    return eval(arr.join(op)).toFixed(2) + '%'
+    return eval(arr.join(op)).toFixed(2) + ' %'
   }
 
 
@@ -114,7 +138,6 @@ export class PricingComponent implements OnInit {
       { headers: { 'Authorization': this.userService.getToken() } }
     ).subscribe(response => {
       this.properties = response;
-      console.log(this.properties)
       this.properties = this.properties.splice(0, 52);
       this.isPropertiesLoaded = true;
     })
@@ -156,16 +179,15 @@ export class PricingComponent implements OnInit {
     this.data = data;
 
 
-
-
-
-
     // If Company Exist
     // Start Of Send Requests
     this.apiRequest = this.requestService.data;
 
+    this.apiRequest.dividends_quarterly = this.data.data.financials.quarterly.dividends;
+
+
     //Latest Data in Requirements file
-    this.apiRequest.shares_basic =  this.data.data.financials.ttm.shares_basic;
+    this.apiRequest.shares_basic = this.data.data.financials.ttm.shares_basic;
     this.apiRequest.shares_diluted = this.data.data.financials.ttm.shares_diluted;
     console.log('diluted', this.apiRequest.shared_diluted)
     this.apiRequest.eps_diluted_cagr_10 = this.data.data.financials.annual.eps_diluted_cagr_10;
@@ -273,7 +295,7 @@ export class PricingComponent implements OnInit {
     this.arraysData[id] = res;
     this.allStatus[id] = true;
 
-    this.ArrayOfData[id][0] = this.arraysData[id].price + '$';
+    this.ArrayOfData[id][0] = this.arraysData[id].price + ' $';
     this.ArrayOfData[id][1] = this.arraysData[id].price;
     this.ArrayOfData[id][2] = this.arraysData[id].industry
     this.ArrayOfData[id][3] = this.arraysData[id].sector
@@ -283,7 +305,7 @@ export class PricingComponent implements OnInit {
     this.ArrayOfData[id][6] = (parseInt(this.ArrayOfData[id][6]) / 1000000).toFixed(0)
     this.ArrayOfData[id][7] = this.arraysData[id].volume;
     this.ArrayOfData[id][8] = (Number(this.ArrayOfData[id][7]) / 14);
-    this.ArrayOfData[id][9] = (Number(this.arraysData[id].volume) - this.ArrayOfData[id][8]) / this.ArrayOfData[id][8] + '%';
+    this.ArrayOfData[id][9] = ((Number(this.arraysData[id].volume)) - (Number(this.ArrayOfData[id][7]) / 14) / this.ArrayOfData[id][8]).toFixed(1)
     this.ArrayOfData[id][10] = (Number(this.arraysData[id].shares_basic) / Number(this.arraysData[id].shares_diluted))
 
     this.ArrayOfData[id][12] = this.arraysData[id].pe_ratio;
@@ -295,43 +317,68 @@ export class PricingComponent implements OnInit {
     this.ArrayOfData[id][17] = parseInt(this.arraysData[id].gross_profit.splice(-1)[0]) / 1000000;
     this.ArrayOfData[id][18] = parseInt(this.arraysData[id].total_opex.splice(-1)[0]);
     this.ArrayOfData[id][18] = this.ArrayOfData[id][18] / 1000000;
-    this.ArrayOfData[id][19] = (this.arraysData[id].roic.splice(-1)[0] * 100).toFixed(1) + '%';
-    this.ArrayOfData[id][20] = (this.arraysData[id].roce.splice(-1)[0] * 100).toFixed(1) + '%';
-    this.ArrayOfData[id][21] = (this.arraysData[id].rotce.splice(-1)[0] * 100).toFixed(1) + '%';
-    this.ArrayOfData[id][22] = (this.arraysData[id].rotce.splice(-1)[0] * 100).toFixed(1) + '%';
-    this.ArrayOfData[id][23] = this.arraysData[id].dividends.splice(-1)[0] + '$';
+    this.ArrayOfData[id][19] = (this.arraysData[id].roic.splice(-1)[0] * 100).toFixed(1)
+    this.ArrayOfData[id][20] = (this.arraysData[id].roce.splice(-1)[0] * 100).toFixed(1)
+    this.ArrayOfData[id][21] = (this.arraysData[id].rotce.splice(-1)[0] * 100).toFixed(1)
+    this.ArrayOfData[id][22] = (this.arraysData[id].rotce.splice(-1)[0] * 100).toFixed(1)
+    this.ArrayOfData[id][23] = this.arraysData[id].dividends.splice(-1)[0] + ' $';
     this.ArrayOfData[id][24] = (Number(this.arraysData[id].dividends.splice(-1)[0]) / Number(this.arraysData[id].price)).toFixed(2);
-    this.ArrayOfData[id][25] = this.arraysData[id].payout_ratio.splice(-1)[0] * 100 + '%';
+    this.ArrayOfData[id][25] = (this.arraysData[id].payout_ratio.splice(-1)[0] * 100).toFixed(1)
     this.ArrayOfData[id][27] = this.arraysData[id].debt_to_equity.splice(-1)[0].toFixed(2);
     this.ArrayOfData[id][28] = this.arraysData[id].debt_to_assets.splice(-1)[0].toFixed(2);
     this.ArrayOfData[id][29] = this.arraysData[id].assets_to_equity.splice(-1)[0].toFixed(2);
-    this.ArrayOfData[id][31] = this.arraysData[id].revenue_per_share.splice(-1)[0].toFixed(2) + '$';
-    this.ArrayOfData[id][32] = this.arraysData[id].ebitda_per_share.splice(-1)[0].toFixed(2) + '$';
+    this.ArrayOfData[id][31] = this.arraysData[id].revenue_per_share.splice(-1)[0].toFixed(2) + ' $';
+    this.ArrayOfData[id][32] = this.arraysData[id].ebitda_per_share.splice(-1)[0].toFixed(2) + ' $';
     this.ArrayOfData[id][33] = (Number(this.arraysData[id].revenue_per_share.splice(-1)[0]) / Number(this.arraysData[id].price)).toFixed(2);
     this.ArrayOfData[id][34] = (Number(this.arraysData[id].ebitda_per_share.splice(-1)[0]) / Number(this.arraysData[id].price)).toFixed(1);
-    this.ArrayOfData[id][35] = (this.arraysData[id].operating_income.splice(-1)[0] / 1000000).toFixed(2) + '$';
+    this.ArrayOfData[id][35] = (this.arraysData[id].operating_income.splice(-1)[0] / 1000000).toFixed(2) + ' $';
     this.ArrayOfData[id][36] = (Number(this.arraysData[id].operating_income.splice(-1)[0]) / Number(this.arraysData[id].price)).toFixed(2);
     this.ArrayOfData[id][37] = this.arraysData[id].pretax_income_per_share.splice(-1)[0].toFixed(2);
     this.ArrayOfData[id][38] = (Number(this.arraysData[id].pretax_income_per_share.splice(-1)[0]) / Number(this.arraysData[id].price)).toFixed(2);
-    this.ArrayOfData[id][39] = this.arraysData[id].fcf_per_share.splice(-1)[0].toFixed(2) + '$';
+    this.ArrayOfData[id][39] = this.arraysData[id].fcf_per_share.splice(-1)[0].toFixed(2) + ' $';
     this.ArrayOfData[id][40] = this.arraysData[id].shares_basic / 1000000;
     this.ArrayOfData[id][41] = this.arraysData[id].shares_diluted / 1000000;
     this.ArrayOfData[id][42] = 'beta';
-    this.ArrayOfData[id][43] = (this.arraysData[id].total_assets_growth.splice(-1)[0] * 100).toFixed(1) + '%';
-    this.ArrayOfData[id][44] = (this.arraysData[id].total_equity_growth.splice(-1)[0] * 100).toFixed(1) + '%';
-    this.ArrayOfData[id][45] = (this.arraysData[id].cfo_growth.splice(-1)[0] * 100).toFixed(1) + '%';
+    this.ArrayOfData[id][43] = (this.arraysData[id].total_assets_growth.splice(-1)[0] * 100).toFixed(1) + ' %';
+    this.ArrayOfData[id][44] = (this.arraysData[id].total_equity_growth.splice(-1)[0] * 100).toFixed(1) + ' %';
+    this.ArrayOfData[id][45] = (this.arraysData[id].cfo_growth.splice(-1)[0] * 100).toFixed(1) + ' %';
     this.ArrayOfData[id][46] = 'black line'
-    this.ArrayOfData[id][47] = (this.arraysData[id].revenue_cagr_10.splice(-1)[0] * 100).toFixed(1) + '%';
-    this.ArrayOfData[id][48] = (this.arraysData[id].eps_diluted_cagr_10.splice(-1)[0] * 100).toFixed(1) + '%';
-    this.ArrayOfData[id][49] = (this.arraysData[id].total_assets_cagr_10.splice(-1)[0] * 100).toFixed(1) + '%';
-    this.ArrayOfData[id][50] = (this.arraysData[id].total_equity_cagr_10.splice(-1)[0] * 100).toFixed(1) + '%';
-    this.ArrayOfData[id][51] = (this.arraysData[id].fcf_cagr_10.splice(-1)[0] * 100).toFixed(1) + '%';
+    this.ArrayOfData[id][47] = (this.arraysData[id].revenue_cagr_10.splice(-1)[0] * 100).toFixed(1) + ' %';
+    this.ArrayOfData[id][48] = (this.arraysData[id].eps_diluted_cagr_10.splice(-1)[0] * 100).toFixed(1) + ' %';
+    this.ArrayOfData[id][49] = (this.arraysData[id].total_assets_cagr_10.splice(-1)[0] * 100).toFixed(1) + ' %';
+    this.ArrayOfData[id][50] = (this.arraysData[id].total_equity_cagr_10.splice(-1)[0] * 100).toFixed(1) + ' %';
+    this.ArrayOfData[id][51] = (this.arraysData[id].fcf_cagr_10.splice(-1)[0] * 100).toFixed(1) + ' %';
 
 
     // push values to operating it
+
     this.grossprofitGrowthArr.push(this.ArrayOfData[id][17])
     this.maxGrossProfitGrowthArr = this.getMax(this.grossprofitGrowthArr)
     this.minGrossProfitGrowthArr = this.getMin(this.grossprofitGrowthArr)
+
+    this.roicArr.push(this.ArrayOfData[id][19])
+    this.maxRoicArr = this.getMax(this.roicArr)
+
+    this.roceArr.push(this.ArrayOfData[id][20])
+    this.maxRoceArr = this.getMax(this.roceArr)
+
+    this.rotceArr.push(this.ArrayOfData[id][21])
+    this.maxRotceArr = this.getMax(this.rotceArr)
+
+    this.fiveRIndicatorArr.push(this.ArrayOfData[id][22])
+    this.maxFiveRIndicatorArr = this.getMax(this.fiveRIndicatorArr)
+
+    this.deptToEquity.push(this.ArrayOfData[id][27])
+    this.maxDeptToEquity = this.getMax(this.deptToEquity)
+
+    this.payoutRatio.push(this.ArrayOfData[id][25])
+    this.maxPayoutRatio = this.getMax(this.payoutRatio)
+
+    this.revenuePerShareRatio.push(this.ArrayOfData[id][33])
+    this.maxRevenuePerShareRatio = this.getMax(this.revenuePerShareRatio)
+
+    this.editdaPerShareRatio.push(this.ArrayOfData[id][34])
+    this.maxEditdaPerShareRatio = this.getMax(this.editdaPerShareRatio)
 
     this.freeCashFlowGrowthArr.push(this.ArrayOfData[id][39])
     this.maxFreeCashFlowGrowthArr = this.getMax(this.freeCashFlowGrowthArr)
@@ -421,7 +468,12 @@ export class PricingComponent implements OnInit {
               this.storeDataFromApiToDataBase(this.arraysData[id]).subscribe(res => {
                 this.returnDataFromDataBase(res, id);
                 localStorage.latestSearchKey = searchKey;
-              }, console.error);
+              }, (error) => {
+                alert('Sorry Your Number Of Requestes Done Today!');
+                e.target.value = '';
+                this.loaderStarted = false;
+                return;
+              });
 
             }, error => alert('company not found'))
 
@@ -432,21 +484,19 @@ export class PricingComponent implements OnInit {
             return;
           }
 
-        }, console.error);
+        }, error => alert('company not found'));
 
       } else {
         this.returnDataFromDataBase(res, id);
       }
 
-    }, console.error);
+    }, error => alert('company not found'));
   }
 
 
   //-------------------------------------------------------- Operating ------------------------------//
   //1- Gross Profit Growth
   // Get maximum value from array
-
-  // testArr:any = [0,2,4,5,2,5,66]
   getMax(arr: any) {
     return Math.max.apply(null, arr)
   }
