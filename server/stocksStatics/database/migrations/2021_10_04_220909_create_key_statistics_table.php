@@ -101,6 +101,8 @@ class CreateKeyStatisticsTable extends Migration
             $table->json('eps_diluted')->nullable();
             $table->json('eps_diluted_growth')->nullable();
             $table->json('dividends_per_share_growth')->nullable();
+            $table->json('dividends_quarterly')->nullable();
+            $table->json('dividends_annual')->nullable();
 
 
 

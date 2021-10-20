@@ -23,6 +23,13 @@ class KeyStatisticsController extends Controller
         };
         // $user->number_of_requests = $user->number_of_requests + 1;
 
+        // dd($user->limit_of_requests);
+
+        $msg = "Sorry you can't send another request today";
+        if($user->limit_of_requests <= $user->number_of_requests){
+            return $msg;
+        }
+
         DB::table('users')->where('id', $user->id)->update(['number_of_requests' => $user->number_of_requests + 1]);
 
         // Angular
@@ -108,7 +115,9 @@ class KeyStatisticsController extends Controller
             'gross_margin' => $request-> gross_margin,
             'eps_diluted' => $request-> eps_diluted,
             'eps_diluted_growth' => $request-> eps_diluted_growth,
-            'dividends_per_share_growth' => $request-> dividends_per_share_growth
+            'dividends_per_share_growth' => $request-> dividends_per_share_growth,
+            'dividends_quarterly' => $request->dividends_quarterly,
+            'dividends_annual' => $request->dividends_annual,
         ]);
 
         $currentRequest = Requests::where('id', 1)->get();

@@ -96,6 +96,8 @@ class KeyStatistics extends Model
         'eps_diluted',
         'eps_diluted_growth',
         'dividends_per_share_growth',
+        'dividends_quarterly',
+        'dividends_annual'
     ];
 
     protected $casts = [
@@ -167,5 +169,7 @@ class KeyStatistics extends Model
         'eps_diluted' => 'array',
         'eps_diluted_growth' => 'array',
         'dividends_per_share_growth' => 'array',
+        'dividends_quarterly'=> 'array',
+        'dividends_annual' => 'array'
     ];
 }
