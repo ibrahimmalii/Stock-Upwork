@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { RequestService } from 'src/app/services/request.service';
 import { UserService } from 'src/app/services/user.service';
-
+import { Chart } from 'angular-highcharts';
 
 
 
@@ -13,6 +13,8 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./filter-and-search.component.css']
 })
 export class FilterAndSearchComponent implements OnInit {
+
+  chart!: Chart;
 
   constructor(private userService: UserService, private apiService: ApiService, private requestService: RequestService) { }
   products=[];
@@ -197,7 +199,11 @@ export class FilterAndSearchComponent implements OnInit {
     // }, 3000);
 
 
-
+    this.init();
+    console.log('on init');
+    this.chart.ref$.subscribe((chart) => {
+      console.log(chart);
+    });
 
 
 
@@ -235,6 +241,52 @@ export class FilterAndSearchComponent implements OnInit {
     // })
   }
 
+
+  
+  init() {
+    this.chart = new Chart({
+      rangeSelector: {
+        selected: 1,
+      },
+      chart: {
+        type: 'line',
+      },
+      title: {
+        text: 'Return On Invested Capital',
+      },
+      credits: {
+        enabled: false,
+      },
+      series: [
+        {
+          data:[
+            [2002,10],
+            [2003,60],
+            [2004,30],
+            [2005,40],
+            [2006,50],
+            [2007,10],
+            [2008,70],
+            [2009,40],
+            [2010,90],
+            [2011,10],
+            [2012,20],
+            [2013,30],
+            [2014,20],
+            [2015,40],
+            [2016,10],
+            [2018,10],
+            [2019,10],
+            [2020,10],
+            [2021,10]
+          ],
+          type: 'spline',
+        },
+        
+      ],
+
+    });
+  }
 
 
   splicedArray(arr: any) {

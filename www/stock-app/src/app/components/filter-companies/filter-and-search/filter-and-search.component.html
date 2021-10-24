@@ -12,31 +12,20 @@
   </div>
 
 
-  <!-- <div *ngIf="firstLoading">
-    <div [hidden]="isPageLoaded">
-      <input #searchKey (keyup.enter)="getData($event, searchKey.value)"
-      placeholder="Search by ticker symbol or company name" list="company" name="company"
-      class="form-control mb-5 w-50 m-auto">
-      <datalist id="company" style="height : 200px">
-        <option class="form-control" *ngFor="let symbol of symbols; let i = index" value={{symbol}}></option>
-      </datalist>
-    </div>
-  </div> -->
 
-  <div class="container" *ngIf="!isResponseGet">
+  <div class="container" *ngIf="isResponseGet">
     <div class="content text-center my-5">
       <p class="h1">Please Search For Company To Get All Information</p>
       <i class="h1 fa fa-search"></i>
     </div>
   </div>
 
-  <div class="loader container text-center" *ngIf="loaderStarted">
-    <img src="/assets/images/ajax-loader.gif">
+  <div class="loader container text-center" *ngIf="!loaderStarted">
   </div>
 
 </section>
 
-<section class="best-mode" *ngIf="isResponseGet">
+<section class="best-mode" *ngIf="!isResponseGet">
   <div class="div1 text-center p-3">
     <img src="/assets/images/1.png">
   </div>
@@ -52,7 +41,7 @@
 
   <!--section2-->
 
-  <section class="sec2 d-flex flex-wrap" *ngIf="isResponseGet">
+  <section class="sec2 d-flex flex-wrap" *ngIf="!isResponseGet">
     <article class="col-lg-5 col-sm-11">
       <div>
         <h3>Beast Mode Scorecard</h3>
@@ -147,7 +136,7 @@
 </section>
 
 <!-----------------------------------secction of table one--------------------------------------->
-<section class="d-flex justify-contents-between one text-center" *ngIf="isResponseGet">
+<section class="d-flex justify-contents-between one text-center" *ngIf="!isResponseGet">
   <table class="col t table-responsive">
     <thead>
       <tr>
@@ -235,12 +224,12 @@
     </tbody>
   </table>
   <div class="chart col">
-    <img src="/assets/images/chart.png">
+      <div [chart]="chart"  class="mainChart"></div>
   </div>
 </section>
 
 <!-----------------------------------secction of table two--------------------------------------->
-<section class="two" *ngIf="isResponseGet">
+<section class="two" *ngIf="!isResponseGet">
   <table class="table my-5">
     <thead>
       <tr>

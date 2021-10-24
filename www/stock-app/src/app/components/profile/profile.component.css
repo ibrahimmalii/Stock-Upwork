@@ -1,0 +1,12 @@
+tr,td ,th{ 
+    width: 60%;
+    /* text-align: center; */
+}
+table{
+    margin: auto;
+}
+.parent{
+    padding-top: 200px;
+    padding-bottom: 200px;
+    color: var(--mc);
+}
