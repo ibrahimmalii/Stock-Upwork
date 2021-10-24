@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\KeyStatistics;
 use Illuminate\Http\Request;
-use Mockery\Undefined;
-use PhpParser\Node\Stmt\Foreach_;
 use App\Models\Requests;
+use App\Models\Tier;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 class KeyStatisticsController extends Controller
 {
@@ -21,16 +19,40 @@ class KeyStatisticsController extends Controller
         if(!$user){
             return $this->NotFoundError();
         };
-        // $user->number_of_requests = $user->number_of_requests + 1;
 
-        // dd($user->limit_of_requests);
+        // Get current tier to get limit of requests
+        $tier = Tier::find($user->tier_id);
+
+        // Updates In User Table
+        $user->monthly_number_of_requests = $user->monthly_number_of_requests + 1;
+        $user->daily_number_of_requests = $user->daily_number_of_requests + 1;
+        $avg_requests = ($user->monthly_number_of_requests / 30);
+
+        // dd($user->monthly_number_of_requests / 30);
 
         $msg = "Sorry you can't send another request today";
-        if($user->limit_of_requests <= $user->number_of_requests){
+        if($tier->request_limit == $user->monthly_number_of_requests){
             return $msg;
         }
 
-        DB::table('users')->where('id', $user->id)->update(['number_of_requests' => $user->number_of_requests + 1]);
+        DB::table('users')->where('id', $user->id)->update([
+            'monthly_number_of_requests' => $user->monthly_number_of_requests,
+            'daily_number_of_requests' => $user->daily_number_of_requests,
+            'avg_monthly_number_of_requests' => $avg_requests
+        ]);
+
+        // Update In Requests Table
+        $currentRequest = Requests::where('id', 1)->get();
+        if(!$currentRequest){
+            return $this->NotFoundError();
+        };
+
+        $currentRequest[0]->monthly_number_of_requests = $currentRequest[0]->monthly_number_of_requests + 1;
+        $currentRequest[0]->remaining_of_requests = $currentRequest[0]->avaliable_requests - $currentRequest[0]->monthly_number_of_requests;
+
+        $currentRequest[0]->save();
+
+
 
         // Angular
         $data = KeyStatistics::create([
@@ -118,16 +140,10 @@ class KeyStatisticsController extends Controller
             'dividends_per_share_growth' => $request-> dividends_per_share_growth,
             'dividends_quarterly' => $request->dividends_quarterly,
             'dividends_annual' => $request->dividends_annual,
+            'beta' => $request->beta
         ]);
 
-        $currentRequest = Requests::where('id', 1)->get();
-        if(!$currentRequest){
-            $currentRequest[0]->number_of_requests += 1;
-        };
 
-        $currentRequest[0]->number_of_requests = $currentRequest[0]->number_of_requests + 1;
-
-        $currentRequest[0]->save();
 
 
 

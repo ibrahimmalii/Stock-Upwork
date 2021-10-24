@@ -103,6 +103,7 @@ class CreateKeyStatisticsTable extends Migration
             $table->json('dividends_per_share_growth')->nullable();
             $table->json('dividends_quarterly')->nullable();
             $table->json('dividends_annual')->nullable();
+            $table->string('beta')->nullable();
 
 
 

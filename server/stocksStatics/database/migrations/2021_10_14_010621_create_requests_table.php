@@ -15,7 +15,10 @@ class CreateRequestsTable extends Migration
     {
         Schema::create('requests', function (Blueprint $table) {
             $table->id();
-            $table->integer('number_of_requests');
+            $table->integer('avaliable_requests')->default(250000);
+            $table->integer('limit_of_requests')->default(10);// How many user has requsts
+            $table->integer('monthly_number_of_requests');
+            $table->integer('remaining_of_requests'); // Available - Monthly
             $table->timestamps();
         });
     }
