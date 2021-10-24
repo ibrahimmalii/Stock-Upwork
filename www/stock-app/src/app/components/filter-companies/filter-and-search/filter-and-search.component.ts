@@ -480,6 +480,13 @@ export class FilterAndSearchComponent implements OnInit {
                 };
               });
 
+              if (!targetItem) {
+                alert('Company Not Found');
+                e.target.value = '';
+                this.loaderStarted = false;
+                return;
+              }
+
               this.data.price = targetItem.price.toString();
               this.data.volume = targetItem.volume.toString();
               this.data.market_cap = targetItem.mkt_cap;
@@ -492,12 +499,16 @@ export class FilterAndSearchComponent implements OnInit {
                 this.returnDataFromDataBase(res);
                 localStorage.latestSearchKey = searchKey;
               }, (error) => {
-                alert('Company Not Found');
+                alert('Sorry Your Number Of Requestes Done Today!');
                 e.target.value = '';
                 this.loaderStarted = false;
                 return;
               });
 
+            }, (error) => {
+              alert('Company Not Found');
+              this.loaderStarted = false;
+              return;
             })
 
           } catch (e) {

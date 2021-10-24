@@ -42,8 +42,9 @@ export class UserService {
   }
 
   isAdmin(){
-    const user = JSON.parse(localStorage.user);
-    return user.role_id === 1 ? true : false;
+    // const user = JSON.parse(localStorage.user);
+    // return user.role_id === 1 ? true : false;
+    return false;
   }
 
   getToken(){

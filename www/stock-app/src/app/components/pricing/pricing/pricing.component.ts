@@ -12,6 +12,7 @@ import { ApiService } from './../../../services/api.service';
   styleUrls: ['./pricing.component.css']
 })
 export class PricingComponent implements OnInit {
+
   //-========================= Define Arrays To Operations ===========================//
 
   roicArr: any = []
@@ -198,6 +199,7 @@ export class PricingComponent implements OnInit {
     this.apiRequest.pe_ratio = this.data.pe_ratio;
     this.apiRequest.ps_ratio = this.data.ps_ratio;
     this.apiRequest.pb_ratio = this.data.pb_ratio;
+    this.apiRequest.beta = this.data.beta;
 
 
     this.apiRequest.name = this.data.data.metadata.name;
@@ -338,11 +340,11 @@ export class PricingComponent implements OnInit {
     this.ArrayOfData[id][39] = this.arraysData[id].fcf_per_share.splice(-1)[0].toFixed(2) + ' $';
     this.ArrayOfData[id][40] = this.arraysData[id].shares_basic / 1000000;
     this.ArrayOfData[id][41] = this.arraysData[id].shares_diluted / 1000000;
-    this.ArrayOfData[id][42] = 'beta';
+    this.ArrayOfData[id][42] = this.arraysData[id].beta;
     this.ArrayOfData[id][43] = (this.arraysData[id].total_assets_growth.splice(-1)[0] * 100).toFixed(1) + ' %';
     this.ArrayOfData[id][44] = (this.arraysData[id].total_equity_growth.splice(-1)[0] * 100).toFixed(1) + ' %';
     this.ArrayOfData[id][45] = (this.arraysData[id].cfo_growth.splice(-1)[0] * 100).toFixed(1) + ' %';
-    this.ArrayOfData[id][46] = 'black line'
+    this.ArrayOfData[id][46] = 'black line';
     this.ArrayOfData[id][47] = (this.arraysData[id].revenue_cagr_10.splice(-1)[0] * 100).toFixed(1) + ' %';
     this.ArrayOfData[id][48] = (this.arraysData[id].eps_diluted_cagr_10.splice(-1)[0] * 100).toFixed(1) + ' %';
     this.ArrayOfData[id][49] = (this.arraysData[id].total_assets_cagr_10.splice(-1)[0] * 100).toFixed(1) + ' %';
@@ -460,7 +462,7 @@ export class PricingComponent implements OnInit {
               this.arraysData[id].pe_ratio = targetItem.pe;
               this.arraysData[id].ps_ratio = targetItem.ps;
               this.arraysData[id].pb_ratio = targetItem.pb;
-
+              this.arraysData[id].beta = targetItem.beta;
 
 
 
@@ -484,13 +486,23 @@ export class PricingComponent implements OnInit {
             return;
           }
 
-        }, error => alert('company not found'));
+        }, error =>{
+          alert('Company Not Found');
+          e.target.value = '';
+          this.loaderStarted = false;
+          return;
+        });
 
       } else {
         this.returnDataFromDataBase(res, id);
       }
 
-    }, error => alert('company not found'));
+    }, error =>{
+      alert('Company Not Found');
+      e.target.value = '';
+      this.loaderStarted = false;
+      return;
+    });
   }
 
 
