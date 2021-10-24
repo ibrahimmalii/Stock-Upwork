@@ -22,12 +22,66 @@ input{
   outline: none;
   border: none;
 }
-.dark-item{
-  background-color:black;
-  border: 1px solid black;
-}
+
 
 .model{
   position: absolute;
 }
 
+.loader > img{
+  width: 30px;
+}
+
+.content input{
+  width : 90%;
+}
+
+
+
+
+
+/* Rows and cells styles */
+.long-item{
+  width: 100vw;
+  position: absolute;
+  margin-bottom: 10px;
+}
+
+.marginTop{
+  margin-top: 24px;
+}
+
+.blue{
+  font-weight: bold;
+  background-color:lightblue;
+}
+
+.light-green{
+  background-color:  rgb(104 244 175);
+}
+
+.green{
+  background: green;
+  font-weight: bold;
+}
+
+
+.maxValue{
+  text-indent: 18px;
+  color:blue;
+  font-weight: bold;
+}
+
+.minValue{
+  text-indent: 18px;
+  color: red;
+  font-weight: bold;
+}
+
+.bg-brown{
+  background-color:brown;
+}
+
+.higherThanOne{
+  background-color: green;
+}

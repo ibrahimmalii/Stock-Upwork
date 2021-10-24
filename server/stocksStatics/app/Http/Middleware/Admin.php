@@ -16,8 +16,8 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        $role = $request->user()->role ?? null;
-        if($role == 2){
+        $role = $request->user()->role_id ?? null;
+        if($role == 1){
             return $next($request);
         }else{
             return response()->json([

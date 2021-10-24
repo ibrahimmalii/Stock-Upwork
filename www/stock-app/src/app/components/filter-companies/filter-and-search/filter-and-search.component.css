@@ -65,7 +65,7 @@ body{
 }
 
 .chart{
- margin-top: 12%;
+ margin-top: 3%;
 }
 
 .t{
@@ -74,9 +74,9 @@ body{
 }
 
 .t td, .t th{
- padding: 5px 20px;
+ padding: 3px 20px;
  /* margin-left: 30px; */
- margin-left: 20px;
+ margin-left: 10px;
 }
 
 
@@ -113,8 +113,3 @@ body{
 /* // XX-Large devices (larger desktops, 1400px and up) */
 @media (min-width: 1400px) { }
 
-
-.mainChart{
-  width: 50%;
-  margin: auto;
-}

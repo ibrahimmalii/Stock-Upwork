@@ -4,14 +4,55 @@ namespace App\Http\Controllers;
 
 use App\Models\KeyStatistics;
 use Illuminate\Http\Request;
-use Mockery\Undefined;
-use PhpParser\Node\Stmt\Foreach_;
 use App\Models\Requests;
-use Symfony\Component\HttpFoundation\RequestStack;
+use App\Models\Tier;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class KeyStatisticsController extends Controller
 {
     public function create(Request $request){
+
+        // dd(request()->bearerToken());// To GET Token From Request
+        // dd(Auth::user()->id);// To Get User Information
+        $user = Auth::user();
+        if(!$user){
+            return $this->NotFoundError();
+        };
+
+        // Get current tier to get limit of requests
+        $tier = Tier::find($user->tier_id);
+
+        // Updates In User Table
+        $user->monthly_number_of_requests = $user->monthly_number_of_requests + 1;
+        $user->daily_number_of_requests = $user->daily_number_of_requests + 1;
+        $avg_requests = ($user->monthly_number_of_requests / 30);
+
+        // dd($user->monthly_number_of_requests / 30);
+
+        $msg = "Sorry you can't send another request today";
+        if($tier->request_limit == $user->monthly_number_of_requests){
+            return $msg;
+        }
+
+        DB::table('users')->where('id', $user->id)->update([
+            'monthly_number_of_requests' => $user->monthly_number_of_requests,
+            'daily_number_of_requests' => $user->daily_number_of_requests,
+            'avg_monthly_number_of_requests' => $avg_requests
+        ]);
+
+        // Update In Requests Table
+        $currentRequest = Requests::where('id', 1)->get();
+        if(!$currentRequest){
+            return $this->NotFoundError();
+        };
+
+        $currentRequest[0]->monthly_number_of_requests = $currentRequest[0]->monthly_number_of_requests + 1;
+        $currentRequest[0]->remaining_of_requests = $currentRequest[0]->avaliable_requests - $currentRequest[0]->monthly_number_of_requests;
+
+        $currentRequest[0]->save();
+
+
 
         // Angular
         $data = KeyStatistics::create([
@@ -23,9 +64,15 @@ class KeyStatisticsController extends Controller
             'industry'=> $request->industry,
             'sector' =>$request->sector,
             'qfs_symbol'=> $request->qfs_symbol,
+            'price' => $request->price,
+            'volume' => $request->volume,
             'market_cap' => $request->market_cap,
+            'shares_basic' => $request->shares_basic,
+            'shares_diluted' => $request->shares_diluted,
+            'pe_ratio' => $request->pe_ratio,
+            'ps_ratio' => $request->ps_ratio,
+            'pb_ratio' => $request->pb_ratio,
             'enterprise_value'=> $request->enterprise_value,
-            'total_revenue' => $request->total_revenue,
             'cogs' => $request->cogs,
             'gross_profit' => $request->gross_profit,
             'total_opex' => $request->total_opex,
@@ -71,12 +118,8 @@ class KeyStatisticsController extends Controller
             'total_assets_cagr_10' => $request->total_assets_cagr_10,
             'total_equity_cagr_10' => $request->total_equity_cagr_10,
             'fcf_cagr_10' => $request->fcf_cagr_10,
-            'price_to_earnings' => $request->price_to_earnings,
-            'price_to_sales' => $request->price_to_sales,
-            'dividends_quarterly' => $request->dividends_quarterly,
-            'dividends_annual' => $request->dividends_annual,
+            'dividends' => $request->dividends,
             'roe_median' => $request->roe_median,
-
             'price_to_book' => $request->price_to_book,
             'enterprise_value_to_earnings' => $request-> enterprise_value_to_earnings,
             'enterprise_value_to_sales' => $request->enterprise_value_to_sales,
@@ -94,21 +137,29 @@ class KeyStatisticsController extends Controller
             'gross_margin' => $request-> gross_margin,
             'eps_diluted' => $request-> eps_diluted,
             'eps_diluted_growth' => $request-> eps_diluted_growth,
-            'dividends_per_share_growth' => $request-> dividends_per_share_growth
+            'dividends_per_share_growth' => $request-> dividends_per_share_growth,
+            'dividends_quarterly' => $request->dividends_quarterly,
+            'dividends_annual' => $request->dividends_annual,
+            'beta' => $request->beta
         ]);
 
-        $currentRequest = Requests::where('id', 1)->get();
-        if(!$currentRequest){
-            $currentRequest[0]->number_of_requests += 1;
-        };
 
-        $currentRequest[0]->number_of_requests = $currentRequest[0]->number_of_requests + 1;
 
-        $currentRequest[0]->save();
+
 
         return $data;
     }
+
+
     public function update(Request $request, $id){
+
+        $user = Auth::user();
+        if(!$user){
+            return $this->NotFoundError();
+        };
+
+        DB::table('users')->where('id', $user->id)->update(['number_of_requests' => $user->number_of_requests + 1]);
+
 
         $company = KeyStatistics::find($id);
 
@@ -126,9 +177,12 @@ class KeyStatisticsController extends Controller
         $company->industry = $request->industry;
         $company->sector =$request->sector;
         $company->qfs_symbol= $request->qfs_symbol;
+        $company->price = $request->price;
+        $company->pe_ratio = $request->pe_ratio;
+        $company->ps_ratio = $request->ps_ratio;
+        $company->pb_ratio = $request->pb_ratio;
         $company->market_cap = $request->market_cap;
         $company->enterprise_value = $request->enterprise_value;
-        $company->total_revenue = $request->total_revenue;
         $company->cogs = $request->cogs;
         $company->gross_profit = $request->gross_profit;
         $company->total_opex = $request->total_opex;
@@ -176,8 +230,7 @@ class KeyStatisticsController extends Controller
         $company->fcf_cagr_10 = $request->fcf_cagr_10;
         $company->price_to_earnings = $request->price_to_earnings;
         $company->price_to_sales = $request->price_to_sales;
-        $company->dividends_quarterly = $request->dividends_quarterly;
-        $company->dividends_annual = $request->dividends_annual;
+        $company->dividends = $request->dividends;
         $company->roe_median = $request->roe_median;
         $company->price_to_book = $request->price_to_book;
         $company->enterprise_value_to_earnings = $request-> enterprise_value_to_earnings;
@@ -212,6 +265,7 @@ class KeyStatisticsController extends Controller
         return $company;
     }
 
+
     public function index(){
         $data = KeyStatistics::get();
 
@@ -219,6 +273,7 @@ class KeyStatisticsController extends Controller
     }
 
     public function show($symbol){
+
         $data = '';
 
         $company = KeyStatistics::where('symbol', $symbol)->get();

@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\DB;
 
 class Kernel extends ConsoleKernel
 {
@@ -13,7 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        commands\everyDay::class,
     ];
 
     /**
@@ -24,8 +25,16 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('day:delete')->daily();
+        $schedule->command('month:delete')->monthly();
+        // $schedule->command('day:delete')->cron('*/1 4 1 * *');
+        // $schedule->command('day:delete')->cron('*/6 * * * *');
+        // $schedule->call(function () {
+        //     DB::table('key_statistics')->delete();
+        // })->everyMinute();
     }
+
+
 
     /**
      * Register the commands for the application.

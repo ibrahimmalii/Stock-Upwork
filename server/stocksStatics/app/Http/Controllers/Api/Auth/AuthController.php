@@ -38,6 +38,7 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->type = $request->type;
+        $user->limit_of_requests = 1000;
 
 
         $user->save();

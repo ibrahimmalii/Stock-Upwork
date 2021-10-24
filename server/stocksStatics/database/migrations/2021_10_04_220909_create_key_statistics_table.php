@@ -23,14 +23,17 @@ class CreateKeyStatisticsTable extends Migration
             $table->string('industry')->nullable();
             $table->string('sector')->nullable();
             $table->string('qfs_symbol')->nullable();
-            $table->json('market_cap')->nullable();
+            $table->string('price')->nullable();
+            $table->string('market_cap')->nullable();
             $table->json('enterprise_value')->nullable();
-            $table->json('volume')->nullable();
-            $table->json('average_daily_volume')->nullable();
-            $table->json('volume_inc_dec')->nullable();
-            $table->json('pe_ratio')->nullable();
-            $table->json('ps_ratio')->nullable();
-            $table->json('total_revenue')->nullable();
+            $table->string('volume')->nullable();
+            $table->string('average_daily_volume')->nullable();
+            $table->string('volume_inc_dec')->nullable();
+            $table->string('shares_basic')->nullable();
+            $table->string('shares_diluted')->nullable();
+            $table->string('pe_ratio')->nullable();
+            $table->string('ps_ratio')->nullable();
+            $table->string('pb_ratio')->nullable();
             $table->string('cogs')->nullable();
             $table->json('gross_profit')->nullable();
             $table->json('total_opex')->nullable();
@@ -78,10 +81,8 @@ class CreateKeyStatisticsTable extends Migration
             $table->json('fcf_cagr_10')->nullable();
             $table->json('price_to_earnings')->nullable();
             $table->json('price_to_sales')->nullable();
-            $table->json('dividends_quarterly')->nullable();
-            $table->json('dividends_annual')->nullable();
+            $table->json('dividends')->nullable();
             $table->json('roe_median')->nullable();
-
             $table->json('price_to_book')->nullable();
             $table->json('enterprise_value_to_earnings')->nullable();
             $table->json('enterprise_value_to_sales')->nullable();
@@ -100,6 +101,9 @@ class CreateKeyStatisticsTable extends Migration
             $table->json('eps_diluted')->nullable();
             $table->json('eps_diluted_growth')->nullable();
             $table->json('dividends_per_share_growth')->nullable();
+            $table->json('dividends_quarterly')->nullable();
+            $table->json('dividends_annual')->nullable();
+            $table->string('beta')->nullable();
 
 
 
