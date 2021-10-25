@@ -27,7 +27,7 @@
 
 </section>
 
-<div class="mainwrapper" *ngIf="!isResponseGet">
+<div class="mainwrapper" *ngIf="isResponseGet">
 
   <section class="best-mode">
     <div class="div1 text-center p-3">
@@ -229,7 +229,7 @@
   </section>
 
   <!----------------------------------secction of chart--------------------------------------->
-  <div class="row my-5 text-center">
+  <div class="container my-5 text-center">
     <div class="chart w-100">
       <div [chart]="chart" class='mainChart'></div>
     </div>
@@ -322,8 +322,3 @@
 
 </div>
 
-<!-- <div class="row my-5 text-center">
-  <div class="chart w-100">
-    <div [chart]="chart" class='mainChart'></div>
-  </div>
-</div> -->

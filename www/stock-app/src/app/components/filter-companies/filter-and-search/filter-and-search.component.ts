@@ -118,6 +118,9 @@ export class FilterAndSearchComponent implements OnInit {
   eps_diluted: any;
   dividends_per_share_growth: any;
 
+  // Cahrts Data
+  chartData:any;
+
 
   oparator(op: any, arr: any) {
     let result = eval(arr.join(op));
@@ -129,11 +132,10 @@ export class FilterAndSearchComponent implements OnInit {
   ngOnInit(): void {
     // About kendo lilst
 
-    this.init();
-    console.log('on init');
-    this.chart.ref$.subscribe((chart) => {
-      console.log(chart);
-    });
+    // this.init();
+    // this.chart.ref$.subscribe((chart) => {
+    //   console.log(chart);
+    // });
 
     // Get And Store Symbols
     // this.apiService.get('https://public-api.quickfs.net/v1/companies/US?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07').subscribe(response => {
@@ -207,7 +209,7 @@ export class FilterAndSearchComponent implements OnInit {
     // }, 3000);
 
 
-  
+
 
 
 
@@ -243,14 +245,14 @@ export class FilterAndSearchComponent implements OnInit {
     //   this.symbols = this.responseData.symbols;
     //   this.isPageLoaded = true;
     // })
+
   }
 
 
-  
   init() {
-    this.chart = new Chart({
-      rangeSelector: {
-        selected: 1,
+      this.chart = new Chart({
+        rangeSelector: {
+          selected: 1,
       },
       chart: {
         type: 'line',
@@ -264,33 +266,26 @@ export class FilterAndSearchComponent implements OnInit {
       series: [
         {
           data:[
-            [2002,10],
-            [2003,60],
-            [2004,30],
-            [2005,40],
-            [2006,50],
-            [2007,10],
-            [2008,70],
-            [2009,40],
-            [2010,90],
-            [2011,10],
-            [2012,20],
-            [2013,30],
-            [2014,20],
-            [2015,40],
-            [2016,10],
-            [2018,10],
-            [2019,10],
-            [2020,10],
-            [2021,10]
+            [2011,this.roic[0]],
+            [2012,this.roic[1]],
+            [2013,this.roic[2]],
+            [2014,this.roic[3]],
+            [2015,this.roic[4]],
+            [2016,this.roic[5]],
+            [2018,this.roic[6]],
+            [2019,this.roic[7]],
+            [2020,this.roic[8]],
+            [2021,this.roic[9]]
           ],
           type: 'spline',
         },
-        
+
       ],
 
     });
   }
+
+
 
 
   splicedArray(arr: any) {
@@ -492,6 +487,10 @@ export class FilterAndSearchComponent implements OnInit {
     this.roa = this.splicedArray(this.data.roa);
     this.roe = this.splicedArray(this.data.roe);
     this.roic = this.splicedArray(this.data.roic);
+    this.init();
+    this.chart.ref$.subscribe((chart) => {
+      // console.log(chart);
+    });
     this.isResponseGet = true;
     this.loaderStarted = false;
     localStorage.responseData = JSON.stringify(res);

@@ -35,26 +35,26 @@ export class RegisterComponent implements OnInit {
       this.http.post(`https://www.patreon.com/api/oauth2/token?code=${this.code}&grant_type=authorization_code&client_id=8xIjmOHkGJieBeSt-JYRvzi8d3nGVhwmTvbPemEMIgYpyShm8CbFYVYa77H9WsjD&client_secret=rVuXCubQbi2qRp8ndIrsQUOBozg3mhr4jn-x4hFE5ixf8-jms0z2242Yja2C_1fA&redirect_uri=http://localhost:4200/auth/register&Content-Type=application/x-www-form-urlencoded`, '').subscribe(res => {
         console.log(res);
         this.responseData = res;
-        // if (this.responseData.access_token) {
-        //   this.http.get('https://www.patreon.com/api/oauth2/api/current_user', { headers: { "Authorization": `Bearer ${this.responseData.access_token}` } }).subscribe(res => {
-        //     console.log(res);
-        //     this.personalData = res;
-        //     this.name = this.personalData.data.attributes.full_name;
-        //     this.email = this.personalData.data.attributes.email;
-        //     this.type = this.personalData.data.type;
-        //     this.isPersonalDataLoaded = true;
+        if (this.responseData.access_token) {
+          this.http.get('https://www.patreon.com/api/oauth2/api/current_user', { headers: { "Authorization": `Bearer ${this.responseData.access_token}` } }).subscribe(res => {
+            console.log(res);
+            this.personalData = res;
+            this.name = this.personalData.data.attributes.full_name;
+            this.email = this.personalData.data.attributes.email;
+            this.type = this.personalData.data.type;
+            this.isPersonalDataLoaded = true;
 
 
-        //     // Validate Login Form
-        //     this.form = this.formBuilder.group({
-        //       name: [this.name, [Validators.minLength(4), Validators.maxLength(255), Validators.required]],
-        //       email: [this.email, [Validators.email, Validators.maxLength(255), Validators.required]],
-        //       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
-        //       password_confirmation: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
-        //       type: [this.type, [Validators.required]],
-        //     });
-        //   })
-        // }
+            // Validate Login Form
+            this.form = this.formBuilder.group({
+              name: [this.name, [Validators.minLength(4), Validators.maxLength(255), Validators.required]],
+              email: [this.email, [Validators.email, Validators.maxLength(255), Validators.required]],
+              password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
+              password_confirmation: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
+              type: [this.type, [Validators.required]],
+            });
+          })
+        }
       })
     }
 
