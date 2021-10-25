@@ -16,18 +16,20 @@
         <li [ngClass]="{
           'd-none' : index==1,
           'bg-info' : index == 22,
-          'blue' : index ==12 || index==39,
-          'green' : index==13,
-          'lightGreen' : index==27 || index==34,
-          'marginTop' : index== 12 || index == 15 || index==27 || index == 31
+          'blue' : index == 0 || index ==12 || index==39,
+          'light-green' : index==13,
+          'green' : index==27 || index==34,
+          'marginTop' : index== 12 || index == 15 || index==27 || index == 31 || index == 47
         }">
-          <input [ngClass]="{
-          'bg-black long-item text-warning w-100': index == 11 || index == 14 || index == 26 || index == 30,
-          'bg-info' : index == 22
-      }" disabled class="" value="{{prop.title}}">
+        <input [ngClass]="{
+          'bg-black long-item text-warning w-100': index == 11 || index == 14 || index == 26 || index == 30 || index == 46,
+          'bg-info' : index == 22,
+          'green' : index==27 || index==34
+        }" disabled class="" value="{{prop.title}}">
+        <i class="fa fa-arrow-circle-up" *ngIf="index == 24"></i>
           <abbr title="{{prop.comment}}">
             <i class="pull-right fa fa-info-circle" [ngClass]="{
-              'd-none' : index == 11 || index == 14 || index == 26 || index == 30
+              'd-none' : index == 11 || index == 14 || index == 26 || index == 30 || index == 46
             }" data-bs-toggle="modal" [attr.data-bs-target]="'#prop'+ index"></i>
           </abbr>
         </li>
@@ -128,15 +130,19 @@
         style="height:60px; border-right: 1px solid black;"></div>
     <ul class="text-center fw-bold" [ngClass]="allStatus[0] ? 'success' : 'danger'" #inputOne *ngIf="isResponseBack">
       <li *ngFor="let item of ArrayOfData[0]; let index = index" [ngClass]="{
+          'fw-bold': index == 0,
           'd-none' : index==1,
           'bg-info' : index == 22,
-          'blue' : index ==12 || index==39,
-          'green' : index==13,
-          'lightGreen' : index==27 || index==34
+          'blue' : index ==12 || index==39 || index == 33,
+          'light-green' : index==13,
+          'green' : index==27 || index==34,
+          'higherThanOne': index == 9 && item > 0
         }">
         <input disabled [ngClass]="{
-          'maxValue' : index==17 && item == maxGrossProfitGrowthArr || index==39 && item == maxFreeCashFlowGrowthArr || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
-          'minValue' : index==17 && item == minGrossProfitGrowthArr || index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr
+          'maxValue': index==17 && item == maxGrossProfitGrowthArr || index ==19 && item == maxRoicArr ||index ==20 && item == maxRoceArr || index ==21 && item == maxRotceArr ||index ==22 && item == maxFiveRIndicatorArr || index ==27 && item == maxDeptToEquity ||index==39 && item == maxFreeCashFlowGrowthArr|| index==25 && item == maxPayoutRatio ||index==33 && item == maxRevenuePerShareRatio ||index==34 && item == maxEditdaPerShareRatio || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
+          'minValue': index==17 && item == minGrossProfitGrowthArr || index ==19 && item < 0 || index ==20 && item < 0 || index ==21 && item < 0 || index ==22 && item < 0 ||index ==25 && item < 0 ||index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr,
+          'higherThanOne': index == 9 && item > 0,
+          'green' : index==27 || index==34
         }" value="{{item}}">
       </li>
     </ul>
@@ -150,12 +156,15 @@
         'd-none' : index==1,
         'bg-info' : index == 22,
         'blue' : index ==12 || index==39,
-        'green' : index==13,
-        'lightGreen' : index==27 || index==34
+        'light-green' : index==13,
+        'green' : index==27 || index==34,
+        'higherThanOne': index == 9 && item > 0
       }">
-        <input disabled [ngClass]="{
-        'maxValue' : index==17 && item == maxGrossProfitGrowthArr || index==39 && item == maxFreeCashFlowGrowthArr || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
-        'minValue' : index==17 && item == minGrossProfitGrowthArr || index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr
+      <input disabled [ngClass]="{
+        'maxValue': index==17 && item == maxGrossProfitGrowthArr || index ==19 && item == maxRoicArr ||index ==20 && item == maxRoceArr || index ==21 && item == maxRotceArr ||index ==22 && item == maxFiveRIndicatorArr || index ==27 && item == maxDeptToEquity ||index==39 && item == maxFreeCashFlowGrowthArr|| index==25 && item == maxPayoutRatio ||index==33 && item == maxRevenuePerShareRatio ||index==34 && item == maxEditdaPerShareRatio || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
+        'minValue': index==17 && item == minGrossProfitGrowthArr || index ==19 && item < 0 || index ==20 && item < 0 || index ==21 && item < 0 || index ==22 && item < 0 ||index ==25 && item < 0 ||index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr,
+        'higherThanOne': index == 9 && item > 0,
+        'green' : index==27 || index==34
       }" value="{{item}}">
       </li>
     </ul>
@@ -169,12 +178,15 @@
         'd-none' : index==1,
         'bg-info' : index == 22,
         'blue' : index ==12 || index==39,
-        'green' : index==13,
-        'lightGreen' : index==27 || index==34
+        'light-green' : index==13,
+        'green' : index==27 || index==34,
+        'higherThanOne': index == 9 && item > 0
       }">
-        <input disabled [ngClass]="{
-        'maxValue' : index==17 && item == maxGrossProfitGrowthArr || index==39 && item == maxFreeCashFlowGrowthArr || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
-        'minValue' : index==17 && item == minGrossProfitGrowthArr || index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr
+      <input disabled [ngClass]="{
+        'maxValue': index==17 && item == maxGrossProfitGrowthArr || index ==19 && item == maxRoicArr ||index ==20 && item == maxRoceArr || index ==21 && item == maxRotceArr ||index ==22 && item == maxFiveRIndicatorArr || index ==27 && item == maxDeptToEquity ||index==39 && item == maxFreeCashFlowGrowthArr|| index==25 && item == maxPayoutRatio ||index==33 && item == maxRevenuePerShareRatio ||index==34 && item == maxEditdaPerShareRatio || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
+        'minValue': index==17 && item == minGrossProfitGrowthArr || index ==19 && item < 0 || index ==20 && item < 0 || index ==21 && item < 0 || index ==22 && item < 0 ||index ==25 && item < 0 ||index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr,
+        'higherThanOne': index == 9 && item > 0,
+        'green' : index==27 || index==34
       }" value="{{item}}">
       </li>
     </ul>
@@ -188,12 +200,15 @@
         'd-none' : index==1,
         'bg-info' : index == 22,
         'blue' : index ==12 || index==39,
-        'green' : index==13,
-        'lightGreen' : index==27 || index==34
+        'light-green' : index==13,
+        'green' : index==27 || index==34,
+        'higherThanOne': index == 9 && item > 0
       }">
-        <input disabled [ngClass]="{
-        'maxValue' : index==17 && item == maxGrossProfitGrowthArr || index==39 && item == maxFreeCashFlowGrowthArr || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
-        'minValue' : index==17 && item == minGrossProfitGrowthArr || index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr
+      <input disabled [ngClass]="{
+        'maxValue': index==17 && item == maxGrossProfitGrowthArr || index ==19 && item == maxRoicArr ||index ==20 && item == maxRoceArr || index ==21 && item == maxRotceArr ||index ==22 && item == maxFiveRIndicatorArr || index ==27 && item == maxDeptToEquity ||index==39 && item == maxFreeCashFlowGrowthArr|| index==25 && item == maxPayoutRatio ||index==33 && item == maxRevenuePerShareRatio ||index==34 && item == maxEditdaPerShareRatio || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
+        'minValue': index==17 && item == minGrossProfitGrowthArr || index ==19 && item < 0 || index ==20 && item < 0 || index ==21 && item < 0 || index ==22 && item < 0 ||index ==25 && item < 0 ||index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr,
+        'higherThanOne': index == 9 && item > 0,
+        'green' : index==27 || index==34
       }" value="{{item}}">
       </li>
     </ul>
@@ -207,12 +222,15 @@
         'd-none' : index==1,
         'bg-info' : index == 22,
         'blue' : index ==12 || index==39,
-        'green' : index==13,
-        'lightGreen' : index==27 || index==34
+        'light-green' : index==13,
+        'green' : index==27 || index==34,
+        'higherThanOne': index == 9 && item > 0
       }">
-        <input disabled [ngClass]="{
-        'maxValue' : index==17 && item == maxGrossProfitGrowthArr || index==39 && item == maxFreeCashFlowGrowthArr || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
-        'minValue' : index==17 && item == minGrossProfitGrowthArr || index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr
+      <input disabled [ngClass]="{
+        'maxValue': index==17 && item == maxGrossProfitGrowthArr || index ==19 && item == maxRoicArr ||index ==20 && item == maxRoceArr || index ==21 && item == maxRotceArr ||index ==22 && item == maxFiveRIndicatorArr || index ==27 && item == maxDeptToEquity ||index==39 && item == maxFreeCashFlowGrowthArr|| index==25 && item == maxPayoutRatio ||index==33 && item == maxRevenuePerShareRatio ||index==34 && item == maxEditdaPerShareRatio || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
+        'minValue': index==17 && item == minGrossProfitGrowthArr || index ==19 && item < 0 || index ==20 && item < 0 || index ==21 && item < 0 || index ==22 && item < 0 ||index ==25 && item < 0 ||index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr,
+        'higherThanOne': index == 9 && item > 0,
+        'green' : index==27 || index==34
       }" value="{{item}}">
       </li>
     </ul>
@@ -226,12 +244,15 @@
         'd-none' : index==1,
         'bg-info' : index == 22,
         'blue' : index ==12 || index==39,
-        'green' : index==13,
-        'lightGreen' : index==27 || index==34
+        'light-green' : index==13,
+        'green' : index==27 || index==34,
+        'higherThanOne': index == 9 && item > 0
       }">
-        <input disabled [ngClass]="{
-        'maxValue' : index==17 && item == maxGrossProfitGrowthArr || index==39 && item == maxFreeCashFlowGrowthArr || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
-        'minValue' : index==17 && item == minGrossProfitGrowthArr || index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr
+      <input disabled [ngClass]="{
+        'maxValue': index==17 && item == maxGrossProfitGrowthArr || index ==19 && item == maxRoicArr ||index ==20 && item == maxRoceArr || index ==21 && item == maxRotceArr ||index ==22 && item == maxFiveRIndicatorArr || index ==27 && item == maxDeptToEquity ||index==39 && item == maxFreeCashFlowGrowthArr|| index==25 && item == maxPayoutRatio ||index==33 && item == maxRevenuePerShareRatio ||index==34 && item == maxEditdaPerShareRatio || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
+        'minValue': index==17 && item == minGrossProfitGrowthArr || index ==19 && item < 0 || index ==20 && item < 0 || index ==21 && item < 0 || index ==22 && item < 0 ||index ==25 && item < 0 ||index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr,
+        'higherThanOne': index == 9 && item > 0,
+        'green' : index==27 || index==34
       }" value="{{item}}">
       </li>
     </ul>
@@ -245,12 +266,15 @@
         'd-none' : index==1,
         'bg-info' : index == 22,
         'blue' : index ==12 || index==39,
-        'green' : index==13,
-        'lightGreen' : index==27 || index==34
+        'light-green' : index==13,
+        'green' : index==27 || index==34,
+        'higherThanOne': index == 9 && item > 0
       }">
-        <input disabled [ngClass]="{
-        'maxValue' : index==17 && item == maxGrossProfitGrowthArr || index==39 && item == maxFreeCashFlowGrowthArr || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
-        'minValue' : index==17 && item == minGrossProfitGrowthArr || index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr
+      <input disabled [ngClass]="{
+        'maxValue': index==17 && item == maxGrossProfitGrowthArr || index ==19 && item == maxRoicArr ||index ==20 && item == maxRoceArr || index ==21 && item == maxRotceArr ||index ==22 && item == maxFiveRIndicatorArr || index ==27 && item == maxDeptToEquity ||index==39 && item == maxFreeCashFlowGrowthArr|| index==25 && item == maxPayoutRatio ||index==33 && item == maxRevenuePerShareRatio ||index==34 && item == maxEditdaPerShareRatio || index==49 && item == maxTotalAssetsGrowthArr || index==50 && item == maxTotalEquityGrowthArr || index==45 && item == maxCashFromOperationsGrowthArr || index==47 && item == maxRevenue10PeriodCagrArr,
+        'minValue': index==17 && item == minGrossProfitGrowthArr || index ==19 && item < 0 || index ==20 && item < 0 || index ==21 && item < 0 || index ==22 && item < 0 ||index ==25 && item < 0 ||index==39 && item == minFreeCashFlowGrowthArr || index==49 && item == minTotalAssetsGrowthArr || index==50 && item == minTotalEquityGrowthArr || index==45 && item == minCashFromOperationsGrowthArr || index==47 && item == minRevenue10PeriodCagrArr,
+        'higherThanOne': index == 9 && item > 0,
+        'green' : index==27 || index==34
       }" value="{{item}}">
       </li>
     </ul>

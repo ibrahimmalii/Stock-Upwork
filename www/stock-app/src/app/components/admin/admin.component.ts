@@ -83,7 +83,9 @@ export class AdminComponent implements OnInit {
     this.loaderStart = true;
     this.apiService.get(`http://public-api.quickfs.net/v1/data/all-data/${symbol}?api_key=4ed0f30c148834139f4bb3c4421341690f3d3c07`,{ headers: { 'Authorization': this.userService.getToken() } }).subscribe(data => {
       this.data = data;
-      console.log(this.data);
+      console.log(this.data.data.financials.ttm.shares_basic);
+      console.log(this.data.data.financials.ttm.shares_diluted);
+
       // If Company Exist
       // Start Of Send Requests
       this.apiRequest = this.requestService.data;

@@ -91,9 +91,6 @@ body{
   height : 100px
 }
 
-/* .t[_ngcontent-stl-c57]{
-  margin-left: 31%;
-} */
 
 /* // Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
@@ -115,6 +112,4 @@ body{
 
 /* // XX-Large devices (larger desktops, 1400px and up) */
 @media (min-width: 1400px) { }
-
-
 

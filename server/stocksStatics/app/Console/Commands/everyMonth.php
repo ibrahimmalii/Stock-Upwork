@@ -2,25 +2,24 @@
 
 namespace App\Console\Commands;
 
-use App\Models\KeyStatistics;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
-class everyDay extends Command
+class everyMonth extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'day:delete';
+    protected $signature = 'month:delete';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'this will be remove all request records users daily';
+    protected $description = 'delete all requests from requests table';
 
     /**
      * Create a new command instance.
@@ -39,7 +38,7 @@ class everyDay extends Command
      */
     public function handle()
     {
-        DB::update('UPDATE users set daily_number_of_requests = 0');
-        DB::table('key_statistics')->delete();
+        DB::update('UPDATE requests SET monthly_number_of_requests = 0 , remaining_of_requests = 0');
+        DB::update('UPDATE users SET monthly_number_of_requests = 0, daily_number_of_requests =0, avg_monthly_number_of_requests =0');
     }
 }

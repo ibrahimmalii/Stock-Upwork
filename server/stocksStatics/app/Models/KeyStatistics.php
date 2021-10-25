@@ -24,6 +24,8 @@ class KeyStatistics extends Model
         'volume',
         'average_daily_volume',
         'volume_inc_dec',
+        'shares_basic',
+        'shares_diluted',
         'pe_ratio',
         'ps_ratio',
         'pb_ratio',
@@ -74,8 +76,7 @@ class KeyStatistics extends Model
         'fcf_cagr_10',
         'price_to_earnings',
         'price_to_sales',
-        'dividends_quarterly',
-        'dividends_annual',
+        'dividends',
         'roe_median',
         'price_to_book',
         'enterprise_value_to_earnings',
@@ -95,6 +96,9 @@ class KeyStatistics extends Model
         'eps_diluted',
         'eps_diluted_growth',
         'dividends_per_share_growth',
+        'dividends_quarterly',
+        'dividends_annual',
+        'beta'
     ];
 
     protected $casts = [
@@ -146,8 +150,7 @@ class KeyStatistics extends Model
         'fcf_cagr_10' => 'array',
         'price_to_earnings' => 'array',
         'price_to_sales' => 'array',
-        'dividends_quarterly' => 'array',
-        'dividends_annual' => 'array',
+        'dividends' => 'array',
         'roe_median' => 'array',
         'price_to_book' => 'array',
         'enterprise_value_to_earnings' => 'array',
@@ -167,5 +170,7 @@ class KeyStatistics extends Model
         'eps_diluted' => 'array',
         'eps_diluted_growth' => 'array',
         'dividends_per_share_growth' => 'array',
+        'dividends_quarterly'=> 'array',
+        'dividends_annual' => 'array'
     ];
 }

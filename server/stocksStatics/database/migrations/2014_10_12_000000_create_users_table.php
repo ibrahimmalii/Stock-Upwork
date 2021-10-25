@@ -19,9 +19,10 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('type')->nullable();
-            $table->integer('limit_of_requests')->default(0);
-            $table->integer('number_of_requests')->default(0);
+            $table->integer('monthly_number_of_requests')->default(0); // Number of requests per month (reset monthly)
+            $table->integer('daily_number_of_requests')->default(0); // Daily Requests (reset daily) -> Cron job
+            $table->integer('avg_monthly_number_of_requests')->default(0); // Total Monthly / 30
+            $table->foreignId('tier_id')->constrained();
             $table->rememberToken();
             $table->timestamps();
         });

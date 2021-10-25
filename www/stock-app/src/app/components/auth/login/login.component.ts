@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
           localStorage.token = this.logginData.data.access_token;
           localStorage.user = JSON.stringify(this.logginData.data.user);
           this.userService.setLoggedStatus(true);
-          this.router.navigateByUrl('/exchanges');
+          this.router.navigateByUrl('/pricing');
           this.isLoginSuccess = true;
           this.isLoginError = false;
         } else {

@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\KeyStatistics;
 use Illuminate\Http\Request;
-use Mockery\Undefined;
-use PhpParser\Node\Stmt\Foreach_;
 use App\Models\Requests;
+use App\Models\Tier;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 class KeyStatisticsController extends Controller
 {
@@ -21,9 +19,40 @@ class KeyStatisticsController extends Controller
         if(!$user){
             return $this->NotFoundError();
         };
-        // $user->number_of_requests = $user->number_of_requests + 1;
 
-        DB::table('users')->where('id', $user->id)->update(['number_of_requests' => $user->number_of_requests + 1]);
+        // Get current tier to get limit of requests
+        $tier = Tier::find($user->tier_id);
+
+        // Updates In User Table
+        $user->monthly_number_of_requests = $user->monthly_number_of_requests + 1;
+        $user->daily_number_of_requests = $user->daily_number_of_requests + 1;
+        $avg_requests = ($user->monthly_number_of_requests / 30);
+
+        // dd($user->monthly_number_of_requests / 30);
+
+        $msg = "Sorry you can't send another request today";
+        if($tier->request_limit == $user->monthly_number_of_requests){
+            return $msg;
+        }
+
+        DB::table('users')->where('id', $user->id)->update([
+            'monthly_number_of_requests' => $user->monthly_number_of_requests,
+            'daily_number_of_requests' => $user->daily_number_of_requests,
+            'avg_monthly_number_of_requests' => $avg_requests
+        ]);
+
+        // Update In Requests Table
+        $currentRequest = Requests::where('id', 1)->get();
+        if(!$currentRequest){
+            return $this->NotFoundError();
+        };
+
+        $currentRequest[0]->monthly_number_of_requests = $currentRequest[0]->monthly_number_of_requests + 1;
+        $currentRequest[0]->remaining_of_requests = $currentRequest[0]->avaliable_requests - $currentRequest[0]->monthly_number_of_requests;
+
+        $currentRequest[0]->save();
+
+
 
         // Angular
         $data = KeyStatistics::create([
@@ -38,6 +67,8 @@ class KeyStatisticsController extends Controller
             'price' => $request->price,
             'volume' => $request->volume,
             'market_cap' => $request->market_cap,
+            'shares_basic' => $request->shares_basic,
+            'shares_diluted' => $request->shares_diluted,
             'pe_ratio' => $request->pe_ratio,
             'ps_ratio' => $request->ps_ratio,
             'pb_ratio' => $request->pb_ratio,
@@ -87,8 +118,7 @@ class KeyStatisticsController extends Controller
             'total_assets_cagr_10' => $request->total_assets_cagr_10,
             'total_equity_cagr_10' => $request->total_equity_cagr_10,
             'fcf_cagr_10' => $request->fcf_cagr_10,
-            'dividends_quarterly' => $request->dividends_quarterly,
-            'dividends_annual' => $request->dividends_annual,
+            'dividends' => $request->dividends,
             'roe_median' => $request->roe_median,
             'price_to_book' => $request->price_to_book,
             'enterprise_value_to_earnings' => $request-> enterprise_value_to_earnings,
@@ -107,17 +137,13 @@ class KeyStatisticsController extends Controller
             'gross_margin' => $request-> gross_margin,
             'eps_diluted' => $request-> eps_diluted,
             'eps_diluted_growth' => $request-> eps_diluted_growth,
-            'dividends_per_share_growth' => $request-> dividends_per_share_growth
+            'dividends_per_share_growth' => $request-> dividends_per_share_growth,
+            'dividends_quarterly' => $request->dividends_quarterly,
+            'dividends_annual' => $request->dividends_annual,
+            'beta' => $request->beta
         ]);
 
-        $currentRequest = Requests::where('id', 1)->get();
-        if(!$currentRequest){
-            $currentRequest[0]->number_of_requests += 1;
-        };
 
-        $currentRequest[0]->number_of_requests = $currentRequest[0]->number_of_requests + 1;
-
-        $currentRequest[0]->save();
 
 
 
@@ -204,8 +230,7 @@ class KeyStatisticsController extends Controller
         $company->fcf_cagr_10 = $request->fcf_cagr_10;
         $company->price_to_earnings = $request->price_to_earnings;
         $company->price_to_sales = $request->price_to_sales;
-        $company->dividends_quarterly = $request->dividends_quarterly;
-        $company->dividends_annual = $request->dividends_annual;
+        $company->dividends = $request->dividends;
         $company->roe_median = $request->roe_median;
         $company->price_to_book = $request->price_to_book;
         $company->enterprise_value_to_earnings = $request-> enterprise_value_to_earnings;

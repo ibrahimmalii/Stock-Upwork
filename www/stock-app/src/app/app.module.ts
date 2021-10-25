@@ -11,6 +11,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ListViewModule } from '@progress/kendo-angular-listview';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminComponent } from './components/admin/admin.component';
+import { ProfileComponent } from './components/profile/profile.component';
+
 
 
 // import { FilterCompaniesComponent } from './components/filter-companies/filter-companies.component';
@@ -20,6 +22,7 @@ import { AdminComponent } from './components/admin/admin.component';
     AppComponent,
     ContactComponent,
     AdminComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import { AdminComponent } from './components/admin/admin.component';
     HttpClientModule,
     ReactiveFormsModule,
     ListViewModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
