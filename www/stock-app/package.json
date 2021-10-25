@@ -3,16 +3,19 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "heroku-postbuild": "ng build --prod"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "~12.0.3",
+    "@angular/cli": "~12.0.3",
     "@angular/common": "~12.0.3",
     "@angular/compiler": "~12.0.3",
+    "@angular/compiler-cli": "~12.0.3",
     "@angular/core": "~12.0.3",
     "@angular/forms": "~12.0.3",
     "@angular/localize": "~12.0.3",
@@ -35,10 +38,12 @@
     "@progress/kendo-theme-default": "latest",
     "angular-highcharts": "^12.0.0",
     "bootstrap": "^5.1.1",
+    "express": "^4.17.1",
     "highcharts": "^9.3.0",
     "patreon": "^0.4.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",
+    "typescript": "~4.2.3",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
@@ -54,5 +59,9 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
     "typescript": "~4.2.3"
+  },
+  "engines": {
+    "node": "14.17.0",
+    "npm": "6.14.13"
   }
 }
